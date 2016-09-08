@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>e9p2</title>
+	<link rel="stylesheet" type="text/css" href="altaproducto.css">
+</head>
+<body>
+
+<header>Alta de productos <br><br></header>  
+<nav>
+  <ul>
+    <li><a href="#">Inicio</a></li>
+    <li><a href="#">Menus</a></li>
+    <li><a href="#">Contacto</a></li>
+  </ul>
+</nav>
+<form method="post" action="listado.php">
+	Nombre:<br>
+  	<input type="text" name="nombre" required> <br>
+  	Marca:<br>
+  	<input type="text" name="marca" required> <br>
+  	C&oacute;digo de barra:*<br>
+  	<input type="number" name="codigodebarra" required> <br>
+  	Cantidad de stock:<br>
+  	<input type="number" name="cantidadstock"> <br>
+  	Cantidad m&iacute;inima de stock:<br>
+  	<input type="number" name="cantidadminimastock" required> <br>
+  	Categoría:<br>
+  	<select>
+  		<option value="bebidas">Bebidas</option>
+  		<option value="chocolates">Chocolates</option>
+
+  	</select><br>
+  	Proovedor: <br>
+  	<input type="text" name="proovedor"> <br>
+    Fecha de vencimiento: <br>
+    <input type="date" name="fechadevencimiento" required> <br>
+  	Precio de venta unitario:<br>
+  	<input type="number" name="precioventa" step="1" required=""> <br>
+  	<input type="submit" name="enviar" value="Enviar">
+
+
+  
+</form>
+	<footer>Buffet - Facultad de Informatica UNLP</footer>
+</body>
+</html>
