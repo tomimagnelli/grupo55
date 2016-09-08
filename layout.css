@@ -1,0 +1,46 @@
+nav {
+    text-align: center;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #5993a6;
+}
+
+header, footer {
+    padding: 1em;
+    color: white;
+    background-color: #5993a6;
+    text-align: center;
+}
+
+section {
+  word-wrap: break-word;
+  margin: 0 1.5%;
+  width: 70%;
+  text-align: justify;
+}
+
+
+
+div.md{
+  color: red;
+}
