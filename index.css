@@ -74,10 +74,15 @@ div.info{
 
 }
 
-form{
+div.contenedor{
    padding-top: 0.35em;
     padding-bottom: 0.625em;
     padding-left: 0.75em;
     padding-right: 0.75em;
     background: url(cafe.jpg);
+}
+
+div.md{
+
+  width:600px
 }
