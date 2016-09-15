@@ -16,15 +16,22 @@
   </ul>
 </nav>
 
-<form> 
+<form method="get" action="backend.html">
+	<fieldset style="width:270px; height:250px; margin: auto;" >
 	Usuario: <br>
-		<input type="text" name="usuario" required=""> <br><br>
+		<input type="text" name="usuario" required placeholder="Usuario"> <br><br>
 	Contraseña: <br>
-		<input type="password" name="contraseña" required=""> <br><br>
+		<input type="password" name="contraseña" required placeholder="Contraseña"> <br><br>
 
-	<input type="submit" name="login" value="Login"> <br><br>
+	<font size="3px"><input type="checkbox" name="remember"> Remember me</font>
 
+	<input type="submit" name="login" value="Login" style="width:80px; height:30px"> <br><br>
+
+	<font size="3px">Olvidaste tu contraseña? <a href="url">Click aqui</a></font>
+
+	</fieldset><br><br>
 </form>
+
 <footer>Buffet - Facultad de informática UNLP</footer>
 	
 </body>
