@@ -30,17 +30,54 @@ header, footer {
     color: white;
     background-color: #5993a6;
     text-align: center;
+    padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+
+
+
 }
-
-section {
-  word-wrap: break-word;
-  margin: 0 1.5%;
-  width: 70%;
-  text-align: justify;
-}
-
-
-
 div.md{
-  color: red;
+  color: white;
+  background-color: black;  text-align: center;
+  font-size: 30px;
+   padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+     border-color: #5993a6;
+   border-width: 1px;
+   border-style: solid;
+   margin: auto;
+   border-radius: 40px 40px 40px 40px;
+   text-align: center;
+
+
+
+}
+div.info{
+  text-align: center;
+  color: white;
+  margin: auto;
+  background-color: #5993a6;
+   padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    border-color:#5993a6;
+   border-width: 1px;
+   border-style: solid;
+   border-radius: 40px 40px 40px 40px;
+   border: 2px groove (internal value);
+
+
+}
+
+form{
+   padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    background: url(cafe.jpg);
 }

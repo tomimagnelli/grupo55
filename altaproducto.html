@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>e9p2</title>
+	<title>Alta de productos</title>
 	<link rel="stylesheet" type="text/css" href="altaproducto.css">
 </head>
 <body>
@@ -16,33 +16,37 @@
   </ul>
 </nav>
 <form method="post" action="listado.php">
+  <fieldset style="width:270px; height:750px; margin: auto;" >
 	Nombre:<br>
-  	<input type="text" name="nombre" required> <br>
+  	<input type="text" name="nombre" placeholder="Nombre..." required> <br><br>
   	Marca:<br>
-  	<input type="text" name="marca" required> <br>
+  	<input type="text" name="marca" placeholder="Marca..." required> <br><br>
   	C&oacute;digo de barra:*<br>
-  	<input type="number" name="codigodebarra" required> <br>
+  	<input type="number" name="codigodebarra" placeholder="Codigo de barra..." required> <br><br>
   	Cantidad de stock:<br>
-  	<input type="number" name="cantidadstock"> <br>
-  	Cantidad m&iacute;inima de stock:<br>
-  	<input type="number" name="cantidadminimastock" required> <br>
+  	<input type="number" name="cantidadstock" placeholder="Cantidad stock..."> <br><br>
+  	Cantidad m&iacute;nima de stock:<br>
+  	<input type="number" name="cantidadminimastock"  placeholder="Cant. minima de stock..." required> <br><br>
   	Categoría:<br>
   	<select>
   		<option value="bebidas">Bebidas</option>
   		<option value="chocolates">Chocolates</option>
 
-  	</select><br>
+  	</select><br><br>
   	Proovedor: <br>
-  	<input type="text" name="proovedor"> <br>
+  	<input type="text" name="proovedor" placeholder="Proovedor..."> <br><br>
     Fecha de vencimiento: <br>
-    <input type="date" name="fechadevencimiento" required> <br>
+    <input type="date" name="fechadevencimiento" required> <br><br>
+    Fecha de alta: <br>
+    <input type="date" name="fechaalta" required> <br><br>
   	Precio de venta unitario:<br>
-  	<input type="number" name="precioventa" step="1" required=""> <br>
+  	<input type="number" name="precioventa" placeholder="Precio..." step="1" required=""> <br><br>
   	<input type="submit" name="enviar" value="Enviar">
 
-
+  </fieldset>
   
 </form>
+<br>
 	<footer>Buffet - Facultad de Informatica UNLP</footer>
 </body>
 </html>
