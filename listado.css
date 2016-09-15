@@ -26,6 +26,10 @@ nav {
 li {
     float: left;
 }
+div.agregar input{
+    width:250; 
+    height:40px;
+}
 
 li a {
     display: block;

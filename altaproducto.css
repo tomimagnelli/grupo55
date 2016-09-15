@@ -4,6 +4,9 @@ header, footer {
     background-color: #5993a6;
     text-align: center;
 }
+body {
+    background: url(cafe.jpg);
+}
 nav {
     text-align: center;
    
@@ -32,7 +35,6 @@ ul {
 }
 form {
 	text-align: center;
-    background: url(cafe.jpg);
     padding-top: 20px;
     padding-bottom: 20px;
 
@@ -53,4 +55,5 @@ fieldset{
     font-size: 20px;
     background-color:#d6ebf0;
     border-radius: 40px 40px 40px 40px;
+    width:270px; height:750px; margin: auto;
 }
