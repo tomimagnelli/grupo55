@@ -45,7 +45,7 @@ footer{
 div.md{
   color: white;
   background-color: black;  text-align: center;
-  font-size: 30px;
+  font-size: 20px;
   width:600px;
    padding-top: 0.35em;
     padding-bottom: 0.625em;
@@ -219,4 +219,37 @@ fieldset.fieldAltaProd{
     background-color:#d6ebf0;
     border-radius: 40px 40px 40px 40px;
     width:270px; height:750px; margin: auto;
+}
+
+
+@media only screen and (max-width: 720px) {
+  section {
+    width:94%;
+  }
+
+  div.info{
+    width: 90%;
+  }
+
+  div.info img{
+    width: 70%;
+  }
+
+  div.md{
+    width: 60%;
+  }
+
+  div.md img{
+    height: 50%;
+    width:60%;
+  }
+
+  h1 {
+    font: 25px 'Merriweather', serif;
+  }
+ 
+ td, th {
+    font-size: 80%;
+}
+
 }
