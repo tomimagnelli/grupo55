@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<header>Iniciar Sesi&oacute;n <br><br></header>	
+<header><h1>Iniciar Sesi&oacute;n</h1></header>	
 <nav class="barra">
   <ul>
     <li><a href="index.html">Inicio</a></li>
@@ -15,20 +15,20 @@
   </ul>
 </nav>
 
-<form method="get" action="backend.html">
+<form class="formLogin" method="get" action="backend.html">
 	<fieldset>
-	Usuario: <br>
-		<input type="text" name="usuario" required placeholder="Usuario"> <br><br>
-	Contraseña: <br>
-		<input type="password" name="contraseña" required placeholder="Contraseña"> <br><br>
+	<label>Usuario:</label>
+	<input type="text" name="usuario" required placeholder="Usuario">
+	<label>Contraseña:</label>
+	<input type="password" name="contraseña" required placeholder="Contraseña">
 
-	<font size="3px"><input type="checkbox" name="remember"> Remember me</font>
+	<input type="checkbox" name="remember"> <label>Remember me</label>
 
-	<input type="submit" name="login" value="Login" style="width:80px; height:30px"> <br><br>
+	<button type="submit">Login</button>
+	 Olvidaste tu <a href="#">contraseña?</a>
 
-	<font size="3px">Olvidaste tu contraseña? <a href="url">Click aqui</a></font>
+	</fieldset>
 
-	</fieldset><br><br>
 </form>
 
 <footer>Buffet - Facultad de inform&aacute;tica UNLP</footer>
