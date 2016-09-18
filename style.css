@@ -1,10 +1,11 @@
 .barra {
     text-align: center;
+
 }
 .barra ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
+    margin: auto;
+    width: 100%;
     overflow: hidden;
     background-color: #333;
 }
@@ -34,6 +35,10 @@ header, footer {
     padding-bottom: 0.625em;
     padding-left: 0.75em;
     padding-right: 0.75em;
+}
+
+header{
+  	width: 100%;
 }
 
 footer{
@@ -85,6 +90,7 @@ div.info{
    border-radius: 40px 40px 40px 40px;
    border: 2px groove;
 }
+
 
 div.info img {
   width:560px;
@@ -342,3 +348,23 @@ fieldset.fieldAltaProd{
 }
 
 }
+
+@media only screen and (max-width: 2000px) and (min-width: 908px) {
+
+  div.info{
+    width: 90%;
+  }
+
+
+  div.md{
+    width: 30%;
+  }
+
+  div.md img{
+    height: 50%;
+    width:60%;
+  }
+
+
+}
+
