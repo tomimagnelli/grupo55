@@ -223,37 +223,7 @@ fieldset.fieldAltaProd{
 }
 
 
-@media only screen and (max-width: 720px) {
-  section {
-    width:94%;
-  }
 
-  div.info{
-    width: 90%;
-  }
-
-  div.info img{
-    width: 70%;
-  }
-
-  div.md{
-    width: 60%;
-  }
-
-  div.md img{
-    height: 50%;
-    width:60%;
-  }
-
-  h1 {
-    font: 25px 'Merriweather', serif;
-  }
- 
- td, th {
-    font-size: 80%;
-}
-
-}
 
 .formLogin input[type=text], input[type=password] {
     width: 100%;
@@ -298,4 +268,77 @@ fieldset.fieldAltaProd{
     margin:auto;
     width: 100%;
     height: 3%;
+}
+
+@media only screen and (max-width: 720px) {
+  section {
+    width:94%;
+  }
+
+  label{
+    font-size: 80%;
+  }
+
+  div.info{
+    width: 90%;
+  }
+
+  div.info img{
+    width: 70%;
+    height: 30%;
+  }
+
+  div.md{
+    width: 60%;
+  }
+
+  div.md img{
+    height: 50%;
+    width:60%;
+  }
+
+  h1 {
+    font: 20px 'Merriweather', serif;
+  }
+ 
+ td, th {
+    font-size: 70%;
+}
+
+}
+
+@media only screen and (max-width: 907px) and (min-width: 721px) {
+  section {
+    width:94%;
+  }
+
+  label{
+    font-size: 80%;
+  }
+
+  div.info{
+    width: 90%;
+  }
+
+  div.info img{
+    width: 70%;
+  }
+
+  div.md{
+    width: 60%;
+  }
+
+  div.md img{
+    height: 50%;
+    width:60%;
+  }
+
+  h1 {
+    font: 25px 'Merriweather', serif;
+  }
+ 
+ td, th {
+    font-size: 80%;
+}
+
 }
