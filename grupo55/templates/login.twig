@@ -1,0 +1,24 @@
+{% extends "layoutini.twig" %}
+{% block contenido %}
+<form class="formLogin" method="post" action="">
+	<fieldset>
+	<label>Usuario:</label>
+	<input type="text" name="usuario" required placeholder="Usuario">
+	<label>Contraseña:</label>
+	<input type="password" name="contraseña" required placeholder="Contraseña">
+
+	<input type="checkbox" name="remember"> <label>Remember me</label>
+	<br>
+	<a href="{{ baseUrl() }}/backend">login</a>
+	<br>
+	 Olvidaste tu <a href="recuperar">contraseña?</a>
+
+	</fieldset>
+
+</form>
+
+	
+</body>
+</html>
+
+{% endblock %}

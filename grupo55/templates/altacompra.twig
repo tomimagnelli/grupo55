@@ -1,0 +1,22 @@
+{% extends "layoutcerrar.twig" %}
+
+{% block contenido %}
+</nav>
+<form class="formAltaProd" method="post" action="">
+  <fieldset class="fieldAltaProd" >
+	<label>Fecha:
+  	<input type="date" name="fecha" placeholder="**/**/****/" required></label>
+  	<label>Cuit proovedor:</label>
+  	<input type="text" name="cuit" placeholder="Cuit" required>
+  	<label>Factura escaneada:</label>
+  	<input name="uploadedfile" type="file" name="factura" />
+  	<a href="{{ baseUrl() }}/altaproducto">Pulse para agregar un producto</a>
+  	<br><br>
+    <a href="{{ baseUrl() }}/compras">CONFIRMAR</a>
+
+  </fieldset>
+  
+</form>
+</body>
+</html>
+{% endblock %}

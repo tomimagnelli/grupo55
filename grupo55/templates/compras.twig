@@ -1,0 +1,41 @@
+{% extends "layoutcerrar.twig" %}
+
+{% block contenido %}
+<form method="post" action="altacompra.html">
+	<div class='agregar'>
+		<a href="{{ baseUrl() }}/altacompra">+ NUEVA COMPRA</a> 
+	</div>
+</form>
+
+
+<table>
+	<tr>
+			<th id="fecha" >Fecha</th>
+      		<th id="cuit">CUIT Proovedor</th>
+     		<th id="factura">Factura escaneada</th>
+      		<th id="lista">Lista de Productos entregados</th>
+      		
+
+	</tr>
+	<tr>
+			<td>28/09/2016</td>
+			<td>55555</td>
+			<td>factura_imagen</td>
+			<td><a href="">Cafe</a>, <a href=""> Alfajor</a> </td>
+			
+			
+	</tr>
+	<tr>
+			<td>29/09/2016</td>
+			<td>1123</td>
+			<td>factura_imagen2</td>
+			<td><a href="">CocaCola</a>, <a href=""> Sprite</a> </td>
+			
+			
+	</tr>
+	
+	
+</table>
+</body>
+</html>
+{% endblock %}

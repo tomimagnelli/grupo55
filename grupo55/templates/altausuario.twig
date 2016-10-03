@@ -1,0 +1,44 @@
+{% extends "layoutcerrar.twig" %}
+
+{% block contenido %}
+</nav>
+<form class="formAltaProd" method="post" action="">
+
+  <fieldset class="fieldAltaProd" >
+	<label>Nombre de usuario:
+   <input type="text" name="nombreusuario" placeholder="Username..." required></label>
+  	<label>Nombre:
+    </label> <input type="text" name="nombre" placeholder="Nombre..." required>
+  	<label>Apellido:</label>
+  	<input type="number" name="apellido" placeholder="Apellido..." required>
+  	<label>Cantidad de stock:</label>
+  	<input type="number" name="DNI" placeholder="Numero de dni..." required>
+  	<label>Habilitado</label>
+  	<select>
+  		<option value="habsi">Habilitado</option>
+  		<option value="habno">Deshabilitado</option>
+
+  	</select>
+  	<label>Contraseña:</label>
+  	<input type="password" name="contraseña" placeholder="contraseña..." required>
+    <label>Telefono:</label>
+    <input type="number" name="contraseña" placeholder="[cod. area]-[nro]" required>
+   <label>Rol</label>
+    <select>
+      <option value="administrador">Administraci&oacute;n</option>
+      <option value="gestion">Gesti&oacute;n</option>
+      <option value="online">Usuario online</option>
+
+    </select>
+
+    <label>Oficina/dto de trabajo:</label>
+    <input type="text" name="lugar" required>
+    <a href="{{ baseUrl() }}/users">CONFIRMAR</a>
+
+
+  </fieldset>
+  
+</form>
+</body>
+</html>
+{% endblock %}

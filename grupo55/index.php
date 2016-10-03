@@ -27,20 +27,6 @@ $app->group('/login', function() use($app) {
 		echo $app->view->render('login.twig');
 	});
 
-	$app->post('/', function() use ($app, $userResource) {
-	  $name = $app->request->post('usuario');
-    $pass = $app->request->post('contraseña');
-    $user = $userResource->login($name, $pass);
-    if ($user) {
-    	$_SESSION['id']=$user->getId();
-    	$_SESSION['user']=$user->getUsuario();
-    	$_SESSION['rol']=$user->getRol_Id();
-    	$app->redirect('/backend.twig');
-    } else {
-      $app->flash('error', 'Usuario o contraseña incorrecto');
-      $app->redirect('/');
-	}
-});
 });
 
 $app->group('/backend', function() use($app) {
@@ -49,12 +35,54 @@ $app->group('/backend', function() use($app) {
 	});
 });
 
+$app->group('/listado', function() use($app) {
+    $app->get('/', function() use($app){
+        echo $app->view->render('listado.twig');
+    });
+});
 
-$app->group('/balanceIngresos', function() use($app) {
+
+$app->group('/altaproducto', function() use($app) {
 	$app->get('/', function() use($app){
-		echo $app->view->render('balanceIngresos.twig');
+		echo $app->view->render('altaproducto.twig');
 	});
 });
+
+$app->group('/users', function() use($app) {
+    $app->get('/', function() use($app){
+        echo $app->view->render('users.twig');
+    });
+});
+
+$app->group('/altausuario', function() use($app) {
+    $app->get('/', function() use($app){
+        echo $app->view->render('altausuario.twig');
+    });
+});
+
+$app->group('/ventasprod', function() use($app) {
+    $app->get('/', function() use($app){
+        echo $app->view->render('ventasprod.twig');
+    });
+});
+
+$app->group('/altaventa', function() use($app) {
+    $app->get('/', function() use($app){
+        echo $app->view->render('altaventa.twig');
+    });
+});
+$app->group('/compras', function() use($app) {
+    $app->get('/', function() use($app){
+        echo $app->view->render('compras.twig');
+    });
+});
+
+$app->group('/altacompra', function() use($app) {
+    $app->get('/', function() use($app){
+        echo $app->view->render('altacompra.twig');
+    });
+});
+
 
 
 

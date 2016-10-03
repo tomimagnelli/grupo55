@@ -1,0 +1,25 @@
+{% extends "layoutcerrar.twig" %}
+
+{% block contenido %}
+</nav>
+<form class="formAltaProd" method="post" action="">
+  <fieldset class="fieldAltaProd" >
+	<label>Producto:
+  	<input type="text" name="nombre" placeholder="Nombre del producto" required></label>
+  	<label>Marca:</label>
+  	<input type="text" name="marca" placeholder="Marca del producto" required>
+  	<label>C&oacute;digo de barra:*</label>
+  	<input type="number" name="codigodebarra" placeholder="Codigo de barra..." required>
+  	<label>Cantidad :</label>
+  	<input type="number" name="cantidad" placeholder="Ingrese cantidad" required>
+  	<label>Precio:</label>
+  	<input type="number" name="precio"  placeholder="$" required>
+  	<label>Total:</label>
+  	<input type="number" name="total" required>
+  	
+  <a href="{{ baseUrl() }}/ventasprod">CONFIRMAR</a>
+
+  </fieldset>
+  
+</form>
+{% endblock %}

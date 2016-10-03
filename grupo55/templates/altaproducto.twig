@@ -1,0 +1,38 @@
+{% extends "layoutcerrar.twig" %}
+
+{% block contenido %}
+  <form class="formAltaProd" method="post" action="">
+  <fieldset class="fieldAltaProd" >
+	<label>Nombre:
+  	<input type="text" name="nombre" placeholder="Nombre..." required></label>
+  	<label>Marca:</label>
+  	<input type="text" name="marca" placeholder="Marca..." required>
+  	<label>C&oacute;digo de barra:*</label>
+  	<input type="number" name="codigodebarra" placeholder="Codigo de barra..." required>
+  	<label>Cantidad de stock:</label>
+  	<input type="number" name="cantidadstock" placeholder="Cantidad stock..." required>
+  	<label>Cantidad m&iacute;nima de stock:</label>
+  	<input type="number" name="cantidadminimastock"  placeholder="Cant. minima de stock..." required>
+  	Categor&iacute;a:
+  	<select>
+  		<option value="bebidas">Bebidas</option>
+  		<option value="chocolates">Chocolates</option>
+
+  	</select>
+  	<label>Proovedor:</label>
+  	<input type="text" name="proovedor" placeholder="Proovedor..." required>
+    <label>Fecha de vencimiento:</label>
+    <input type="date" name="fechadevencimiento" required>
+    <label>Fecha de alta:</label>
+    <input type="date" name="fechaalta" required> 
+  	<label>Precio de venta unitario:</label>
+  	<input type="number" name="precioventa" placeholder="Precio..." step="1" required="">
+  	<a href="{{ baseUrl() }}/listado">Enviar</a>
+
+  </fieldset>
+  
+</form>
+
+</body>
+</html>
+{% endblock %}

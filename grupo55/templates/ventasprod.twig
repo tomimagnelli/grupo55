@@ -1,0 +1,46 @@
+{% extends "layoutcerrar.twig" %}
+
+{% block contenido %}
+<form method="post" action="">
+	<div class='agregar'>
+		
+	<a href="{{ baseUrl() }}/altaventa">AGREGAR VENTA</a>
+	</div>
+</form>
+
+
+<table>
+	<tr>
+			<th id="nombre" >Producto</th>
+			<th id="marca">Marca</th>
+			<th id="codigo">Codigo de barra</th>
+			<th id="cantidad">Cantidad</th>
+			<th id="preciounidad">Precio unidad ($)</th>
+			<th id="preciototal">Total $</th>
+	
+
+
+	</tr>
+	<tr>
+			<td>Caf&eacute;</td>
+			<td>Arlist&aacute;n</td>
+			<td>111001</td>
+			<td>2</td>
+			<td>70</td>
+			<td>140</td>
+			
+	</tr>
+	<tr>
+			<td>Caf&eacute;</td>
+			<td>Arlist&aacute;n</td>
+			<td>111001</td>
+			<td>3</td>
+			<td>70</td>
+			<td>210</td>
+			
+	</tr>
+	
+</table>
+</body>
+</html>
+{% endblock %}
