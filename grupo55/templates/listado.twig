@@ -1,9 +1,7 @@
-{% extends layoutcerrar.twig %}
+{% extends "layoutcerrar.twig" %}
 {% block contenido %}
-<form method="get" action="altaproducto.html">
-	<div class='agregar'>
-		<input type="submit" value="+ Agregar un producto"> 
-	</div>
+<form class="agregar" method="post" action="">
+	<a href="{{ baseUrl() }}/altaproducto">AGREGAR UN PRODUCTO</a>
 </form>
 
 
