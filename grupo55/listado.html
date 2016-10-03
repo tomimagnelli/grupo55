@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Buffet - Listado</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<header><h1>Productos</h1></header>	
+<nav class="barra">
+  <ul>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="contacto">Contacto</a></li>
+    <li><a href="cerrar">Cerrar Sesi&oacute;n</a></li>
+
+  </ul>
+
+</nav>
+
+<form method="get" action="altaproducto.html">
+	<div class='agregar'>
+		<input type="submit" value="+ Agregar un producto"> 
+	</div>
+</form>
+
+
+<table>
+	<tr>
+			<th id="nombre" >Nombre</th>
+			<th id="marca">Marca</th>
+			<th id="codigo">Codigo de barra</th>
+			<th id="stockact">Stock Actual</th>
+			<th id="stockmin">Stock minimo</th>
+			<th id="categoria">Categor&iacute;a</th>
+			<th id="proovedor">Proovedor</th>
+			<th id="precio">Precio venta($)</th>
+			<th id="fechaalta">Fecha de alta</th>
+			<th id="opciones">Opciones</th>
+
+
+	</tr>
+	<tr>
+			<td>Caf&eacute;</td>
+			<td>Arlist&aacute;n</td>
+			<td>111001</td>
+			<td>20</td>
+			<td>5</td>
+			<td>Bebida</td>
+			<td>Nestle Bs. As.</td>
+			<td>70</td>
+			<td>10/10/16</td>
+			<td>
+				<input type="button"  value="Info">
+				<input type="button"  value="Modificar">
+				<input type="button" value="Dar de baja">
+			<td>
+	</tr>
+	<tr>
+			<td>Alfajor</td>
+			<td>Capit&aacute;n del espacio</td>
+			<td>123123</td>
+			<td>25</td>
+			<td>10</td>
+			<td>Alimento</td>
+			<td>Alfajores SA</td>
+			<td>716</td>
+			<td>23/11/17</td>
+			<td>
+				<input type="button"  value="Info">
+				<input type="button"  value="Modificar">
+				<input type="button" value="Dar de baja">
+			<td>
+	</tr>
+
+	
+</table>
+<footer>Buffet - Facultad de inform&aacute;tica UNLP</footer>
+	
+</body>
+</html>

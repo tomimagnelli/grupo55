@@ -1,0 +1,43 @@
+{% extends layoutcerrar.twig %}
+{% block contenido %}
+<form method="get" action="altaproducto.html">
+	<div class='agregar'>
+		<input type="submit" value="+ Agregar un producto"> 
+	</div>
+</form>
+
+
+<table>
+	<tr>
+			<th id="nombre" >Nombre</th>
+			<th id="marca">Marca</th>
+			<th id="stock">Stock Actual</th>
+			<th id="fechavenc">Fecha De vencimiento</th>
+	</tr>
+	<tr>
+			<td>Caf&eacute;</td>
+			<td>Arlist&aacute;n</td>
+			<td>10</td>
+			<td>10/10/16</td>
+			<td>
+				<input type="button"  value="Info">
+				<input type="button"  value="Modificar">
+				<input type="button" value="Dar de baja">
+			<td>
+	</tr>
+	<tr>
+			<td>Alfajor</td>
+			<td>Capit&aacute;n del espacio</td>
+			<td>16</td>
+			<td>1/12/17</td>
+			<td>
+				<input type="button"  value="Info">
+				<input type="button"  value="Modificar">
+				<input type="button" value="Dar de baja">
+			<td>
+	</tr>
+</table>
+
+</body>
+</html>
+{% endblock %}
