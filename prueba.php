@@ -5,7 +5,11 @@
  $db_base="grupo55";
  $cn = new PDO("mysql:dbname=$db_base;host=$db_host",$db_user,$db_pass);
  $query = "SELECT * FROM categoria";
- $result=$cn->query($query);
- echo $result;     
+ $result=$cn->query($query)->fetchAll();;
+
+foreach( $result as $row ) {
+    echo $row['id'];
+    echo $row['nombre'];
+}
 
 ?>
