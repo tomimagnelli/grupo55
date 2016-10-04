@@ -5,7 +5,7 @@
  $db_base="grupo55";
  $cn = new PDO("mysql:dbname=$db_base;host=$db_host",$db_user,$db_pass);
  $query = "SELECT * FROM categoria";
- $sentencia = $gbd->prepare("INSERT INTO categoria (nombre) VALUES (:nombre)");
+ $sentencia = $cn->prepare("INSERT INTO categoria (nombre) VALUES (:nombre)");
 $sentencia->bindParam(':nombre', $name);
 // insertar una fila
 $name = 'cereales';
