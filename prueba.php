@@ -6,5 +6,6 @@
  $cn = new PDO("mysql:dbname=$db_base;host=$db_host",$db_user,$db_pass);
  $query = "SELECT * FROM categoria";
  $result=$cn->query($query);
+ echo $result;     
 
 ?>
