@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+		<title>Buffet</title>
+		<link rel="stylesheet" type="text/css" href="{{ baseUrl() }}/style.css">
+	</head>
+<body>
+
+
+<header>
+   <h1>Buffet de la Facultad</h1>
+</header>
+
+<nav class="barra">
+  <ul>
+    <li><a href="{{ baseUrl() }}/">Inicio</a></li>
+		  {% if session.user is not null %}
+			  <li><a href="{{ baseUrl() }}/logout">Cerrar Sesi&oacute;n</a></li>
+			{% else %}
+    <li><a href="{{ baseUrl() }}/login">Iniciar Sesi&oacute;n</a></li>
+		 {% endif %}
+    <li><a href="contacto">Contacto</a></li>
+
+  </ul>
+</nav>
+{% if flash is not empty %}
+		{% include 'components/messages.twig' %}
+	{% endif %}

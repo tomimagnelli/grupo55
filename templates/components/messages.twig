@@ -1,0 +1,13 @@
+{% if flash.success is not empty %}
+	<div class="flash success">
+		<p>
+			{{ flash.success }}
+		</p>
+	</div>
+{% else %}
+	<div class="flash error">
+		<p>
+			{{ flash.error }}
+		</p>
+	</div>
+{% endif %}

@@ -1,0 +1,68 @@
+{% extends "layout.twig" %}
+
+{% block contenido %}
+
+<div class="container">
+	<div class="col col-6-center card">
+		<h2 class="title">
+			<span class="icon">
+				<i class="fa fa-user"></i>
+			</span>
+			{{ usuario.usuario }}
+		</h2>
+		<div class="user-data">
+				<span class="field">Documento: {{ usuario.documento }}</span>
+				<span class="field">Email: {{ usuario.email }} </span>
+				<span class="field">Nombre:	{{ usuario.nombre }}</span>
+				<span class="field">Apellido:	{{ usuario.apellido }} </span>
+				{% for ubicacion in ubicacionUser %}
+				<span class="field">Ubicación: {{ ubicacion.nombre }} | {{ ubicacion.descripcion }} </span>
+				{% endfor %}
+				<span class="field">Rol del Usuario: {{ usuario.rol_id }} </span>
+				<span class="field">Teléfono: {{ usuario.telefono }} </span>
+		</div>
+		<div id="edit" class="modal">
+			<form method="POST" class="modal-content abm-content">
+				<a class="close" onclick="cerrar()" onkeypress="cerrar()" role="button">×</a>
+				<h3>Editar Usuario</h3>
+				<label for="editName">Nombre: </label>
+				<input type="text" name="nombre" id="editName" maxlength="45" value="{{ usuario.nombre }}" required/>
+				<label for="editApellido">Apellido: </label>
+				<input type="text" name="apellido" id="editApellido" maxlength="45" value="{{ usuario.apellido }}" required/>
+				<label for="editTelefono">Teléfono: </label>
+				<input type="number" name="telefono" id="editTelefono" maxlength="25" value="{{ usuario.telefono }}" required/>
+				<label for="newRol">Rol: </label>
+				<select id="newRol" name="rol_id" required>
+				 <option value="" selected="selected">Seleccione</option>
+				 <option value="1">Administrador</option>
+				 <option value="2">Usuario Online</option>
+				 <option value="3">Gestión</option>
+				</select>
+				<label for="newUbicacion" id="labelUbicacion">Ubicación: </label>
+				<select id="newUbicacion" name="ubicacion_id">
+				 <option value="" selected="selected">Seleccione</option>
+				 {% for ubicacion in ubicaciones %}
+				 <option value="{{ ubicacion.id }}">{{ ubicacion.nombre }} | {{ ubicacion.descripcion }}</option>
+				 {% endfor %}
+				</select>
+				<label for="editMail">Mail: </label>
+				<input type="email" name="email" id="editMail" value="{{ usuario.email }}" required/>
+				<label for="editDocumento">Documento: </label>
+				<input type="number" name="documento" id="editDocumento" maxlength="8" value="{{ usuario.documento }}" required/>
+				<label for="editUsername">Nombre de usuario: </label>
+				<input type="text" name="user" id="editUsername" maxlength="20" value="{{ usuario.usuario }}" required/>
+				<label for="editPassword">Contraseña: </label>
+				<input type="password" name="pass" id="editPassword" maxlength="20" placeholder="Contraseña" required/>
+				<input type="hidden" name="userid" value="{{ usuario.id }}"/>
+				 <br><br>
+				<input type="submit" value="Modificar"/>
+			</form>
+		</div>
+		<div class="right">
+			<a href="#" class="action-button shadow animate green active" onclick ="mostrar('edit')" role="button">
+				<i class="fa fa-pencil"></i>Modificar
+			</a>
+		</div>
+	</div>
+</div>
+{% endblock %}
