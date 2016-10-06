@@ -1,0 +1,19 @@
+<table summary="Tabla de productos del buffet">
+  <tr>
+    <th id="Nombre">NOMBRE</th>
+    <th id="Marca">MARCA</th>
+    <th id="Stock">STOCK</th>
+		<th>ACCIONES</th>
+  </tr>
+	{% for producto in productos %}
+		<tr id="{{ producto.id }}">
+			<td>{{ producto.nombre }}</td>
+			<td>{{ producto.marca }}</td>
+			<td>{{ producto.stock }}</td>
+			<td>
+				<a href="productos/show?id={{ producto.id }}" title="Editar"><i class="fa fa-pencil"></i></a>
+				<a href="productos/delete?id={{ producto.id }}" title="Eliminar"><i class="fa fa-trash-o"></i></a>
+			</td>
+		</tr>
+	{% endfor %}
+  </table>

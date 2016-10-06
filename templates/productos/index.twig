@@ -1,0 +1,42 @@
+{% extends "layout.twig" %}
+
+{% block contenido %}
+
+<div id="new" class="modal">
+  <form method="post" class="modal-content abm-content">
+    <a class="close" onclick="cerrar()" onkeypress="cerrar()" role="button">×</a>
+    <h3>Nuevo producto</h3>
+    <label for="newProductName">Nombre: </label>
+    <input type="text" name="nombre" id="newProductName" maxlength="20" placeholder="Nombre" required />
+    <label for="newMarkName">Marca: </label>
+    <input type="text" name="marca" id="newMarkName" maxlength="20" placeholder="Marca" required />
+    <label for="newStockAct">Stock actual: </label>
+    <input type="number" name="stock" id="newStockAct" value="0" placeholder="Stock actual" required/>
+    <label for="newStockMin">Stock mínimo: </label>
+    <input type="number" name="stock_minimo" id="newStockMin" placeholder="Stock mínimo" required />
+    <label for="newCategory">Categoría: </label>
+    <select id="newCategory" name="categoria_id" required>
+     <option value="" selected="selected">Seleccione</option>
+     {% for categoria in categorias %}
+        <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+     {% endfor %}
+    </select>
+    <label for="newProviderName">Proovedor: </label>
+    <input type="text" id="newProviderName" maxlength="20" placeholder="Proovedor" name="proovedor" required />
+    <label for="newDescription">Descripción: </label>
+    <input type="text" id="newDescription" maxlength="255" placeholder="Descripción" name="descripcion" required />
+    <label for="newPrice">Precio venta: </label>
+    <input type="number" name="precio_venta_unitario" id="newPrice" min="0" step="0.5" placeholder="Precio de venta unitaria" required />
+    <br><br>
+    <input type="submit" value="Agregar"/>
+  </form>
+</div>
+    <br>
+    <h1 class="title" id="listado">Listado de Productos</h1>
+      <div class="centered">
+    <a id="nuevo" href="#" class="action-button shadow animate green active" onclick ="mostrar('new')" onkeypress="mostrar('new')" role="button">Nuevo</a>
+  </div>
+
+{% include 'productos/_index.twig' with {'productos' : productos} %}
+
+{% endblock %}
