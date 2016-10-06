@@ -14,12 +14,14 @@ class ComposerStaticInit7d8e59127c8db5c46d1b71101ecdaa02
         'S' => 
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Component\\Debug\\' => 24,
             'Symfony\\Component\\Console\\' => 26,
             'Slim\\Views\\' => 11,
             'Slim\\Flash\\' => 11,
         ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
         ),
         'M' => 
@@ -43,6 +45,10 @@ class ComposerStaticInit7d8e59127c8db5c46d1b71101ecdaa02
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
+        'Symfony\\Component\\Debug\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/debug',
+        ),
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
@@ -55,6 +61,10 @@ class ComposerStaticInit7d8e59127c8db5c46d1b71101ecdaa02
         'Slim\\Flash\\' => 
         array (
             0 => __DIR__ . '/..' . '/slim/flash/src',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
         'Psr\\Http\\Message\\' => 
         array (
