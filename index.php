@@ -4,6 +4,7 @@ require_once 'vendor/autoload.php';
 require_once 'Model/Resource/UsuarioResource.php';
 use Model\Entity\Usuario;
 use Model\Resource\UsuarioResource;
+use Controller\UsuarioController;
 
 session_start();
 
@@ -65,7 +66,7 @@ $app->group('/login', function() use($app) {
 
 $app->group('/backend', function() use($app) {
 	$app->get('/', function() use($app){
-      $app->applyHook('must.be.logeado');
+      $app->applyHook('must.be.logueado');
 	 	echo $app->view->render('backend.twig');
 	});
 });
@@ -84,7 +85,6 @@ $app->group('/altaproducto', function() use($app) {
 });
 
 $app->group('/users', function() use ($app, $userResource) {
-    $app->applyHook('must.be.logeado');
     // Listar
     $app->get('/', '\Controller\UsuarioController:listUsuarios')->setParams(array($app));
 });
