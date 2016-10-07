@@ -28,7 +28,7 @@ class UsuarioController {
           $app->flash('error', 'No se pudo dar de alta el usuario');
       }
     }
-    echo $app->redirect('/usuarios');
+    echo $app->redirect('/users');
   }
 
   public function editUsuario($app,$user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id = null,$id) {

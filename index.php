@@ -87,12 +87,27 @@ $app->group('/altaproducto', function() use($app) {
 $app->group('/users', function() use ($app, $userResource) {
     // Listar
     $app->get('/', '\Controller\UsuarioController:listUsuarios')->setParams(array($app));
+    //Alta
+
 });
 
-$app->group('/altausuario', function() use($app) {
+$app->group('/altausuario', function() use($app, $userResource) {
     $app->get('/', function() use($app){
         echo $app->view->render('altausuario.twig');
     });
+
+    $app->post('/', '\Controller\UsuarioController:newUsuario')->setParams(
+          array($app, $app->request->post('user'),
+          $app->request->post('pass'),
+          $app->request->post('nombre'),
+          $app->request->post('apellido'),
+          $app->request->post('documento'),
+          $app->request->post('telefono'),
+          $app->request->post('rol_id'),
+          $app->request->post('email'),
+          $app->request->post('ubicacion_id'))
+  );
+
 });
 
 $app->group('/ventasprod', function() use($app) {
