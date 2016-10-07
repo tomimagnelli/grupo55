@@ -11,8 +11,14 @@ class UsuarioController {
 
   public function listUsuarios($app){
     $app->applyHook('must.be.administrador');
-    echo $app->view->render( "users.twig", array('usuarios' => (UsuarioResource::getInstance()->get())));
+    echo $app->view->render( "users.twig", array('usuarios' => (UsuarioResource::getInstance()->get()), 'ubicaciones' => (UbicacionResource::getInstance()->get())));
   }
+
+  public function cargaUbicaciones($app){
+      $app->applyHook('must.be.administrador');
+      echo $app->view->render( "altausuario.twig", array('ubicaciones' => (UbicacionResource::getInstance()->get())));
+
+    }
 
   public function newUsuario($app,$user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id = null) {
     $app->applyHook('must.be.administrador');
@@ -38,7 +44,7 @@ class UsuarioController {
     } else {
       $app->flash('error', 'No se pudo modificar el usuario');
     }
-    echo $app->redirect('/usuarios');
+    echo $app->redirect('/users');
   }
 
   public function registrarUsuario($app,$user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id = 2,$email,$ubicacion_id = null ) {
@@ -57,14 +63,14 @@ class UsuarioController {
     } else {
       $app->flash('error', 'No se pudo eliminar el usuario');
     }
-    $app->redirect('/usuarios');
+    $app->redirect('/users');
   }
 
   public function showUsuario($app, $id){
     $app->applyHook('must.be.administrador');
     $user = UsuarioResource::getInstance()->get($id);
     $ubicacion = UsuarioResource::getInstance()->ubicacion($id);
-    echo $app->view->render( "usuarios/show.twig", array('usuario' => ($user), 'ubicacionUser' => ($ubicacion), 'ubicaciones' => (UbicacionResource::getInstance()->get())));
+    echo $app->view->render( "edituser.twig", array('usuario' => ($user), 'ubicacionUser' => ($ubicacion), 'ubicaciones' => (UbicacionResource::getInstance()->get())));
   }
 
 }

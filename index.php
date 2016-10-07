@@ -82,19 +82,18 @@ $app->group('/altaproducto', function() use($app) {
 	$app->get('/', function() use($app){
 		echo $app->view->render('altaproducto.twig');
 	});
+
 });
 
 $app->group('/users', function() use ($app, $userResource) {
     // Listar
     $app->get('/', '\Controller\UsuarioController:listUsuarios')->setParams(array($app));
-    //Alta
 
 });
 
 $app->group('/altausuario', function() use($app, $userResource) {
-    $app->get('/', function() use($app){
-        echo $app->view->render('altausuario.twig');
-    });
+   $app->get('/', '\Controller\UsuarioController:cargaUbicaciones')->setParams(array($app));
+
 
     $app->post('/', '\Controller\UsuarioController:newUsuario')->setParams(
           array($app, $app->request->post('user'),
@@ -109,6 +108,27 @@ $app->group('/altausuario', function() use($app, $userResource) {
   );
 
 });
+
+$app->group('/edituser', function() use($app, $userResource) {
+    $app->get('/', '\Controller\UsuarioController:showUsuario')->setParams(array($app, $app->request->get('id')));
+
+    $app->post('/', '\Controller\UsuarioController:editUsuario')->setParams(
+           array($app, $app->request->post('user'),
+           $app->request->post('pass'),
+           $app->request->post('nombre'),
+           $app->request->post('apellido'),
+           $app->request->post('documento'),
+           $app->request->post('telefono'),
+           $app->request->post('rol_id'),
+           $app->request->post('email'),
+           $app->request->post('ubicacion_id'),
+           $app->request->post('userid'))
+   );
+
+});
+
+$app->get('/delete', '\Controller\UsuarioController:deleteUsuario')->setParams(array($app, $app->request->get('id')));
+
 
 $app->group('/ventasprod', function() use($app) {
     $app->get('/', function() use($app){

@@ -15,8 +15,9 @@
 				<td>{{ usuario.usuario }}</td>
 				<td>{{ usuario.documento }}</td>
 				<td>
-					<a href="usuarios/show?id={{ usuario.id }}" title="Editar"><i class="fa fa-pencil"></i></a>
-					<a href="usuarios/delete?id={{ usuario.id }}" title="Eliminar"><i class="fa fa-trash-o"></i></a>
+					<a href="edituser?id={{ usuario.id }}"> <input type="button" value="Editar" /> </a>
+
+					<a href="delete?id={{ usuario.id }}"> <input type="button" value="Eliminar" /></i></a>
 				</td>
 			</tr>
 		{% endfor %}
