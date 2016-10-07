@@ -72,17 +72,31 @@ $app->group('/backend', function() use($app) {
 });
 
 $app->group('/listado', function() use($app) {
-    $app->get('/', function() use($app){
-        echo $app->view->render('listado.twig');
-    });
+     $app->get('/', '\Controller\ProductoController:listProductos')->setParams(array($app));
+     $app->get('/delete', '\Controller\ProductoController:deleteProducto')->setParams(array($app, $app->request->get('id')));
 });
 
-
 $app->group('/altaproducto', function() use($app) {
-	$app->get('/', function() use($app){
-		echo $app->view->render('altaproducto.twig');
-	});
+    $app->get('/', '\Controller\ProductoController:showAltaProducto')->setParams(array($app));
+    $app->post('/', '\Controller\ProductoController:newProducto')->setParams(
+          array($app,$app->request->post('nombre'),
+          $app->request->post('marca'),
+          $app->request->post('stock'),
+          $app->request->post('stock_minimo'),
+          $app->request->post('proovedor'),
+          $app->request->post('precio_venta_unitario'),
+          $app->request->post('categoria_id'),
+          $app->request->post('descripcion')));
+  });
 
+$app->group('/stockminimo', function() use($app) {
+     $app->get('/', '\Controller\ProductoController:listStockminimo')->setParams(array($app));
+     
+});
+
+$app->group('/faltantes', function() use($app) {
+     $app->get('/', '\Controller\ProductoController:listFaltantes')->setParams(array($app));
+     
 });
 
 $app->group('/users', function() use ($app, $userResource) {
