@@ -1,41 +1,28 @@
-{% extends "layoutcerrar.twig" %}
+{% extends "layout.twig" %}
+
 {% block contenido %}
-<form class="agregar" method="post" action="">
-	<a href="{{ baseUrl() }}/altaproducto">AGREGAR UN PRODUCTO</a>
-</form>
+<a href="{{ baseUrl() }}/altaproducto" target="rightframe"><input type="button" value="AGREGAR UN PRODUCTO" /></a>
 
 
-<table>
+<table summary="Tabla de productos del buffet">
 	<tr>
-			<th id="nombre" >Nombre</th>
-			<th id="marca">Marca</th>
-			<th id="stock">Stock Actual</th>
-			<th id="fechavenc">Fecha De vencimiento</th>
+			<th id="Nombre">NOMBRE</th>
+    		<th id="Marca">MARCA</th>
+   			<th id="Stock">STOCK</th>
+			<th>ACCIONES</th>
+		
 	</tr>
-	<tr>
-			<td>Caf&eacute;</td>
-			<td>Arlist&aacute;n</td>
-			<td>10</td>
-			<td>10/10/16</td>
-			<td>
-				<input type="button"  value="Info">
-				<input type="button"  value="Modificar">
-				<input type="button" value="Dar de baja">
-			<td>
-	</tr>
-	<tr>
-			<td>Alfajor</td>
-			<td>Capit&aacute;n del espacio</td>
-			<td>16</td>
-			<td>1/12/17</td>
-			<td>
-				<input type="button"  value="Info">
-				<input type="button"  value="Modificar">
-				<input type="button" value="Dar de baja">
-			<td>
-	</tr>
+	{% for producto in productos %}
+		  <tr id="{{ producto.id }}">
+				<td>{{ producto.nombre }}</td>
+				<td>{{ producto.marca }}</td>
+				<td>{{ producto.stock }}</td>
+				<td>
+					<a href="editproducto?id={{ producto.id }}"><input type="button" value="Editar" /></a>
+					<a href="listado/delete?id={{ producto.id }}"><input type="button" value="Eliminar" /></a>
+				</td>
+			</tr>
+		{% endfor %}
 </table>
 
-</body>
-</html>
 {% endblock %}
