@@ -15,10 +15,6 @@ class ProductoController {
     echo $app->view->render( "stockminimo.twig", array('productos' => (ProductoResource::getInstance()->get()), 'categorias' => (CategoriaResource::getInstance()->get())));
   }
 
-  public function listFaltantes($app){
-    echo $app->view->render( "faltantes.twig", array('productos' => (ProductoResource::getInstance()->get()), 'categorias' => (CategoriaResource::getInstance()->get())));
-  }
-
   public function showAltaProducto($app){
     echo $app->view->render( "altaproducto.twig", array('categorias' => (CategoriaResource::getInstance()->get())));
   }

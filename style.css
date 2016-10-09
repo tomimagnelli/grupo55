@@ -70,7 +70,7 @@ div.md{
 
 div.md img{
     width:300px;
-    height:250px; 
+    height:250px;
     margin:auto;
 }
 
@@ -94,7 +94,7 @@ div.info{
 
 div.info img {
   width:560px;
-  height:305px; 
+  height:305px;
   margin:auto;
 }
 
@@ -199,7 +199,7 @@ tr:nth-child(even) {
 }
 
 div.agregar input{
-    width:250px; 
+    width:250px;
     height:40px;
 }
 
@@ -276,6 +276,95 @@ fieldset.fieldAltaProd{
     height: 3%;
 }
 
+.config input[type="text"],input[type="img"]{
+  display: inline-block;
+}
+
+.config input[type="text"]{
+  width: 50%;
+  height: 2.1em;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  text-align: left;
+  display: inline-block;
+  margin-right: 10%;
+  border: solid 1px #dcdcdc;
+  transition: box-shadow 0.3s, border 0.3s;
+}
+
+.config .estilotextarea {border: 2px solid #003366;
+  border-radius: 15px;
+}
+
+.config input[type="file"] {
+  border: 2px solid #003366;
+  box-shadow: 2.5px 2.5px 2.5px #888888;
+  font-weight:bold;
+
+}
+
+.config img{
+  width:560px;
+  height:305px;
+}
+
+.config input[type="submit"]{
+  text-align: center;
+  width: 100px;
+  height: 2.8em;
+  display: inline-block;
+  border-radius: 5px;
+  position: relative;
+  margin-left: 40%;
+  margin-right: 50%;
+  background: #003366;
+  color: white;
+  cursor: pointer;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.4s;
+  border:none;
+  box-shadow: 2.5px 2.5px 2.5px #888888;
+  font-weight:bold;
+}
+
+.config .estilotextarea {border: 2px solid #003366;
+  border-radius: 15px;
+}
+
+ul.pagination {
+    background-color: white;
+    display: inline-block;
+    padding: 0;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+    border: 1px solid #ddd;
+    transition: background-color .3s;
+    border-radius: 5px;
+    color: #003366;
+    float:left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+ul.pagination li a:hover {background-color: #003366; color: white}
+
+.pagination li:first-child a {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.pagination li:last-child a {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+
 @media only screen and (max-width: 720px) {
   section {
     width:94%;
@@ -306,7 +395,7 @@ fieldset.fieldAltaProd{
   h1 {
     font: 20px 'Merriweather', serif;
   }
- 
+
  td, th {
     font-size: 70%;
 }
@@ -342,7 +431,7 @@ fieldset.fieldAltaProd{
   h1 {
     font: 25px 'Merriweather', serif;
   }
- 
+
  td, th {
     font-size: 80%;
 }
@@ -367,4 +456,3 @@ fieldset.fieldAltaProd{
 
 
 }
-

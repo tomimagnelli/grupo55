@@ -29,9 +29,8 @@ require_once 'permissions.php';
 
 
 
-$app->get('/', function () use ($app) {
-    $app->render('index.twig');
-});
+$app->get('/', '\Controller\HomeController:showHome')->setParams(array($app));
+
 
 // login...
 $app->post('/', function() use ($app, $userResource) {
@@ -106,15 +105,18 @@ $app->group('/editproducto', function() use($app) {
 
 });
 
-$app->group('/stockminimo', function() use($app) {
-     $app->get('/', '\Controller\ProductoController:listStockminimo')->setParams(array($app));
-     
-});
 
 $app->group('/faltantes', function() use($app) {
      $app->get('/', '\Controller\ProductoController:listFaltantes')->setParams(array($app));
-     
+
 });
+
+$app->group('/stockminimo', function() use($app) {
+  $app->applyHook('must.be.logueado');
+  $app->get('/', '\Controller\ListadoController:indexActionStockMin')->setParams(array($app));
+  $app->get('/page', '\Controller\ListadoController:indexActionStockMin')->setParams(array($app, $app->request->get('id')));
+});
+
 
 $app->group('/users', function() use ($app, $userResource) {
     // Listar
@@ -182,6 +184,18 @@ $app->group('/altacompra', function() use($app) {
     $app->get('/', function() use($app){
         echo $app->view->render('altacompra.twig');
     });
+});
+
+$app->group('/config', function() use($app) {
+  $app->applyHook('must.be.logueado');
+  $app->get('/', '\Controller\ConfigController:showConfig')->setParams(array($app));
+
+  $app->post('/setPaginacion', '\Controller\ConfigController:setPaginacion')->setParams(
+           array($app, $app->request->post('paginacionInt')));
+  $app->post('/setDescripcion', '\Controller\ConfigController:setDescripcion')->setParams(
+           array($app, $app->request->post('titleInfo'),$app->request->post('descInfo')));
+  $app->post('/setMenu', '\Controller\ConfigController:setMenu')->setParams(
+           array($app, $app->request->post('menuTitulo'),$app->request->post('menuInfo')));
 });
 
 

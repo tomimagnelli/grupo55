@@ -1,0 +1,62 @@
+{% extends "layout.twig" %}
+
+{% block contenido %}
+    <br>
+    <section>
+        <form method="post" action="config/setDescripcion" class="config" enctype="multipart/form-data">
+            <h2>Cambiar Información</h2>
+            <label for="titleInfo">Título: </label>
+            <input type="text" id="menuTitleInfo" name="titleInfo" maxlength="50" placeholder="Titulo" value="{{tituloDescripcion.valor}}" required/>
+            <br>
+            <br>
+            <label for="titleInfo">Descripcion: </label>
+            <br>
+            <textarea cols="30" rows="10" id="textarea-info" name="descInfo" title="textarea-menu">{{infoDescripcion.valor}}</textarea>
+            <br>
+            <label for="titleInfo">Imagen: </label>
+            <br>
+            <img src="{{imgDescripcion.valor}}" alt="retrato a poner en la portada" />
+            <br>
+            <input type="file" id="myFileInfo" name="myFileInfo" accept="image/*" value="img/empty.jpg">
+            <br>
+            <br>
+            <input type="submit" value="Guardar"/>
+        </form>
+    </section>
+    <section>
+        <form method="post" action="config/setMenu" class="config" enctype="multipart/form-data">
+            <h2>Cambiar men&uacute;</h2>
+            <label for="menuTitleMenu">Titulo: </label>
+            <input type="text" id="menuTitleMenu" maxlength="50" placeholder="Titulo" name="menuTitulo" value="{{tituloMenu.valor}}" required/>
+            <br>
+            <br>
+            <img src="{{imgMenu.valor}}" alt="representacion del plato subioa" />
+            <input type="file" id="myFileMenu" name="myFileMenu" accept="image/*">
+            <br>
+            <br>
+            <input type="submit" value="Guardar"/>
+        </form>
+    </section>
+    <section>
+        <form method="post" action="config/setPaginacion" class="config">
+            <h2>Paginaci&oacute;n</h2>
+            <label for="paginacionInt">Paginaci&oacute;n: </label>
+            <input type="number" id="paginacionInt" name="paginacionInt" maxlength="50" step=1 placeholder="Paginaci&oacute;n" value="{{paginacion.valor}}" required/>
+            <br>
+            <br>
+            <input type="submit" value="Guardar"/>
+        </form>
+        <form method="post" action="config/setHabilitacion" class="config">
+        <label>Habilitación / Deshabilitación: </label>
+        <br>
+        <br>
+          <select id="habilitacion" name="habilitacion_id" required>
+           <option value="" selected="selected">Seleccione</option>
+           <option value="1">Habilitar</option>
+           <option value="2">Deshabilitar</option>
+          </select>
+          <br>
+          <input type="submit" value="Guardar">
+        </form>
+    </section>
+    {% endblock %}

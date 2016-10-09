@@ -14,7 +14,7 @@ class ListadoController {
         $paginator = ProductoResource::getInstance()->getPaginateStockMin($pageSize,$page);
         $totalItems = count($paginator);
         $pagesCount = ceil($totalItems / $pageSize);
-        echo $app->view->render('listados/stockMinimo/index.twig', array(
+        echo $app->view->render('stockminimo.twig', array(
             "productos"     => $paginator,
             "totalItems" => $totalItems,
             "pagesCount" => $pagesCount
@@ -28,7 +28,7 @@ class ListadoController {
         $paginator = ProductoResource::getInstance()->getPaginateFaltantes($pageSize,$page);
         $totalItems = count($paginator);
         $pagesCount = ceil($totalItems / $pageSize);
-        echo $app->view->render('listados/faltantes/index.twig', array(
+        echo $app->view->render('faltantes.twig', array(
             "productos"     => $paginator,
             "totalItems" => $totalItems,
             "pagesCount" => $pagesCount

@@ -15,7 +15,8 @@ class ConfigController {
       'imgDescripcion' => ($configResource->get('imgDescripcion')),
       'tituloMenu' => ($configResource->get('tituloMenu')),
       'infoMenu' => ($configResource->get('infoMenu')),
-      'imgMenu' => ($configResource->get('imgMenu'))));
+      'imgMenu' => ($configResource->get('imgMenu')),
+      'paginacion' => ($configResource->get('paginacion'))));
   }
 
  public function setPaginacion($app,$value) {
@@ -37,7 +38,7 @@ public function setTituloDescripcion($app,$value) {
   public function setImgDescripcion($app) {
     $app->applyHook('must.be.administrador');
   	if (isset($_FILES["myFileInfo"])) {
-  	     $target_path = "img/";
+  	     $target_path = "uploads/";
 	        $target_path = $target_path . basename( $_FILES["myFileInfo"]['name']); move_uploaded_file($_FILES["myFileInfo"]['tmp_name'], $target_path);
             ConfiguracionResource::getInstance()->edit('imgDescripcion',$target_path);
     }
@@ -55,22 +56,18 @@ public function setTituloDescripcion($app,$value) {
     ConfiguracionResource::getInstance()->edit('tituloMenu',$value);
  }
 
- public function setInfoMenu($app,$value) {
-    ConfiguracionResource::getInstance()->edit('infoMenu',$value);
- }
 
 public function setImgMenu($app) {
     if (isset($_FILES["myFileMenu"])) {
-  	$target_dir = "img/";
+  	$target_dir = "uploads/";
 	$target_file = $target_dir .  basename( $_FILES["myFileMenu"]["name"]);
     move_uploaded_file($_FILES["myFileMenu"]["tmp_name"], $target_file);
     ConfiguracionResource::getInstance()->edit('imgMenu',$target_file);
 	}
   }
-  public function setMenu($app,$titulo,$descripcion) {
+  public function setMenu($app,$titulo) {
     $app->applyHook('must.be.administrador');
   	$this->setTituloMenu($app,$titulo);
-  	$this->setInfoMenu($app,$descripcion);
   	$this->setImgMenu($app);
     echo $app->redirect('/config');
   }

@@ -1,0 +1,30 @@
+{% extends "layout.twig" %}
+
+{% block contenido %}
+<div class="contenedor">
+        <div class="info">
+              <section >
+                  <h1>{{tituloDescripcion.valor}}</h1>
+                    <p>{{infoDescripcion.valor}}</p>
+
+                    <img src="{{ baseUrl() }}/{{imgDescripcion.valor}}" alt="fondo del buffet"/>
+
+              </section>
+        </div>
+
+        <div class="md">
+
+                 <section>
+                  <h1>Men&uacute; del d&iacute;a:</h1>
+                  <img src="{{ baseUrl() }}/{{imgMenu.valor}}" alt="menu del dia"/>
+                  <h1>{{tituloMenu.valor}}</h1>
+                </section>
+
+        </div>
+
+</div>
+
+
+</body>
+</html>
+{% endblock %}
