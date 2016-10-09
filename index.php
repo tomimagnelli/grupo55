@@ -112,7 +112,6 @@ $app->group('/faltantes', function() use($app) {
 });
 
 $app->group('/stockminimo', function() use($app) {
-  $app->applyHook('must.be.logueado');
   $app->get('/', '\Controller\ListadoController:indexActionStockMin')->setParams(array($app));
   $app->get('/page', '\Controller\ListadoController:indexActionStockMin')->setParams(array($app, $app->request->get('id')));
 });
@@ -187,7 +186,6 @@ $app->group('/altacompra', function() use($app) {
 });
 
 $app->group('/config', function() use($app) {
-  $app->applyHook('must.be.logueado');
   $app->get('/', '\Controller\ConfigController:showConfig')->setParams(array($app));
 
   $app->post('/setPaginacion', '\Controller\ConfigController:setPaginacion')->setParams(
