@@ -16,11 +16,11 @@
   <ul>
     <li><a href="{{ baseUrl() }}/">Inicio</a></li>
 		  {% if session.user is not null %}
-			  <li><a href="{{ baseUrl() }}/logout">Cerrar Sesi&oacute;n</a></li>
+				<li><a href="{{ baseUrl() }}/backend">Operaciones</a></li>
+				<li><a href="{{ baseUrl() }}/logout">Cerrar Sesi&oacute;n</a></li>
 			{% else %}
     <li><a href="{{ baseUrl() }}/login">Iniciar Sesi&oacute;n</a></li>
 		 {% endif %}
-    <li><a href="contacto">Contacto</a></li>
 
   </ul>
 </nav>

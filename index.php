@@ -107,8 +107,8 @@ $app->group('/editproducto', function() use($app) {
 
 
 $app->group('/faltantes', function() use($app) {
-     $app->get('/', '\Controller\ProductoController:listFaltantes')->setParams(array($app));
-
+  $app->get('/', '\Controller\ListadoController:indexActionFaltantes')->setParams(array($app));
+  $app->get('/page', '\Controller\ListadoController:indexActionFaltantes')->setParams(array($app, $app->request->get('id')));
 });
 
 $app->group('/stockminimo', function() use($app) {
@@ -173,17 +173,26 @@ $app->group('/altaventa', function() use($app) {
         echo $app->view->render('altaventa.twig');
     });
 });
-$app->group('/compras', function() use($app) {
-    $app->get('/', function() use($app){
-        echo $app->view->render('compras.twig');
-    });
-});
+
 
 $app->group('/altacompra', function() use($app) {
     $app->get('/', function() use($app){
         echo $app->view->render('altacompra.twig');
     });
 });
+
+$app->group('/compras', function() use ($app) {
+    // Listar
+    $app->get('/', '\Controller\CompraController:listCompras')->setParams(array($app));
+
+});
+
+$app->group('/egresos', function() use ($app) {
+    // Listar
+    $app->get('/', '\Controller\EgresoDetalleController:listEgresosDeCompra')->setParams(array($app, $app->request->get('id')));
+
+});
+
 
 $app->group('/config', function() use($app) {
   $app->get('/', '\Controller\ConfigController:showConfig')->setParams(array($app));
