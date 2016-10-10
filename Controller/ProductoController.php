@@ -9,6 +9,7 @@ use Model\Resource\CategoriaResource;
 class ProductoController {
 
   public function listProductos($app){
+    $app->applyHook('must.be.administrador.or.gestion');
     echo $app->view->render( "listado.twig", array('productos' => (ProductoResource::getInstance()->get()), 'categorias' => (CategoriaResource::getInstance()->get())));
   }
   public function listStockminimo($app){

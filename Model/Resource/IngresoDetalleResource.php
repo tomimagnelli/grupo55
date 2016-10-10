@@ -70,6 +70,22 @@ class IngresoDetalleResource extends AbstractResource {
         return $this->get();
     }
 
+    public function hayStock($producto_id, $cantidad){
+
+      $query_string = " SELECT p FROM Model\Entity\Producto p
+                        WHERE (p.id = $producto_id) and (p.stock >= $cantidad)";
+
+      $query = $this->getEntityManager()->createQuery($query_string);
+
+      if (is_null($query)){
+      $app->flash('error', 'No hay stock para el producto seleccionado');
+      }
+      else {
+        return true;
+      }
+
+    }
+
    }
 
 ?>

@@ -7,6 +7,7 @@ use Model\Resource\CompraResource;
 class CompraController {
 
   public function listCompras($app){
+    $app->applyHook('must.be.administrador.or.gestion');
     echo $app->view->render( "compras.twig", array('compras' => (CompraResource::getInstance()->get())));
   }
   
