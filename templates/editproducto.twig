@@ -25,7 +25,7 @@
     <input type="number" name="precio_venta_unitario" id="editPrecio" maxlength="25" value="{{ producto.precio_venta_unitario}}" required/>
 
     <label>Categor&iacute;a: </label>
-    <select name="categoria_id">
+    <select name="categoria_id" required>
     <option value="" selected="selected">Seleccione</option>
      {% for categoria in categorias %}
         <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>

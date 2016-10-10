@@ -168,11 +168,17 @@ $app->group('/ventasprod', function() use($app) {
     });
 });
 
+
+
 $app->group('/altaventa', function() use($app) {
-    $app->get('/', function() use($app){
-        echo $app->view->render('altaventa.twig');
-    });
-});
+    $app->get('/', '\Controller\IngresoDetalleController:showAltaVenta')->setParams(array($app));
+    $app->post('/', '\Controller\IngresoDetalleController:newIngresoDetalle')->setParams(
+          array($app,$app->request->post('ingreso_tipo_id'),
+          $app->request->post('producto_id'),
+          $app->request->post('cantidad'),
+          $app->request->post('precio_unitario'),
+          $app->request->post('descripcion')));
+  });
 
 
 $app->group('/altacompra', function() use($app) {
@@ -184,6 +190,12 @@ $app->group('/altacompra', function() use($app) {
 $app->group('/compras', function() use ($app) {
     // Listar
     $app->get('/', '\Controller\CompraController:listCompras')->setParams(array($app));
+
+});
+
+$app->group('/ingresos', function() use ($app) {
+    // Listar
+    $app->get('/', '\Controller\IngresoDetalleController:listIngresos')->setParams(array($app));
 
 });
 

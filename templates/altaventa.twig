@@ -1,23 +1,36 @@
-{% extends "layoutcerrar.twig" %}
+{% extends "layout.twig" %}
 
 {% block contenido %}
 </nav>
-<form class="formAltaProd" method="post" action="">
+<form class="formAltaProd" method="post" action="altaventa">
   <fieldset class="fieldAltaProd" >
-	<label>Producto:
-  	<input type="text" name="nombre" placeholder="Nombre del producto" required></label>
-  	<label>Marca:</label>
-  	<input type="text" name="marca" placeholder="Marca del producto" required>
-  	<label>C&oacute;digo de barra:*</label>
-  	<input type="number" name="codigodebarra" placeholder="Codigo de barra..." required>
+
+	<label>Tipo venta: </label>
+  	<select name="ingreso_tipo_id">
+    <option value="" selected="selected">Seleccione</option>
+       {% for tipo in tiposingreso %}
+          <option value="{{ tipo.id }}">{{ tipo.nombre }}</option>
+       {% endfor %}
+
+    </select>
+
+    <label>Producto: </label>
+    <select name="producto_id">
+    <option value="" selected="selected">Seleccione</option>
+     {% for producto in productos %}
+        <option value="{{ producto.id }}">{{ producto.nombre }} {{ producto.marca }}</option>
+     {% endfor %}
+    </select>
+
   	<label>Cantidad :</label>
   	<input type="number" name="cantidad" placeholder="Ingrese cantidad" required>
   	<label>Precio:</label>
-  	<input type="number" name="precio"  placeholder="$" required>
-  	<label>Total:</label>
-  	<input type="number" name="total" required>
+  	<input type="number" name="precio_unitario"  placeholder="$" required>
+
+  	<label>Descripcion:</label>
+    <input type="text" name="descripcion" placeholder="Descripcion del producto..." required>
   	
-  <a href="{{ baseUrl() }}/ventasprod">CONFIRMAR</a>
+  <input type="submit" value="Agregar"/>
 
   </fieldset>
   
