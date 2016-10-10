@@ -9,8 +9,18 @@ use Model\Resource\CategoriaResource;
 class ProductoController {
 
   public function listProductos($app){
-    $app->applyHook('must.be.administrador.or.gestion');
-    echo $app->view->render( "productos/index.twig", array('productos' => (ProductoResource::getInstance()->get()), 'categorias' => (CategoriaResource::getInstance()->get())));
+    echo $app->view->render( "listado.twig", array('productos' => (ProductoResource::getInstance()->get()), 'categorias' => (CategoriaResource::getInstance()->get())));
+  }
+  public function listStockminimo($app){
+    echo $app->view->render( "stockminimo.twig", array('productos' => (ProductoResource::getInstance()->get()), 'categorias' => (CategoriaResource::getInstance()->get())));
+  }
+
+  public function listFaltantes($app){
+    echo $app->view->render( "faltantes.twig", array('productos' => (ProductoResource::getInstance()->get()), 'categorias' => (CategoriaResource::getInstance()->get())));
+  }
+
+  public function showAltaProducto($app){
+    echo $app->view->render( "altaproducto.twig", array('categorias' => (CategoriaResource::getInstance()->get())));
   }
 
   public function newProducto($app,$nombre,$marca,$stock,$stock_minimo,$proovedor,$precio_venta_unitario,$categoria_id = null,$descripcion) {
@@ -20,7 +30,7 @@ class ProductoController {
     } else {
       $app->flash('error', 'No se pudo dar de alta el producto');
     }
-    echo $app->redirect('/productos');
+    echo $app->redirect('/listado');
   }
 
   public function editProducto($app,$nombre,$marca,$stock,$stock_minimo,$proovedor,$precio_venta_unitario,$categoria_id = null,$descripcion,$id) {
@@ -30,7 +40,7 @@ class ProductoController {
     } else {
       $app->flash('error', 'No se pudo modificar el producto');
     }
-    echo $app->redirect('/productos');
+    echo $app->redirect('/listado');
   }
 
   public function deleteProducto($app, $id) {
@@ -40,14 +50,14 @@ class ProductoController {
     } else {
       $app->flash('error', 'No se pudo eliminar el producto');
     }
-    $app->redirect('/productos');
+    $app->redirect('/listado');
   }
 
   public function showProducto($app, $id){
     $app->applyHook('must.be.administrador.or.gestion');
     $producto = ProductoResource::getInstance()->get($id);
     $categoria = ProductoResource::getInstance()->categoria($id);
-    echo $app->view->render( "productos/show.twig", array('producto' => ($producto), 'categoriaProd' => ($categoria), 'categorias' => (CategoriaResource::getInstance()->get())));
+    echo $app->view->render( "editproducto.twig", array('producto' => ($producto), 'categoriaProd' => ($categoria), 'categorias' => (CategoriaResource::getInstance()->get())));
   }
 
 }

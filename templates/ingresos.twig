@@ -1,0 +1,29 @@
+{% extends "layout.twig" %}
+
+{% block contenido %}
+<a href="{{ baseUrl() }}/altaventa" target="rightframe"><input type="button" value="NUEVA VENTA" /></a>
+<table summary="Igresos de dinero del Buffet">
+	<tr>
+		<th id="IngresoId">Id del ingreso</th>
+		<th id="IngresoDescripcion">Descripcion</th>
+		<th id="Cantidad">Cantidad</th>
+		<th id="PrecioUnitario">Precio unitario</th>
+	</tr>
+
+		{% for ingreso_detalle in ingresos %}
+
+	<tr>
+			
+				<td>{{ ingreso_detalle.id}}</td>
+				<td>{{ ingreso_detalle.descripcion}}</td>
+				<td>{{ ingreso_detalle.cantidad }}</td>
+				<td>{{ ingreso_detalle.precio_unitario }}</td>
+				
+		{% endfor %}
+			
+	</tr>
+		
+	</table>
+
+{% endblock %}
+

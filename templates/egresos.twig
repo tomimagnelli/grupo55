@@ -1,0 +1,30 @@
+{% extends "layout.twig" %}
+
+{% block contenido %}
+<table summary="Egresos de dinero del Buffet">
+	<tr>
+		<th id="CompraId">Id de la compra</th>
+		<th id="ProdctoNombre">Nombre del producto</th>
+		<th id="ProdctoMarca">Marca del producto</th>
+		<th id="Cantidad">Cantidad</th>
+		<th id="ProdctoId">Precio unitario</th>
+	</tr>
+
+		{% for egreso_detalle in egresos %}
+
+	<tr>
+			
+				<td>{{ compra.id }}</td>
+				<td>{{ producto.nombre }}</td>
+				<td>{{ producto.nombre }}</td>
+				<td>{{ egreso_detalle.cantidad }}</td>
+				<td>{{ egreso_detalle.precio_unitario }}</td>
+				
+		{% endfor %}
+			
+	</tr>
+		
+	</table>
+
+
+{% endblock %}

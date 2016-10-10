@@ -89,6 +89,33 @@ $app->group('/altaproducto', function() use($app) {
           $app->request->post('descripcion')));
   });
 
+$app->group('/altaventa', function() use($app) {
+    $app->get('/', '\Controller\IngresoDetalleController:showAltaVenta')->setParams(array($app));
+    $app->post('/', '\Controller\IngresoDetalleController:newIngresoDetalle')->setParams(
+          array($app,$app->request->post('ingreso_tipo_id'),
+          $app->request->post('producto_id'),
+          $app->request->post('cantidad'),
+          $app->request->post('precio_unitario'),
+          $app->request->post('descripcion')));
+  });
+
+$app->group('/editproducto', function() use($app) {
+    $app->get('/', '\Controller\ProductoController:showProducto')->setParams(array($app, $app->request->get('id')));
+
+    $app->post('/', '\Controller\ProductoController:editProducto')->setParams(
+           array($app, $app->request->post('nombre'),
+           $app->request->post('marca'),
+           $app->request->post('stock'),
+           $app->request->post('stock_minimo'),
+           $app->request->post('proovedor'),
+           $app->request->post('precio_venta_unitario'),
+           $app->request->post('categoria_id'),
+           $app->request->post('descripcion'),
+           $app->request->post('productoid'))
+   );
+
+});
+
 $app->group('/stockminimo', function() use($app) {
      $app->get('/', '\Controller\ProductoController:listStockminimo')->setParams(array($app));
      
@@ -98,6 +125,26 @@ $app->group('/faltantes', function() use($app) {
      $app->get('/', '\Controller\ProductoController:listFaltantes')->setParams(array($app));
      
 });
+
+$app->group('/compras', function() use ($app) {
+    // Listar
+    $app->get('/', '\Controller\CompraController:listCompras')->setParams(array($app));
+
+});
+
+$app->group('/ingresos', function() use ($app) {
+    // Listar
+    $app->get('/', '\Controller\IngresoDetalleController:listIngresos')->setParams(array($app));
+
+});
+
+$app->group('/egresos', function() use ($app) {
+    // Listar
+    $app->get('/', '\Controller\EgresoDetalleController:listEgresosDeCompra')->setParams(array($app, $app->request->get('id')));
+
+});
+
+
 
 $app->group('/users', function() use ($app, $userResource) {
     // Listar

@@ -1,0 +1,26 @@
+{% extends "layout.twig" %}
+
+{% block contenido %}
+
+<table summary="Productos con stock minimo">
+	<tr>
+			<th id="Nombre">NOMBRE</th>
+    		<th id="Marca">MARCA</th>
+   			<th id="Stock">STOCK</th>
+   			<
+		
+	</tr>
+	{% for producto in productos %}
+		{% if producto.stock == 0 %}
+		  <tr id="{{ producto.id }}">
+				<td>{{ producto.nombre }}</td>
+				<td>{{ producto.marca }}</td>
+				<td>{{ producto.stock }}</td>
+				
+				
+			</tr>
+		{% endif %}
+	{% endfor %}
+</table>
+
+{% endblock %}
