@@ -156,6 +156,18 @@ class Producto
     {
         $this->fecha_alta = new \DateTime("now");
     }
+
+    public function sumar($cantidad)
+    {
+        $this->setStock($this->stock+$cantidad);
+        return $this;
+    }
+
+    public function descontar($cantidad)
+    {
+        $this->setStock($this->stock-$cantidad);
+        return $this;
+    }
 }
 
 ?>
