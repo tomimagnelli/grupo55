@@ -19,9 +19,9 @@ class CompraController {
  }
 
 
-  public function newCompra($app,$proovedor,$proovedor_cuit) {
+  public function newCompra($app,$proveedor,$proveedor_cuit,$producto_id) {
     $app->applyHook('must.be.administrador.or.gestion');
-    if (CompraResource::getInstance()->insert($nombre,$proovedor,$proovedor_cuit)){
+    if (CompraResource::getInstance()->insert($proovedor,$proovedor_cuit)){
        $app->flash('success', 'La compra ha sido dado de alta exitosamente');
     } else {
       $app->flash('error', 'No se pudo dar de alta la compra');

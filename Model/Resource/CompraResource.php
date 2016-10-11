@@ -27,7 +27,7 @@ class CompraResource extends AbstractResource {
        *
        * @return string
        */
-    
+
 
 public function get($id = null)
     {
@@ -38,6 +38,20 @@ public function get($id = null)
             $data = $this->getEntityManager()->find('Model\Entity\Compra', $id);
         }
         return $data;
+    }
+
+    public function Nuevo ($ingreso_tipo_id,$producto_id,$cantidad,$precio_unitario, $descripcion){
+        $compra = new Compra();
+        $tipoegresp = TipoIngresoResource::getInstance()->get($ingreso_tipo_id);
+        $EgresoDetalle= EgresoDetalle::
+        $producto = ProductoResource::getInstance()->get($producto_id);
+        $ingreso_detalle->setIngreso_Tipo_Id($tipoingreso);
+        $ingreso_detalle->setProducto_Id($producto);
+        $ingreso_detalle->setCantidad($cantidad);
+        $ingreso_detalle->setPrecio_Unitario($precio_unitario);
+        $ingreso_detalle->setDescripcion($descripcion);
+        $ingreso_detalle->setFechaAlta();
+        return $ingreso_detalle;
     }
 
   }
