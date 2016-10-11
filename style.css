@@ -335,7 +335,7 @@ fieldset.fieldAltaProd{
 }
 
 ul.pagination {
-    background-color: white;
+    background-color: #333;
     display: inline-block;
     padding: 0;
 }
@@ -346,13 +346,13 @@ ul.pagination li a {
     border: 1px solid #ddd;
     transition: background-color .3s;
     border-radius: 5px;
-    color: #003366;
+    color: white;
     float:left;
     padding: 8px 16px;
     text-decoration: none;
 }
 
-ul.pagination li a:hover {background-color: #003366; color: white}
+ul.pagination li a:hover {background-color: #5993a6; color: white}
 
 .pagination li:first-child a {
     border-top-left-radius: 5px;
