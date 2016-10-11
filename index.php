@@ -182,9 +182,7 @@ $app->group('/altaventa', function() use($app) {
 
 
 $app->group('/altacompra', function() use($app) {
-    $app->get('/', function() use($app){
-        echo $app->view->render('altacompra.twig');
-    });
+      $app->get('/', '\Controller\CompraController:showAltaCompra')->setParams(array($app));
 });
 
 $app->group('/compras', function() use ($app) {

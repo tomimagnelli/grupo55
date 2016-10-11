@@ -3,6 +3,8 @@
 namespace Controller;
 use Model\Entity\Compra;
 use Model\Resource\CompraResource;
+use Model\Entity\Producto;
+use Model\Resource\ProductoResource;
 
 class CompraController {
 
@@ -10,7 +12,12 @@ class CompraController {
     $app->applyHook('must.be.administrador.or.gestion');
     echo $app->view->render( "compras.twig", array('compras' => (CompraResource::getInstance()->get())));
   }
-  
+
+
+  public function showAltaCompra($app){
+   echo $app->view->render( "altacompra.twig", array('productos' => (ProductoResource::getInstance()->get())));
+ }
+
 
   public function newCompra($app,$proovedor,$proovedor_cuit) {
     $app->applyHook('must.be.administrador.or.gestion');

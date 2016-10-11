@@ -2,22 +2,25 @@
 
 {% block contenido %}
 </nav>
-<form class="formAltaProd" method="post" action="">
+<form class="formAltaProd" method="post" action="altacompra">
   <fieldset class="fieldAltaProd" >
 	<label>Proovedor:
   	<input type="text" name="proovedor" placeholder="Nombre del proovedord" required></label>
   	<label>Cuit proovedor:</label>
   	<input type="text" name="cuit" placeholder="Cuit" required>
-  	<label>Factura escaneada:</label>
 
-  	<input name="uploadedfile" type="file" name="factura" />
-  	<a href="{{ baseUrl() }}/altaproducto"><input type="button" value="agregar producto"</a>
-
+    <label for="productos" id="labelproductos">Productos: </label>
+    <select id="newProducto" name="producto_id">
+     <option value="" selected="selected">Seleccione</option>
+     {% for producto in productos %}
+     <option value="{{ producto.id }}">{{ producto.nombre }} | {{ producto.marca}}</option>
+     {% endfor %}
+    </select>
   	<br><br>
-    <a href="{{ baseUrl() }}/compras">CONFIRMAR</a>
+    <input type="submit" value="Agregar"/>
 
   </fieldset>
-  
+
 </form>
 </body>
 </html>

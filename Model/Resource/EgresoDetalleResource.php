@@ -7,6 +7,8 @@ use Model\Entity\EgresoDetalle;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Model\Entity\Producto;
 use Model\Resource\ProductoResource;
+use Model\Resource\EgresoDetalleResource;
+
 /**
  * Class Resource
  * @package Model

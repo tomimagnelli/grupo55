@@ -12,7 +12,7 @@ class IngresoDetalleController {
 
   public function listIngresos($app){
   	$app->applyHook('must.be.administrador.or.gestion');
-    echo $app->view->render( "ingresos.twig", array('ingresos' => (IngresoDetalleResource::getInstance()->get()), 'productos' => (ProductoResource::getInstance()->get())));
+    echo $app->view->render( "ingresos.twig", array('ingresos' => (IngresoDetalleResource::getInstance()->getIngresosDeCompra()), 'productos' => (ProductoResource::getInstance()->get())));
   }
 
    public function showAltaVenta($app){
@@ -26,19 +26,19 @@ class IngresoDetalleController {
     }
 
 
-  public function newIngresoDetalle($app,$ingreso_tipo_id,$producto_id,$cantidad,$precio_unitario, $descripcion) {
-    $app->applyHook('must.be.administrador.or.gestion');
+    public function newIngresoDetalle($app,$ingreso_tipo_id,$producto_id,$cantidad,$precio_unitario, $descripcion) {
+        $app->applyHook('must.be.administrador.or.gestion');
 
-    if (IngresoDetalleResource::getInstance()->hayStock($producto_id, $cantidad))
-    {
-    	if (IngresoDetalleResource::getInstance()->insert($ingreso_tipo_id,$producto_id,$cantidad,$precio_unitario,$descripcion)){
-       			$app->flash('success', 'Venta dada de alta correctamente');
-    	} else {
-      			$app->flash('error', 'No se pudo dar de alta la venta');
-    			}
-    	echo $app->redirect('/ingresos');
-	}
-  }
-  
+
+        	if (IngresoDetalleResource::getInstance()->insert($ingreso_tipo_id,$producto_id,$cantidad,$precio_unitario,$descripcion)){
+        			ProductoResource::getInstance()->descontarStock($producto_id,$cantidad);
+           			$app->flash('success', 'Venta dada de alta correctamente');
+        	} else {
+          			$app->flash('error', 'No se pudo dar de alta la venta');
+        			}
+        	echo $app->redirect('/ingresos');
+
+      }
+
 }
 ?>

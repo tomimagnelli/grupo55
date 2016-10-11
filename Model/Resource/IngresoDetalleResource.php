@@ -5,6 +5,7 @@ use vendor\doctrine\common\lib\Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Model\Entity\IngresoDetalle;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Model\Entity\Producto;
 /**
  * Class Resource
  * @package Model
@@ -37,6 +38,18 @@ class IngresoDetalleResource extends AbstractResource {
         }
         return $data;
     }
+
+
+    public function getIngresosDeCompra()
+        {
+          $query_string = "
+              SELECT i.cantidad,i.precio_unitario,i.descripcion,p.nombre,p.marca
+              FROM Model\Entity\IngresoDetalle i
+              INNER JOIN Model\Entity\Producto p
+              WITH i.producto_id = p.id";
+          $query = $this->getEntityManager()->createQuery($query_string);
+          return $query->getResult();
+        }
 
 
     public function producto($id) {
