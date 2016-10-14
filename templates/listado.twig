@@ -10,7 +10,7 @@
     		<th id="Marca">MARCA</th>
    			<th id="Stock">STOCK</th>
 			<th>ACCIONES</th>
-		
+
 	</tr>
 	{% for producto in productos %}
 		  <tr id="{{ producto.id }}">
@@ -24,5 +24,6 @@
 			</tr>
 		{% endfor %}
 </table>
+{% include 'paginacion/paginacionListado.twig' with {'pagesCount' : pagesCount} %}
 
 {% endblock %}

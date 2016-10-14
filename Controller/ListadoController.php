@@ -34,4 +34,20 @@ class ListadoController {
             "pagesCount" => $pagesCount
         ));
     }
+
+    public function indexActionListado($app,$page = 1) {
+        $app->applyHook('must.be.administrador.or.gestion');
+        $productos = ProductoResource::getInstance()->get();
+        $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
+        $paginator = ProductoResource::getInstance()->getPaginateFaltantes($pageSize,$page);
+        $totalItems = count($paginator);
+        $pagesCount = ceil($totalItems / $pageSize);
+        echo $app->view->render('listado.twig', array(
+            "productos"     => $paginator,
+            "totalItems" => $totalItems,
+            "pagesCount" => $pagesCount
+        ));
+    }
+
+
 }

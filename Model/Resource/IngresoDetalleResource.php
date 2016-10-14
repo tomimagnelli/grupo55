@@ -77,6 +77,15 @@ class IngresoDetalleResource extends AbstractResource {
         return $ingreso_detalle;
     }
 
+    public function getPaginateIngresos($pageSize,$currentPage){
+        $em = $this->getEntityManager();
+        $dql = "SELECT i FROM Model\Entity\IngresoDetalle i";
+        $query = $em->createQuery($dql)->setFirstResult($pageSize * (intval($currentPage) - 1))->setMaxResults($pageSize);
+        $paginator = new Paginator($query, $fetchJoinCollection = true);
+        return $paginator;
+    }
+
+
     public function insert($ingreso_tipo_id,$producto_id,$cantidad,$precio_unitario, $descripcion){
         $this->getEntityManager()->persist($this->Nuevo($ingreso_tipo_id,$producto_id,$cantidad,$precio_unitario,$descripcion));
         $this->getEntityManager()->flush();

@@ -1,0 +1,9 @@
+<div class="centered">
+<ul class="pagination">
+  <li><a href="#">&laquo;</a></li>
+    {% for i in 1..pagesCount %}
+        <li><a href="{{ baseUrl() }}/ingresos/page?id={{i}}">{{ i }}</a></li>
+    {% endfor %}
+  <li><a href="#">&raquo;</a></li>
+</ul>
+</div>
