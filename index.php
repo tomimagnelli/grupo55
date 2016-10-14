@@ -73,7 +73,6 @@ $app->group('/backend', function() use($app) {
 $app->group('/listado', function() use($app) {
      $app->get('/', '\Controller\ListadoController:indexActionListado')->setParams(array($app));
      $app->get('/page', '\Controller\ListadoController:indexActionListado')->setParams(array($app, $app->request->get('id')));
-     $app->get('/', '\Controller\ProductoController:listProductos')->setParams(array($app));
      $app->get('/delete', '\Controller\ProductoController:deleteProducto')->setParams(array($app, $app->request->get('id')));
 });
 
@@ -197,7 +196,6 @@ $app->group('/ingresos', function() use ($app) {
   $app->get('/', '\Controller\ListadoController:indexActionIngresos')->setParams(array($app));
   $app->get('/page', '\Controller\ListadoController:indexActionIngresos')->setParams(array($app, $app->request->get('id')));
 
-    $app->get('/', '\Controller\IngresoDetalleController:listIngresos')->setParams(array($app));
 
 
 });

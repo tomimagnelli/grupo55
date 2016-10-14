@@ -77,7 +77,7 @@ class IngresoDetalleResource extends AbstractResource {
         return $ingreso_detalle;
     }
 
-    public function getPaginateIngresos($pageSize,$currentPage){
+    public function getPaginateIngreso($pageSize,$currentPage){
         $em = $this->getEntityManager();
         $dql = "SELECT i FROM Model\Entity\IngresoDetalle i";
         $query = $em->createQuery($dql)->setFirstResult($pageSize * (intval($currentPage) - 1))->setMaxResults($pageSize);

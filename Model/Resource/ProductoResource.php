@@ -112,6 +112,14 @@ class ProductoResource extends AbstractResource {
       return $paginator;
   }
 
+  public function getPaginateListado($pageSize,$currentPage){
+      $em = $this->getEntityManager();
+      $dql = "SELECT p FROM Model\Entity\Producto p";
+      $query = $em->createQuery($dql)->setFirstResult($pageSize * (intval($currentPage) - 1))->setMaxResults($pageSize);
+      $paginator = new Paginator($query, $fetchJoinCollection = true);
+      return $paginator;
+  }
+
    public function sumarStock($id,$cantidad)
   {
     $this->getEntityManager()->persist($this->get($id)->ingresa($cantidad));

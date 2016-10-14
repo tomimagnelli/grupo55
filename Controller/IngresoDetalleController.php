@@ -10,10 +10,6 @@ use Model\Resource\TipoIngresoResource;
 
 class IngresoDetalleController {
 
-  public function listIngresos($app){
-  	$app->applyHook('must.be.administrador.or.gestion');
-    echo $app->view->render( "ingresos.twig", array('ingresos' => (IngresoDetalleResource::getInstance()->getIngresosDeCompra()), 'productos' => (ProductoResource::getInstance()->get())));
-  }
 
    public function showAltaVenta($app){
     echo $app->view->render( "altaventa.twig", array('productos' => (ProductoResource::getInstance()->get()), 'tiposingreso' => (TipoIngresoResource::getInstance()->get())));
