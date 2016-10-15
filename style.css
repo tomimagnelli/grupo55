@@ -225,7 +225,7 @@ fieldset.fieldAltaProd{
     font-size: 20px;
     background-color:#d6ebf0;
     border-radius: 40px 40px 40px 40px;
-    width:270px; height:750px; margin: auto;
+    width:270px; height:100%; margin: auto;
 }
 
 

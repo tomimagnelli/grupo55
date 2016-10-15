@@ -64,6 +64,11 @@ class Usuario
      * @Column(type="string", length=255)
      */
     protected $email;
+    /**
+     * @var integer
+     * @Column(type="integer")
+     */
+    protected $habilitado;
 
     public function getId() {
     	return $this->id;
@@ -95,6 +100,9 @@ class Usuario
     public function getTelefono() {
         return $this->telefono;
     }
+     public function getHabilitado() {
+        return $this->habilitado;
+    }
     public function setId($id) {
         $this->id = $id;
     }
@@ -124,6 +132,9 @@ class Usuario
     }
     public function setEmail($email) {
     	$this->email = $email;
+    }
+    public function setHabilitado($habilitado) {
+        $this->habilitado = $habilitado;
     }
 }
  ?>

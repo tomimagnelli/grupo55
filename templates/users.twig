@@ -9,6 +9,7 @@
 		<th id="Nombre">NOMBRE</th>
 		<th id="MiembroDesde">DOCUMENTO</th>
 		<th>ACCIONES</th>
+		<th>HABILITADO</th>
 	</tr>
 		{% for usuario in usuarios %}
 		  <tr id="{{ usuario.id }}">
@@ -19,6 +20,13 @@
 
 					<a href="delete?id={{ usuario.id }}"> <input type="button" value="Eliminar" /></i></a>
 				</td>
+				{% if usuario.habilitado == 0 %}
+				<td>Si</td>
+				{% else %}
+				<td>No</td>
+				{% endif %}
+
+
 			</tr>
 		{% endfor %}
 	</table>

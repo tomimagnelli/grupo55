@@ -56,12 +56,29 @@ class ProductoResource extends AbstractResource {
         return $this->get();
     }
 
+    
     public function delete($id)
-    {
+    {     
+
         $producto = $this->getEntityManager()->getReference('Model\Entity\Producto', $id);
-        $this->getEntityManager()->remove($producto);
-        $this->getEntityManager()->flush();
-        return $this->get();
+         $query_string = "
+          SELECT ed FROM Model\Entity\EgresoDetalle ed
+          WHERE ed.producto = $id";
+
+          $query = $this->getEntityManager()->createQuery($query_string);
+          
+          $total=$query->getResult();
+
+          if (count($total) == 0) {
+               
+                $this->getEntityManager()->remove($producto);
+                $this->getEntityManager()->flush();
+                return $this->get();
+          }
+          else {
+            return false;
+          }
+           
     }
 
     public function Nuevo ($nombre,$marca,$stock,$stock_minimo,$proovedor,$precio_venta_unitario,$categoria_id = null,$descripcion){

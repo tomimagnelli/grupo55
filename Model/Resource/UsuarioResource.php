@@ -38,7 +38,7 @@ class UsuarioResource extends AbstractResource {
         return $data;
     }
 
-   public function edit($user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id = null, $id)
+   public function edit($user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id = null,$habilitado, $id)
     {
         $usuario = $this->getEntityManager()->getReference('Model\Entity\Usuario', $id);
         $ubicacion = UbicacionResource::getInstance()->get($ubicacion_id);
@@ -51,6 +51,7 @@ class UsuarioResource extends AbstractResource {
         $usuario->setDocumento($documento);
         $usuario->setApellido($apellido);
         $usuario->setUbicacion_Id($ubicacion);
+        $usuario->setHabilitado($habilitado);
         $this->getEntityManager()->persist($usuario);
         $this->getEntityManager()->flush();
         return $this->get();
@@ -71,7 +72,7 @@ class UsuarioResource extends AbstractResource {
         $this->getEntityManager()->flush();
         return $this->get();
     }
-    public function Nuevo ($user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id = null){
+    public function Nuevo ($user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id = null,$habilitado){
         $usuario = new Usuario();
         $ubicacion = UbicacionResource::getInstance()->get($ubicacion_id);
         $usuario->setUsuario($user);
@@ -83,11 +84,12 @@ class UsuarioResource extends AbstractResource {
         $usuario->setDocumento($documento);
         $usuario->setApellido($apellido);
         $usuario->setUbicacion_Id($ubicacion);
+        $usuario->setHabilitado($habilitado);
         return $usuario;
     }
 
-    public function insert($user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id = null){
-        $this->getEntityManager()->persist($this->Nuevo($user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id));
+    public function insert($user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id = null,$habilitado){
+        $this->getEntityManager()->persist($this->Nuevo($user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id,$habilitado));
         $this->getEntityManager()->flush();
         return $this->get();
     }
@@ -97,6 +99,16 @@ class UsuarioResource extends AbstractResource {
         $data = $this->getEntityManager()->getRepository('Model\Entity\Usuario')->findOneBy(array('usuario' => $username));
         if ($data != null) {
           if (($data->getClave() == md5($pass))) return $data;
+          else return false;
+        }
+        else return false;
+    }
+
+     public function estaHabilitado($username, $pass)
+    {
+        $data = $this->getEntityManager()->getRepository('Model\Entity\Usuario')->findOneBy(array('usuario' => $username));
+        if ($data != null) {
+          if ($data->getHabilitado() == 0) return $data;
           else return false;
         }
         else return false;

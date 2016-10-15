@@ -20,7 +20,7 @@ class UsuarioController {
 
     }
 
-  public function newUsuario($app,$user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id = null) {
+  public function newUsuario($app,$user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id = null,$habilitado) {
     $app->applyHook('must.be.administrador');
     $error = false;
     if (!Validator::hasLength(50, $nombre)) {
@@ -28,7 +28,7 @@ class UsuarioController {
          $app->flash('error', 'El nombre debe tener menos de 50 caracteres');
     }
     if (!$error) {
-        if (UsuarioResource::getInstance()->insert($user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id)){
+        if (UsuarioResource::getInstance()->insert($user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id,$habilitado)){
            $app->flash('success', 'El usuario ha sido dado de alta exitosamente');
        } else {
           $app->flash('error', 'No se pudo dar de alta el usuario');
@@ -37,9 +37,9 @@ class UsuarioController {
     echo $app->redirect('/users');
   }
 
-  public function editUsuario($app,$user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id = null,$id) {
+  public function editUsuario($app,$user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id = null,$habilitado,$id) {
     $app->applyHook('must.be.administrador');
-    if (UsuarioResource::getInstance()->edit($user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id,$id)){
+    if (UsuarioResource::getInstance()->edit($user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id,$habilitado,$id)){
        $app->flash('success', 'El usuario ha sido modificado exitosamente');
     } else {
       $app->flash('error', 'No se pudo modificar el usuario');
@@ -47,8 +47,8 @@ class UsuarioController {
     echo $app->redirect('/users');
   }
 
-  public function registrarUsuario($app,$user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id = 2,$email,$ubicacion_id = null ) {
-    if (UsuarioResource::getInstance()->insert($user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id)){
+  public function registrarUsuario($app,$user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id = 2,$email,$ubicacion_id = null,$habilitado) {
+    if (UsuarioResource::getInstance()->insert($user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id,$habilitado)){
        $app->flash('success', 'El registro se ha realizado con éxito');
     } else {
       $app->flash('error', 'No se pudo dar de alta el usuario');

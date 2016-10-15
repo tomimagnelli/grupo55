@@ -36,6 +36,12 @@
     <label for="editPassword">Contraseña: </label>
     <input type="password" name="pass" id="editPassword" maxlength="20" placeholder="Contraseña" required/>
     <input type="hidden" name="userid" value="{{ usuario.id }}"/>
+    <label for="Habilitado">Habilitado </label>
+        <select id="newHabilitado" name="habilitado" required>
+         <option value="" selected="selected">Seleccione</option>
+         <option value="0">Si</option>
+         <option value="1">No</option>
+        </select>
      <br><br>
     <input type="submit" value="Modificar"/>
   </form>
