@@ -8,6 +8,7 @@
 	<tr>
 		<th id="Nombre">NOMBRE</th>
 		<th id="MiembroDesde">DOCUMENTO</th>
+		<th>TIPO USUARIO</th>
 		<th>ACCIONES</th>
 		<th>HABILITADO</th>
 	</tr>
@@ -15,6 +16,15 @@
 		  <tr id="{{ usuario.id }}">
 				<td>{{ usuario.usuario }}</td>
 				<td>{{ usuario.documento }}</td>
+				{% if usuario.rol_id == 1 %}
+				<td>Administrador</td>
+				{% endif %}
+				{% if usuario.rol_id == 2 %}
+				<td>Usuario Online</td>
+				{% endif %}
+				{% if usuario.rol_id == 3 %}
+				<td>Gestion</td>
+				{% endif %}
 				<td>
 					<a href="edituser?id={{ usuario.id }}"> <input type="button" value="Editar" /> </a>
 
