@@ -5,6 +5,8 @@ use Model\Entity\Compra;
 use Model\Resource\CompraResource;
 use Model\Entity\Producto;
 use Model\Resource\ProductoResource;
+use Model\Entity\TipoEgreso;
+use Model\Resource\TipoEgresoResource;
 
 class CompraController {
 
@@ -15,11 +17,12 @@ class CompraController {
 
 
   public function showAltaCompra($app){
-   echo $app->view->render( "altacompra.twig", array('productos' => (ProductoResource::getInstance()->get())));
+   echo $app->view->render( "altacompra.twig",array('tiposegreso' => (TipoEgresoResource::getInstance()->get())));
  }
 
-  public function showAltaCompra2($app){
-   echo $app->view->render( "agregarproductoacompra.twig", array('productos' => (ProductoResource::getInstance()->get())));
+
+  public function showAltaCompra2($app,$id){
+   echo $app->view->render( "agregarproductoacompra.twig", array('productos' => (ProductoResource::getInstance()->get()),'tiposegreso' => (TipoEgresoResource::getInstance()->get()),'compra' => (CompraResource::getInstance()->get($id))));
  }
 
 

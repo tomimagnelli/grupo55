@@ -4,6 +4,14 @@
 </nav>
 <form class="formAltaProd" method="post" action="altacompra">
   <fieldset class="fieldAltaProd" >
+  <label>Tipo de compra: </label>
+    <select name="egreso_tipo_id">
+    <option value="" selected="selected">Seleccione</option>
+       {% for tipo in tiposegreso %}
+          <option value="{{ tipo.id }}">{{ tipo.nombre }}</option>
+       {% endfor %}
+
+    </select>
 	<label>Proveedor:
   	<input type="text" name="proveedor" placeholder="Nombre del proveedor" required></label>
   	<label>Cuit proveedor:</label>

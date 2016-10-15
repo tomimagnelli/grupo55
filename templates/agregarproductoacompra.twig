@@ -1,11 +1,11 @@
 {% extends "layout.twig" %}
 
 {% block contenido %}
-  <form class="formAltaProd" method="post" action="">
+  <form class="formAltaProd" method="post" action="agregarproductoacompra">
   <fieldset class="fieldAltaProd" >
 
     <label for="productos" id="labelproductos">Seleccione el producto: </label>
-    <select id="newProducto" name="producto_id" required>
+    <select  name="producto" required>
      <option value="" selected="selected">Seleccione</option>
      {% for producto in productos %}
      <option value="{{ producto.id }}">{{ producto.nombre }} | {{ producto.marca}}</option>
@@ -14,7 +14,18 @@
 
     <label>Cantidad:</label>
     <input type="number" name="cantidad" placeholder="Ingrese cantidad" required>
-  	 <input type="submit" value="Agregar"/>
+    <input type="hidden" name="compra" value="{{ compra.id }}">
+    <label>Precio unitario:</label>
+    <input type="number" name="precio_unitario" placeholder="Ingrese cantidad" required>
+    <label>Tipo egreso: </label>
+    <select name="egreso_tipo_id">
+    <option value="" selected="selected">Seleccione</option>
+       {% for tipo in tiposegreso %}
+          <option value="{{ tipo.id }}">{{ tipo.nombre }}</option>
+       {% endfor %}
+
+    </select>
+  	<input type="submit" value="Agregar" /></a>
 
   </fieldset>
   

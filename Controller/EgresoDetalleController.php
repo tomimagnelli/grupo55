@@ -3,6 +3,8 @@
 namespace Controller;
 use Model\Entity\EgresoDetalle;
 use Model\Resource\EgresoDetalleResource;
+use Model\Entity\Producto;
+use Model\Resource\ProductoResource;
 
 class EgresoDetalleController {
 
@@ -10,6 +12,8 @@ class EgresoDetalleController {
   	$app->applyHook('must.be.administrador.or.gestion');
     echo $app->view->render( "egresos.twig", array('egresos' => (EgresoDetalleResource::getInstance()->getEgresosDeCompra($idCompra))));
   }
+
+ 
 
    public function newEgresoDetalle($app,$compra, $producto,$cantidad,$precio_unitario, $egreso_tipo_id) {
         $app->applyHook('must.be.administrador.or.gestion');
@@ -21,7 +25,7 @@ class EgresoDetalleController {
         	} else {
           			$app->flash('error', 'No se pudo dar de alta el producto');
         			}
-        	echo $app->redirect('/agregarproductos');
+        	echo $app->redirect('/compras');
 
       }
 

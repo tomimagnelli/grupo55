@@ -7,8 +7,10 @@ use Model\Entity\EgresoDetalle;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Model\Entity\Producto;
 use Model\Resource\ProductoResource;
-use Model\Resource\EgresoDetalleResource;
-
+use Model\Entity\Compra;
+use Model\Resource\CompraResource;
+use Model\Entity\TipoEgreso;
+use Model\Resource\TipoEgresoResource;
 /**
  * Class Resource
  * @package Model
@@ -43,17 +45,16 @@ class EgresoDetalleResource extends AbstractResource {
     }
 
     public function Nuevo ($compra, $producto,$cantidad,$precio_unitario, $egreso_tipo_id){
-        $egreso_detalle = newEgresoDetalle();
+        $egreso_detalle = new EgresoDetalle();
         $tipoegreso = TipoEgresoResource::getInstance()->get($egreso_tipo_id);
         $comp = CompraResource::getInstance()->get($compra);
         $prod = ProductoResource::getInstance()->get($producto);
         $egreso_detalle->setEgresoTipoId($tipoegreso);
-        $egreso_detalle->setProducto($producto);
+        $egreso_detalle->setProducto($prod);
         $egreso_detalle->setCompra($comp);
         $egreso_detalle->setCantidad($cantidad);
-        $egresoo_detalle->setPrecioUnitario($precio_unitario);
-        $egreso_detalle->setDescripcion($descripcion);
-        $egreso_detalle->setFechaAlta();
+        $egreso_detalle->setPrecioUnitario($precio_unitario);
+        $egreso_detalle->setFecha();
         return $egreso_detalle;
     }
 

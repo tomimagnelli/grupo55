@@ -208,12 +208,10 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
       *
       * @return self
       */
-     public function setFecha($fecha)
-     {
-         $this->fecha = $fecha;
-
-         return $this;
-     }
+     public function setFecha()
+    {
+        $this->fecha = new \DateTime("now");
+    }
   }
 
 ?>

@@ -16,7 +16,7 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
      */
      protected $id;
      /**
-      * @ManyToOne(targetEntity="Producto", inversedBy="egreso_detalle")
+      * @ManyToOne(targetEntity="Producto", inversedBy="ingreso_detalle")
       * @JoinColumn(name="producto_id", referencedColumnName="id")
       */
      protected $producto;

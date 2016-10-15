@@ -81,12 +81,11 @@ $app->group('/agregarproductos', function() use($app) {
 });
 
 $app->group('/agregarproductoacompra', function() use($app) {
-   $app->get('/', '\Controller\CompraController:showAltaCompra2')->setParams(array($app));
-     $app->post('/', '\Controller\EgresoDetalleController:newProducto')->setParams(
+   $app->get('/', '\Controller\CompraController:showAltaCompra2')->setParams(array($app,$app->request->get('id')));
+     $app->post('/', '\Controller\EgresoDetalleController:newEgresoDetalle')->setParams(
           array($app,$app->request->post('compra'),
           $app->request->post('producto'),
           $app->request->post('cantidad'),
-          $app->request->post('stock_minimo'),
           $app->request->post('precio_unitario'),
           $app->request->post('egreso_tipo_id')));
 
