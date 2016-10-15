@@ -184,12 +184,11 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
       *
       * @return self
       */
-     public function setFecha($fecha)
-     {
-         $this->fecha = $fecha;
+    public function setFecha()
+    {
+        $this->fecha = new \DateTime("now");
+    }
 
-         return $this;
-     }
 
      /**
       * Gets the value of precio_unitario.

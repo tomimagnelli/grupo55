@@ -53,16 +53,16 @@ class IngresoDetalleResource extends AbstractResource {
     }
 
 
-    public function Nuevo ($ingreso_tipo_id,$producto_id,$cantidad,$precio_unitario, $descripcion){
+    public function Nuevo ($ingreso_tipo_id,$producto,$cantidad,$precio_unitario, $descripcion){
         $ingreso_detalle = new IngresoDetalle();
         $tipoingreso = TipoIngresoResource::getInstance()->get($ingreso_tipo_id);
-        $producto = ProductoResource::getInstance()->get($producto_id);
-        $ingreso_detalle->setIngreso_Tipo_Id($tipoingreso);
-        $ingreso_detalle->setProducto_Id($producto);
+        $prod = ProductoResource::getInstance()->get($producto);
+        $ingreso_detalle->setIngresoTipoId($tipoingreso);
+        $ingreso_detalle->setProducto($prod);
         $ingreso_detalle->setCantidad($cantidad);
-        $ingreso_detalle->setPrecio_Unitario($precio_unitario);
+        $ingreso_detalle->setPrecioUnitario($precio_unitario);
         $ingreso_detalle->setDescripcion($descripcion);
-        $ingreso_detalle->setFechaAlta();
+        $ingreso_detalle->setFecha();
         return $ingreso_detalle;
     }
 
@@ -76,8 +76,8 @@ class IngresoDetalleResource extends AbstractResource {
     }
 
 
-    public function insert($ingreso_tipo_id,$producto_id,$cantidad,$precio_unitario, $descripcion){
-        $this->getEntityManager()->persist($this->Nuevo($ingreso_tipo_id,$producto_id,$cantidad,$precio_unitario,$descripcion));
+    public function insert($ingreso_tipo_id,$producto,$cantidad,$precio_unitario, $descripcion){
+        $this->getEntityManager()->persist($this->Nuevo($ingreso_tipo_id,$producto,$cantidad,$precio_unitario,$descripcion));
         $this->getEntityManager()->flush();
         return $this->get();
     }

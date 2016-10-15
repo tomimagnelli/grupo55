@@ -9,16 +9,16 @@
   	<label>Cuit proveedor:</label>
   	<input type="text" name="proveedor_cuit" placeholder="Cuit" required>
 
-    <label for="productos" id="labelproductos">Productos: </label>
-    <select id="newProducto" name="producto_id">
-     <option value="" selected="selected">Seleccione</option>
-     {% for producto in productos %}
-     <option value="{{ producto.id }}">{{ producto.nombre }} | {{ producto.marca}}</option>
-     {% endfor %}
-    </select>
-  	<br><br>
-    <input type="submit" value="Agregar"/>
+    <label>Factura escaneada:</label>
+    <form enctype="multipart/form-data" action="" method="post">
+    <input name="uploadedfile" type="file" />
 
+    </form>
+
+    
+     <a href="{{ baseUrl() }}/agregarproductos?id={{ compra.id }}" target="rightframe"><input type="button" value="Agregar productos a la compra" /></a>
+
+     <input type="submit" value="Confirmar"/>
   </fieldset>
 
 </form>

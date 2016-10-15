@@ -18,6 +18,10 @@ class CompraController {
    echo $app->view->render( "altacompra.twig", array('productos' => (ProductoResource::getInstance()->get())));
  }
 
+  public function showAltaCompra2($app){
+   echo $app->view->render( "agregarproductoacompra.twig", array('productos' => (ProductoResource::getInstance()->get())));
+ }
+
 
   public function newCompra($app,$proveedor,$proveedor_cuit,$producto_id) {
     $app->applyHook('must.be.administrador.or.gestion');

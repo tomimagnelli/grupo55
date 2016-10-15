@@ -1,0 +1,24 @@
+{% extends "layout.twig" %}
+
+{% block contenido %}
+<a href="{{ baseUrl() }}/agregarproductoacompra" target="rightframe"><input type="button" value="+ Agregar un producto a la compra" /></a>
+
+
+<table summary="Agregar productos para una compra">
+	<tr>
+			<th id="Producto">Producto</th>
+    		<th id="Cantidad">Cantidad</th>
+			<th>ACCIONES</th>
+
+	</tr>
+	
+	<tr>
+		 <td>Gallelocas</td>
+		 <td>5</td>
+	</tr>
+		
+</table>
+<a href="{{ baseUrl() }}/altacompra" target="rightframe"><input type="button" value="Confirmar productos" /></a>
+
+
+{% endblock %}

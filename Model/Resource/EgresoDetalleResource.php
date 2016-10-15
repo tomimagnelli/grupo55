@@ -42,6 +42,28 @@ class EgresoDetalleResource extends AbstractResource {
         return $data;
     }
 
+    public function Nuevo ($compra, $producto,$cantidad,$precio_unitario, $egreso_tipo_id){
+        $egreso_detalle = newEgresoDetalle();
+        $tipoegreso = TipoEgresoResource::getInstance()->get($egreso_tipo_id);
+        $comp = CompraResource::getInstance()->get($compra);
+        $prod = ProductoResource::getInstance()->get($producto);
+        $egreso_detalle->setEgresoTipoId($tipoegreso);
+        $egreso_detalle->setProducto($producto);
+        $egreso_detalle->setCompra($comp);
+        $egreso_detalle->setCantidad($cantidad);
+        $egresoo_detalle->setPrecioUnitario($precio_unitario);
+        $egreso_detalle->setDescripcion($descripcion);
+        $egreso_detalle->setFechaAlta();
+        return $egreso_detalle;
+    }
+
+     public function insert($compra, $producto,$cantidad,$precio_unitario, $egreso_tipo_id){
+        $this->getEntityManager()->persist($this->Nuevo($compra, $producto,$cantidad,$precio_unitario, $egreso_tipo_id));
+        $this->getEntityManager()->flush();
+        return $this->get();
+    }
+
+
 
 
     public function getEgresosDeCompra($idCompra)

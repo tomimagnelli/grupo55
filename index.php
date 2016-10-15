@@ -73,6 +73,26 @@ $app->group('/login', function() use($app) {
 
 });
 
+$app->group('/agregarproductos', function() use($app) {
+  $app->get('/', function() use($app){
+    echo $app->view->render('agregarproductos.twig');
+  });
+
+});
+
+$app->group('/agregarproductoacompra', function() use($app) {
+   $app->get('/', '\Controller\CompraController:showAltaCompra2')->setParams(array($app));
+     $app->post('/', '\Controller\EgresoDetalleController:newProducto')->setParams(
+          array($app,$app->request->post('compra'),
+          $app->request->post('producto'),
+          $app->request->post('cantidad'),
+          $app->request->post('stock_minimo'),
+          $app->request->post('precio_unitario'),
+          $app->request->post('egreso_tipo_id')));
+
+
+});
+
 $app->group('/backend', function() use($app) {
 	$app->get('/', function() use($app){
       $app->applyHook('must.be.logueado');
@@ -195,6 +215,8 @@ $app->group('/altaventa', function() use($app) {
 
 $app->group('/altacompra', function() use($app) {
       $app->get('/', '\Controller\CompraController:showAltaCompra')->setParams(array($app));
+
+
 });
 
 $app->group('/compras', function() use ($app) {
