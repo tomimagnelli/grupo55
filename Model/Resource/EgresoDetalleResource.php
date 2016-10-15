@@ -37,7 +37,7 @@ class EgresoDetalleResource extends AbstractResource {
             $egresos = $this->getEntityManager()->getRepository('Model\Entity\EgresoDetalle')->findAll();
             $data = $egresos;}
          else {
-            $data = $this->getEntityManager()->find('Model\Entity\EgresoDetalle', $id);
+           $data = $this->getEntityManager()->getRepository('Model\Entity\EgresoDetalle')->findOneBy(array('id'=> $id));
         }
         return $data;
     }
@@ -50,8 +50,8 @@ class EgresoDetalleResource extends AbstractResource {
               SELECT e.cantidad, e.precio_unitario, p.nombre, p.marca
               FROM Model\Entity\EgresoDetalle e
               INNER JOIN Model\Entity\Producto p
-              WITH e.producto_id = p.id
-              WHERE e.compra_id = :idCompra";
+              WITH e.producto = p.id
+              WHERE e.compra = :idCompra";
           $query = $this->getEntityManager()->createQuery($query_string);
           $query->setParameter('idCompra',$idCompra);
           return $query->getResult();

@@ -36,17 +36,27 @@ $app->get('/', '\Controller\HomeController:showHome')->setParams(array($app));
 $app->post('/', function() use ($app, $userResource) {
 	  $name = $app->request->post('usuario');
     $pass = $app->request->post('contraseña');
+
     $user = $userResource->login($name, $pass);
+    $habilitado = $userResource->estaHabilitado($name, $pass);
     if ($user) {
+      if ($habilitado) {
     	$_SESSION['id']=$user->getId();
     	$_SESSION['user']=$user->getUsuario();
     	$_SESSION['rol']=$user->getRol_Id();
     	$app->flash('success', 'Usuario logueado correctamente como '. $user->getUsuario());
     	$app->redirect('/backend');
-    } else {
+      }
+      else {
+        $app->flash('error', 'Usuario Inhabilitado');
+        $app->redirect('/');
+      }
+    }
+
+    else {
       $app->flash('error', 'Usuario o contraseña incorrecto');
       $app->redirect('/');
-	}
+	 }
 });
 
 $app->get('/logout', function() use ($app, $userResource) {
@@ -71,8 +81,7 @@ $app->group('/backend', function() use($app) {
 });
 
 $app->group('/listado', function() use($app) {
-     $app->get('/', '\Controller\ListadoController:indexActionListado')->setParams(array($app));
-     $app->get('/page', '\Controller\ListadoController:indexActionListado')->setParams(array($app, $app->request->get('id')));
+     $app->get('/', '\Controller\ProductoController:listProductos')->setParams(array($app));
      $app->get('/delete', '\Controller\ProductoController:deleteProducto')->setParams(array($app, $app->request->get('id')));
 });
 
@@ -137,7 +146,8 @@ $app->group('/altausuario', function() use($app, $userResource) {
           $app->request->post('telefono'),
           $app->request->post('rol_id'),
           $app->request->post('email'),
-          $app->request->post('ubicacion_id'))
+          $app->request->post('ubicacion_id'),
+          $app->request->post('habilitado'))
   );
 
 });
@@ -155,6 +165,7 @@ $app->group('/edituser', function() use($app, $userResource) {
            $app->request->post('rol_id'),
            $app->request->post('email'),
            $app->request->post('ubicacion_id'),
+           $app->request->post('habilitado'),
            $app->request->post('userid'))
    );
 
@@ -195,8 +206,6 @@ $app->group('/compras', function() use ($app) {
 $app->group('/ingresos', function() use ($app) {
   $app->get('/', '\Controller\ListadoController:indexActionIngresos')->setParams(array($app));
   $app->get('/page', '\Controller\ListadoController:indexActionIngresos')->setParams(array($app, $app->request->get('id')));
-
-
 
 });
 

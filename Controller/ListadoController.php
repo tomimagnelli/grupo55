@@ -4,6 +4,8 @@ namespace Controller;
 use Model\Entity\Producto;
 use Model\Resource\IngresoDetalleResource;
 use Model\Entity\IngresoDetalle;
+use Model\Entity\Compra;
+use Model\Resource\CompraResource;
 use Model\Resource\ProductoResource;
 use Model\Resource\ConfiguracionResource;
 
@@ -53,13 +55,27 @@ class ListadoController {
 
     public function indexActionIngresos($app,$page = 1) {
         $app->applyHook('must.be.administrador.or.gestion');
-        $ingresos = IngresoDetalleResource::getInstance()->getIngresosDeCompra();
+        $ingresos = IngresoDetalleResource::getInstance()->get();
         $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
         $paginator = IngresoDetalleResource::getInstance()->getPaginateIngreso($pageSize,$page);
         $totalItems = count($paginator);
         $pagesCount = ceil($totalItems / $pageSize);
         echo $app->view->render('ingresos.twig', array(
             "ingresos"     => $paginator,
+            "totalItems" => $totalItems,
+            "pagesCount" => $pagesCount
+        ));
+    }
+
+    public function indexActionCompra($app,$page = 1) {
+        $app->applyHook('must.be.administrador.or.gestion');
+        $ingresos = CompraResource::getInstance()->get();
+        $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
+        $paginator = CompraResource::getInstance()->getPaginateCompra($pageSize,$page);
+        $totalItems = count($paginator);
+        $pagesCount = ceil($totalItems / $pageSize);
+        echo $app->view->render('compras.twig', array(
+            "compras"     => $paginator,
             "totalItems" => $totalItems,
             "pagesCount" => $pagesCount
         ));

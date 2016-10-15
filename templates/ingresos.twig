@@ -15,11 +15,11 @@
 
 	<tr>
 
-				<td>{{ ingreso_detalle.nombre}}</td>
-				<td>{{ ingreso_detalle.marca}}</td>
+				<td>{{ ingreso_detalle.producto.nombre}}</td>
+				<td>{{ ingreso_detalle.producto.marca}}</td>
 				<td>{{ ingreso_detalle.descripcion}}</td>
 				<td>{{ ingreso_detalle.cantidad }}</td>
-				<td>{{ ingreso_detalle.precio_unitario }}</td>
+				<td>{{ ingreso_detalle.preciounitario }}</td>
 
 		{% endfor %}
 

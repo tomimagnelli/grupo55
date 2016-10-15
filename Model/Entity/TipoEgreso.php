@@ -1,14 +1,13 @@
 <?php
+
 namespace Model\Entity;
+
 use Model\Entity;
 use Doctrine\ORM\Mapping;
-
 /**
- *
- * @Entity
- * @Table(name="ingreso_tipo")
- */
-class TipoIngreso
+ * @Entity @Table(name="egreso_tipo")
+ **/
+class TipoEgreso
 {
     /**
       * @Id @Column(type="integer") @GeneratedValue
@@ -70,5 +69,3 @@ class TipoIngreso
         return $this;
     }
 }
-
-?>

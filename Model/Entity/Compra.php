@@ -8,56 +8,125 @@ use Doctrine\ORM\Mapping;
 /**
  * @Entity @Table(name="compra")
  **/
-class Compra
-{
-    /**
-     * @var integer
-     *
-     * @Id
-     * @Column(name="id", type="integer")
-     * @GeneratedValue(strategy="AUTO")
+ class Compra
+ {
+     /**
+       * @Id @Column(type="integer") @GeneratedValue
+      * @var int
      */
-    protected $id;
-    /**
-     * @Column(type="string", length=100)
+     protected $id;
+     /**
+      * @Column(type="string")
+      * @var string
+     */
+     protected $proveedor;
+     /**
+     * @Column(type="string")
      * @var string
-    */
-    protected $proveedor;
-    /**
-    * @Column(type="string", length=15)
-    * @var string
-    */
-   
-    protected $proveedor_cuit;
-    /**
-     * @Column(type="datetime")
-     * @var DateTime
      */
-    protected $fecha;
+     protected $proveedor_cuit;
+     /**
+      * @Column(type="datetime")
+      * @var DateTime
+      */
+     protected $fecha;
 
-    public function getId()
-    {
-        return $this->id;
-    }
+     /**
+      * Gets the value of id.
+      *
+      * @return int
+      */
+     public function getId()
+     {
+         return $this->id;
+     }
 
-    public function getProveedor()
-    {
-        return $this->proveedor;
-    }
+     /**
+      * Sets the value of id.
+      *
+      * @param int $id the id
+      *
+      * @return self
+      */
+     public function setId($id)
+     {
+         $this->id = $id;
 
-    public function setProveedor($proveedor)
-    {
-        $this->proveedor = $proveedor;
-    }
-   
-    public function getProveedor_Cuit()
-    {
-        return $this->proveedor_cuit;
-    }
+         return $this;
+     }
 
-    public function setProveedor_Cuit($proveedor_cuit)
-    {
-        $this->proveedor_cuit = $proveedor_cuit;
-    }
+     /**
+      * Gets the value of proovedor.
+      *
+      * @return string
+      */
+     public function getProveedor()
+     {
+         return $this->proveedor;
+     }
+
+     /**
+      * Sets the value of proovedor.
+      *
+      * @param string $proovedor the proovedor
+      *
+      * @return self
+      */
+     public function setProveedor($proveedor)
+     {
+         $this->proveedor = $proveedor;
+
+         return $this;
+     }
+
+     /**
+      * Gets the value of proovedor_cuit.
+      *
+      * @return string
+      */
+     public function getProveedor_Cuit()
+     {
+         return $this->proveedor_cuit;
+     }
+
+     /**
+      * Sets the value of proovedor_cuit.
+      *
+      * @param string $proovedor_cuit the proovedor cuit
+      *
+      * @return self
+      */
+     public function setProveedorCuit($proveedor_cuit)
+     {
+         $this->proveedor_cuit = $proveedor_cuit;
+
+         return $this;
+     }
+
+
+     /**
+      * Gets the value of fecha_alta.
+      *
+      * @return DateTime
+      */
+     public function getFecha()
+     {
+         return $this->fecha;
+     }
+
+     /**
+      * Sets the value of fecha_alta.
+      *
+      * @param DateTime $fecha_alta the fecha alta
+      *
+      * @return self
+      */
+     public function setFecha($fecha)
+     {
+         $this->fecha = $fecha;
+
+         return $this;
+     }
+    
 }
 ?>

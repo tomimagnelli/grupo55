@@ -5,6 +5,8 @@ use Model\Resource\AbstractResource;
 use vendor\doctrine\common\lib\Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Model\Entity\Compra;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 /**
  * Class Resource
  * @package Model
@@ -52,6 +54,15 @@ public function get($id = null)
         $ingreso_detalle->setDescripcion($descripcion);
         $ingreso_detalle->setFechaAlta();
         return $ingreso_detalle;
+    }
+
+    public function getPaginateCompra($pageSize,$currentPage){
+        $em = $this->getEntityManager();
+        $dql = "SELECT c FROM Model\Entity\Compra c";
+        $query = $em->createQuery($dql)->setFirstResult($pageSize * (intval($currentPage) - 1))->setMaxResults($pageSize);
+        $paginator = new Paginator($query, $fetchJoinCollection = true);
+        return $paginator;
+
     }
 
   }

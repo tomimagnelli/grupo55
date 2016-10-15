@@ -34,22 +34,11 @@ class IngresoDetalleResource extends AbstractResource {
             $ingresos = $this->getEntityManager()->getRepository('Model\Entity\IngresoDetalle')->findAll();
             $data = $ingresos;}
          else {
-            $data = $this->getEntityManager()->find('Model\Entity\IngresoDetalle', $id);
+           $data = $this->getEntityManager()->getRepository('Model\Entity\IngresoDetalle')->findOneBy(array('id'=> $id));
         }
         return $data;
     }
 
-
-    public function getIngresosDeCompra()
-        {
-          $query_string = "
-              SELECT i.cantidad,i.precio_unitario,i.descripcion,p.nombre,p.marca
-              FROM Model\Entity\IngresoDetalle i
-              INNER JOIN Model\Entity\Producto p
-              WITH i.producto_id = p.id";
-          $query = $this->getEntityManager()->createQuery($query_string);
-          return $query->getResult();
-        }
 
 
     public function producto($id) {
@@ -83,6 +72,7 @@ class IngresoDetalleResource extends AbstractResource {
         $query = $em->createQuery($dql)->setFirstResult($pageSize * (intval($currentPage) - 1))->setMaxResults($pageSize);
         $paginator = new Paginator($query, $fetchJoinCollection = true);
         return $paginator;
+
     }
 
 

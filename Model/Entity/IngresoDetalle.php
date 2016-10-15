@@ -8,121 +8,212 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 /**
  * @Entity @Table(name="ingreso_detalle")
  **/
-class IngresoDetalle {
-    /**
+ class IngresoDetalle
+ {
+     /**
+       * @Id @Column(type="integer") @GeneratedValue
+      * @var int
+     */
+     protected $id;
+     /**
+      * @ManyToOne(targetEntity="Producto", inversedBy="egreso_detalle")
+      * @JoinColumn(name="producto_id", referencedColumnName="id")
+      */
+     protected $producto;
+     /**
+     * @Column(type="integer")
      * @var integer
-     *
-     * @Id
-     * @Column(name="id", type="integer")
-     * @GeneratedValue(strategy="AUTO")
      */
-    protected $id;
-    
+     protected $cantidad;
      /**
-     * @ManyToOne(targetEntity="Producto", inversedBy="ingresos")
-     * @JoinColumn(name="producto_id", referencedColumnName="id")
-     */
+      * @var Decimal
+      * @Column(type="decimal")
+      */
+     protected $precio_unitario;
+     /**
+      * @ManyToOne(targetEntity="TipoIngreso", inversedBy="ingreso_detalle")
+      * @JoinColumn(name="ingreso_tipo_id", referencedColumnName="id")
+      */
+     protected $ingreso_tipo_id;
+     /**
+      * @Column(type="datetime")
+      * @var datetime
+      */
+     protected $fecha;
+     /**
+      * @var String
+      * @Column(type="string")
+      */
+     protected $descripcion;
 
-    protected $producto_id;
-
-   /**
-     * @ManyToOne(targetEntity="TipoIngreso", inversedBy="ingresos")
-     * @JoinColumn(name="ingreso_tipo_id", referencedColumnName="id")
-     */
-    protected $ingreso_tipo_id;
-
-    /**
-    * @Column(type="integer")
-    * @var integer
-    */
-    protected $cantidad;
-   
-    /**
-    * @Column(type="float")
-    * @var float
-    */
-    protected $precio_unitario;
 
      /**
-    * @Column(type="string", length=255)
-    * @var string
-    */
-    protected $descripcion;
-  
-    /**
-     * @Column(type="datetime")
-     * @var DateTime
-     */
-    protected $fecha;
+      * Gets the value of id.
+      *
+      * @return int
+      */
+     public function getId()
+     {
+         return $this->id;
+     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
+     /**
+      * Sets the value of id.
+      *
+      * @param int $id the id
+      *
+      * @return self
+      */
+     public function setId($id)
+     {
+         $this->id = $id;
 
+         return $this;
+     }
 
-    public function getProducto_Id()
-    {
-            return $this->producto_id;
-    }
+     /**
+      * Gets the value of producto.
+      *
+      * @return mixed
+      */
+     public function getProducto()
+     {
+         return $this->producto;
+     }
 
-    public function setProducto_Id($producto_id)
-    {
-            $this->producto_id = $producto_id;
-    }
-    public function getCantidad()
-    {
-            return $this->cantidad;
-    }
+     /**
+      * Sets the value of producto.
+      *
+      * @param mixed $producto the producto
+      *
+      * @return self
+      */
+     public function setProducto($producto)
+     {
+         $this->producto = $producto;
 
-    public function setCantidad($cantidad)
-    {
-            $this->cantidad = $cantidad;
-    }
-    public function getPrecio_Unitario()
-    {
-            return $this->precio_unitario;
-    }
+         return $this;
+     }
 
-    public function setPrecio_Unitario($precio_unitario)
-    {
-            $this->precio_unitario = $precio_unitario;
-    }
-    
-    public function getIngreso_Tipo_Id()
-    {
-            return $this->ingreso_tipo_id;
-    }
+     /**
+      * Gets the value of cantidad.
+      *
+      * @return integer
+      */
+     public function getCantidad()
+     {
+         return $this->cantidad;
+     }
 
-    public function setIngreso_Tipo_Id($ingreso_tipo_id)
-    {
-            $this->ingreso_tipo_id = $ingreso_tipo_id;
-    }
+     /**
+      * Sets the value of cantidad.
+      *
+      * @param integer $cantidad the cantidad
+      *
+      * @return self
+      */
+     public function setCantidad($cantidad)
+     {
+         $this->cantidad = $cantidad;
 
-    public function getDescripcion()
-    {
-            return $this->descripcion;
-    }
+         return $this;
+     }
 
-    public function setDescripcion($descripcion)
-    {
-            $this->descripcion = $descripcion;
-    }
+     /**
+      * Gets the value of precio_unitario.
+      *
+      * @return Decimal
+      */
+     public function getPrecioUnitario()
+     {
+         return $this->precio_unitario;
+     }
 
-    public function getFecha()
-    {
-            return $this->fecha;
-    }
+     /**
+      * Sets the value of precio_unitario.
+      *
+      * @param Decimal $precio_unitario the precio unitario
+      *
+      * @return self
+      */
+     public function setPrecioUnitario($precio_unitario)
+     {
+         $this->precio_unitario = $precio_unitario;
 
-    public function setFecha($fecha)
-    {
-            $this->fecha = $fecha;
-    }
+         return $this;
+     }
 
-    public function setFechaAlta()
-    {
-        $this->fecha = new \DateTime("now");
-    }
+     /**
+      * Gets the value of ingreso_tipo_id.
+      *
+      * @return mixed
+      */
+     public function getIngresoTipoId()
+     {
+         return $this->ingreso_tipo_id;
+     }
+
+     /**
+      * Sets the value of ingreso_tipo_id.
+      *
+      * @param mixed $ingreso_tipo_id the ingreso tipo id
+      *
+      * @return self
+      */
+     public function setIngresoTipoId($ingreso_tipo_id)
+     {
+         $this->ingreso_tipo_id = $ingreso_tipo_id;
+
+         return $this;
+     }
+
+     /**
+      * Gets the value of fecha.
+      *
+      * @return datetime
+      */
+     public function getFecha()
+     {
+         return $this->fecha;
+     }
+
+     /**
+      * Sets the value of fecha.
+      *
+      * @param datetime $fecha the fecha
+      *
+      * @return self
+      */
+     public function setFecha($fecha)
+     {
+         $this->fecha = $fecha;
+
+         return $this;
+     }
+
+     /**
+      * Gets the value of precio_unitario.
+      *
+      * @return Decimal
+      */
+     public function getDescripcion()
+     {
+         return $this->descripcion;
+     }
+
+     /**
+      * Sets the value of precio_unitario.
+      *
+      * @param Decimal $precio_unitario the precio unitario
+      *
+      * @return self
+      */
+     public function setDescripcion($descripcion)
+     {
+         $this->descripcion = $descripcion;
+
+         return $this;
+     }
 }
 
 ?>
