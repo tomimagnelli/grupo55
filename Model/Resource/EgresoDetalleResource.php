@@ -80,6 +80,16 @@ class EgresoDetalleResource extends AbstractResource {
           return $query->getResult();
         }
 
+      public function getPaginateEgreso($pageSize,$currentPage){
+          $em = $this->getEntityManager();
+          $dql = "SELECT e FROM Model\Entity\EgresoDetalle e";
+          $query = $em->createQuery($dql)->setFirstResult($pageSize * (intval($currentPage) - 1))->setMaxResults($pageSize);
+          $paginator = new Paginator($query, $fetchJoinCollection = true);
+          return $paginator;
+
+      }
+
+
      public function compra($id) {
       $egreso = $this->getEntityManager()->getReference('Model\Entity\EgresoDetalle', $id);
       $query_string = "

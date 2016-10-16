@@ -8,6 +8,9 @@ use Model\Entity\Compra;
 use Model\Resource\CompraResource;
 use Model\Resource\ProductoResource;
 use Model\Resource\ConfiguracionResource;
+use Model\Resource\EgresoDetalleResource;
+use Model\Entity\EgresoDetalle;
+
 
 class ListadoController {
 
@@ -67,9 +70,9 @@ class ListadoController {
         ));
     }
 
-    public function indexActionCompra($app,$page = 1) {
+    public function indexActionCompras($app,$page = 1) {
         $app->applyHook('must.be.administrador.or.gestion');
-        $ingresos = CompraResource::getInstance()->get();
+        $compras = CompraResource::getInstance()->get();
         $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
         $paginator = CompraResource::getInstance()->getPaginateCompra($pageSize,$page);
         $totalItems = count($paginator);
@@ -81,5 +84,19 @@ class ListadoController {
         ));
     }
 
+
+    public function indexActionEgresos($app,$page = 1) {
+        $app->applyHook('must.be.administrador.or.gestion');
+        $egresos = EgresoDetalleResource::getInstance()->get();
+        $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
+        $paginator = EgresoDetalleResource::getInstance()->getPaginateEgreso($pageSize,$page);
+        $totalItems = count($paginator);
+        $pagesCount = ceil($totalItems / $pageSize);
+        echo $app->view->render('egresos.twig', array(
+            "egresos"     => $paginator,
+            "totalItems" => $totalItems,
+            "pagesCount" => $pagesCount
+        ));
+    }
 
 }

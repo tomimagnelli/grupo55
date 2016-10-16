@@ -42,18 +42,47 @@ public function get($id = null)
         return $data;
     }
 
-    public function Nuevo ($ingreso_tipo_id,$producto_id,$cantidad,$precio_unitario, $descripcion){
+    public function nuevo ($app,$proveedor,$proveedor_cuit){
         $compra = new Compra();
-        $tipoegresp = TipoIngresoResource::getInstance()->get($ingreso_tipo_id);
-        $EgresoDetalle= EgresoDetalle::
-        $producto = ProductoResource::getInstance()->get($producto_id);
-        $ingreso_detalle->setIngreso_Tipo_Id($tipoingreso);
-        $ingreso_detalle->setProducto_Id($producto);
-        $ingreso_detalle->setCantidad($cantidad);
-        $ingreso_detalle->setPrecio_Unitario($precio_unitario);
-        $ingreso_detalle->setDescripcion($descripcion);
-        $ingreso_detalle->setFechaAlta();
-        return $ingreso_detalle;
+        $compra->setProveedor($proveedor);
+        $compra->setProveedorCuit($proveedor_cuit);
+        $compra->setFecha();
+        if (isset($_FILES["myFileInfo"])) {
+          $target_path = "uploads/";
+          $target_path = $target_path . basename( $_FILES["myFileInfo"]['name']); move_uploaded_file($_FILES["myFileInfo"]['tmp_name'], $target_path);
+          $compra->setFactura($target_path);
+        }
+        return $compra;
+    }
+
+    public function edit($app,$editproveedor,$editproveedor_cuit,$compraid)
+     {
+         $compra = $this->getEntityManager()->getReference('Model\Entity\Compra', $compraid);
+         $compra->setProveedor($editproveedor);
+         $compra->setProveedorCuit($editproveedor_cuit);
+         $compra->setFecha();
+         if (isset($_FILES["myFileInfo"])) {
+           $target_path = "uploads/";
+           $target_path = $target_path . basename( $_FILES["myFileInfo"]['name']); move_uploaded_file($_FILES["myFileInfo"]['tmp_name'], $target_path);
+           $compra->setFactura($target_path);
+         }
+         $this->getEntityManager()->persist($compra);
+         $this->getEntityManager()->flush();
+         return $this->get();
+     }
+
+     public function delete($id)
+     {
+         $compra = $this->getEntityManager()->getReference('Model\Entity\Compra', $id);
+         $this->getEntityManager()->remove($compra);
+         $this->getEntityManager()->flush();
+         return $this->get();
+     }
+
+    public function insert($app,$proovedor,$proovedor_cuit){
+        $this->getEntityManager()->persist($this->nuevo($app,$proovedor,$proovedor_cuit));
+        $this->getEntityManager()->flush();
+        return $this->get();
     }
 
     public function getPaginateCompra($pageSize,$currentPage){

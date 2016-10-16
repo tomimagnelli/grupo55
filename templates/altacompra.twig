@@ -2,29 +2,19 @@
 
 {% block contenido %}
 </nav>
-<form class="formAltaProd" method="post" action="altacompra">
+<form class="formAltaProd" method="post" action="altacompra" enctype="multipart/form-data">
   <fieldset class="fieldAltaProd" >
-  <label>Tipo de compra: </label>
-    <select name="egreso_tipo_id">
-    <option value="" selected="selected">Seleccione</option>
-       {% for tipo in tiposegreso %}
-          <option value="{{ tipo.id }}">{{ tipo.nombre }}</option>
-       {% endfor %}
 
-    </select>
 	<label>Proveedor:
   	<input type="text" name="proveedor" placeholder="Nombre del proveedor" required></label>
   	<label>Cuit proveedor:</label>
   	<input type="text" name="proveedor_cuit" placeholder="Cuit" required>
 
     <label>Factura escaneada:</label>
-    <form enctype="multipart/form-data" action="" method="post">
-    <input name="uploadedfile" type="file" />
+    <input type="file" name="myFileInfo" id="myFileInfo">
 
     </form>
 
-    
-     <a href="{{ baseUrl() }}/agregarproductos?id={{ compra.id }}" target="rightframe"><input type="button" value="Agregar productos a la compra" /></a>
 
      <input type="submit" value="Confirmar"/>
   </fieldset>

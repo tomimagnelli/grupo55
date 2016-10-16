@@ -16,13 +16,14 @@
 				<td>{{ egreso_detalle.producto.nombre }}</td>
 				<td>{{ egreso_detalle.producto.marca }}</td>
 				<td>{{ egreso_detalle.cantidad }}</td>
-				<td>{{ egreso_detalle.precio_unitario }}</td>
+				<td>{{ egreso_detalle.preciounitario }}</td>
 
 		{% endfor %}
 
 	</tr>
 
 	</table>
+	{% include 'paginacion/paginacionEgresos.twig' with {'pagesCount' : pagesCount} %}
 
 
 {% endblock %}

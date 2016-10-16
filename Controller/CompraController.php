@@ -25,10 +25,36 @@ class CompraController {
    echo $app->view->render( "agregarproductoacompra.twig", array('productos' => (ProductoResource::getInstance()->get()),'tiposegreso' => (TipoEgresoResource::getInstance()->get()),'compra' => (CompraResource::getInstance()->get($id))));
  }
 
+ public function ShowEditCompra($app,$id) {
+   $app->applyHook('must.be.administrador');
+   $compra = CompraResource::getInstance()->get($id);
+   echo $app->view->render( "editCompra.twig", array('compra' => ($compra)));
 
-  public function newCompra($app,$proveedor,$proveedor_cuit,$producto_id) {
+ }
+
+ public function editCompra($app,$editproveedor,$editproveedor_cuit,$compraid) {
+   $app->applyHook('must.be.administrador');
+   if (CompraResource::getInstance()->edit($app,$editproveedor,$editproveedor_cuit,$compraid)){
+      $app->flash('success', 'La compra ha sido modificado exitosamente');
+   } else {
+     $app->flash('error', 'No se pudo modificar la compra');
+   }
+   echo $app->redirect('/compras');
+ }
+
+ public function deleteCompra($app, $id) {
+   $app->applyHook('must.be.administrador');
+   if (CompraResource::getInstance()->delete($id)) {
+     $app->flash('success', 'La compra ha sido eliminado exitosamente.');
+   } else {
+     $app->flash('error', 'No se pudo eliminar la compra');
+   }
+   $app->redirect('/compras');
+ }
+
+  public function newCompra($app,$proveedor,$proveedor_cuit) {
     $app->applyHook('must.be.administrador.or.gestion');
-    if (CompraResource::getInstance()->insert($proovedor,$proovedor_cuit)){
+    if (CompraResource::getInstance()->insert($app,$proveedor,$proveedor_cuit)){
        $app->flash('success', 'La compra ha sido dado de alta exitosamente');
     } else {
       $app->flash('error', 'No se pudo dar de alta la compra');

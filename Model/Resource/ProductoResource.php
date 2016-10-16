@@ -56,9 +56,9 @@ class ProductoResource extends AbstractResource {
         return $this->get();
     }
 
-    
+
     public function delete($id)
-    {     
+    {
 
         $producto = $this->getEntityManager()->getReference('Model\Entity\Producto', $id);
          $query_string = "
@@ -66,11 +66,11 @@ class ProductoResource extends AbstractResource {
           WHERE ed.producto = $id";
 
           $query = $this->getEntityManager()->createQuery($query_string);
-          
+
           $total=$query->getResult();
 
           if (count($total) == 0) {
-               
+
                 $this->getEntityManager()->remove($producto);
                 $this->getEntityManager()->flush();
                 return $this->get();
@@ -78,7 +78,7 @@ class ProductoResource extends AbstractResource {
           else {
             return false;
           }
-           
+
     }
 
     public function Nuevo ($nombre,$marca,$stock,$stock_minimo,$proovedor,$precio_venta_unitario,$categoria_id = null,$descripcion){
@@ -139,7 +139,7 @@ class ProductoResource extends AbstractResource {
 
    public function sumarStock($id,$cantidad)
   {
-    $this->getEntityManager()->persist($this->get($id)->ingresa($cantidad));
+    $this->getEntityManager()->persist($this->get($id)->sumar($cantidad));
     $this->getEntityManager()->flush();
   }
 

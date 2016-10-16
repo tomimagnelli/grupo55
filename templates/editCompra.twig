@@ -1,0 +1,32 @@
+{% extends "layout.twig" %}
+
+{% block contenido %}
+</nav>
+<form class="formEditCompra" method="post" action="editCompra" enctype="multipart/form-data">
+  <fieldset class="fieldAltaProd" >
+
+	<label>Proveedor:
+  <br>
+  	<input type="text" name="editproveedor" placeholder="Nombre del proveedor"  value="{{ compra.proveedor }}"required></label>
+    <br>
+  	<label>Cuit proveedor:</label>
+    <br>
+  	<input type="text" name="editproveedor_cuit" placeholder="Cuit" value="{{ compra.proveedor_cuit }}" required>
+<br>
+    <label>Factura escaneada:</label>
+    <br>
+    <img src="{{compra.factura}}" alt="factura" />
+
+    <input type="file" name="myFileInfo" id="myFileInfo" value="{{ compra.factura }}">
+    <input type="hidden" name="compraid" value="{{ compra.id }}"/>
+
+    </form>
+<br>
+
+     <input type="submit" value="Confirmar"/>
+  </fieldset>
+
+</form>
+</body>
+</html>
+{% endblock %}

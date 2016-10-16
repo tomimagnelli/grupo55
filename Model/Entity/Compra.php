@@ -31,6 +31,14 @@ use Doctrine\ORM\Mapping;
       */
      protected $fecha;
 
+
+     /**
+      * @Column(type="string")
+      * @var string
+     */
+
+     protected $factura;
+
      /**
       * Gets the value of id.
       *
@@ -121,12 +129,34 @@ use Doctrine\ORM\Mapping;
       *
       * @return self
       */
-     public function setFecha($fecha)
+      public function setFecha()
      {
-         $this->fecha = $fecha;
+         $this->fecha = new \DateTime("now");
+     }
+
+     /**
+      * Gets the value of valor.
+      *
+      * @return string
+      */
+     public function getFactura()
+     {
+         return $this->factura;
+     }
+
+     /**
+      * Sets the value of valor.
+      *
+      * @param string $valor the valor
+      *
+      * @return self
+      */
+     public function setFactura($factura)
+     {
+         $this->factura = $factura;
 
          return $this;
      }
-    
+
 }
 ?>

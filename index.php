@@ -100,27 +100,29 @@ $app->group('/backend', function() use($app) {
 });
 
 $app->group('/listado', function() use($app) {
-     $app->get('/', '\Controller\ProductoController:listProductos')->setParams(array($app));
+     $app->get('/', '\Controller\ListadoController:indexActionListado')->setParams(array($app));
+     $app->get('/page', '\Controller\ListadoController:indexActionListado')->setParams(array($app, $app->request->get('ids')));
+
      $app->get('/delete', '\Controller\ProductoController:deleteProducto')->setParams(array($app, $app->request->get('id')));
-});
+     $app->get('/listado/delete', '\Controller\ProductoController:deleteProducto')->setParams(array($app, $app->request->get('id')));
 
-$app->group('/altaproducto', function() use($app) {
-    $app->get('/', '\Controller\ProductoController:showAltaProducto')->setParams(array($app));
-    $app->post('/', '\Controller\ProductoController:newProducto')->setParams(
-          array($app,$app->request->post('nombre'),
-          $app->request->post('marca'),
-          $app->request->post('stock'),
-          $app->request->post('stock_minimo'),
-          $app->request->post('proovedor'),
-          $app->request->post('precio_venta_unitario'),
-          $app->request->post('categoria_id'),
-          $app->request->post('descripcion')));
-  });
+     $app->get('/editProducto', '\Controller\ProductoController:showProducto')->setParams(array($app, $app->request->get('id')));
 
-$app->group('/editproducto', function() use($app) {
-    $app->get('/', '\Controller\ProductoController:showProducto')->setParams(array($app, $app->request->get('id')));
+     $app->post('/editProducto', '\Controller\ProductoController:editProducto')->setParams(
+            array($app, $app->request->post('nombre'),
+            $app->request->post('marca'),
+            $app->request->post('stock'),
+            $app->request->post('stock_minimo'),
+            $app->request->post('proovedor'),
+            $app->request->post('precio_venta_unitario'),
+            $app->request->post('categoria_id'),
+            $app->request->post('descripcion'),
+            $app->request->post('productoid'))
+    );
 
-    $app->post('/', '\Controller\ProductoController:editProducto')->setParams(
+    $app->get('/listado/editProducto', '\Controller\ProductoController:showProducto')->setParams(array($app, $app->request->get('id')));
+
+    $app->post('/listado/editProducto', '\Controller\ProductoController:editProducto')->setParams(
            array($app, $app->request->post('nombre'),
            $app->request->post('marca'),
            $app->request->post('stock'),
@@ -130,9 +132,24 @@ $app->group('/editproducto', function() use($app) {
            $app->request->post('categoria_id'),
            $app->request->post('descripcion'),
            $app->request->post('productoid'))
-   );
+    );
+
+    $app->group('/altaproducto', function() use($app) {
+        $app->get('/', '\Controller\ProductoController:showAltaProducto')->setParams(array($app));
+        $app->post('/', '\Controller\ProductoController:newProducto')->setParams(
+              array($app,$app->request->post('nombre'),
+              $app->request->post('marca'),
+              $app->request->post('stock'),
+              $app->request->post('stock_minimo'),
+              $app->request->post('proovedor'),
+              $app->request->post('precio_venta_unitario'),
+              $app->request->post('categoria_id'),
+              $app->request->post('descripcion')));
+      });
+
 
 });
+
 
 
 $app->group('/faltantes', function() use($app) {
@@ -214,13 +231,29 @@ $app->group('/altaventa', function() use($app) {
 
 $app->group('/altacompra', function() use($app) {
       $app->get('/', '\Controller\CompraController:showAltaCompra')->setParams(array($app));
-
+      $app->post('/', 'Controller\CompraController:newCompra')->setParams(
+               array($app, $app->request->post('proveedor'),
+               $app->request->post('proveedor_cuit')));
 
 });
 
+
+$app->group('/editCompra', function() use($app) {
+      $app->get('/', '\Controller\CompraController:showEditCompra')->setParams(array($app, $app->request->get('id')));
+      $app->post('/', '\Controller\CompraController:editCompra')->setParams(
+               array($app, $app->request->post('editproveedor'),
+               $app->request->post('editproveedor_cuit'),
+              $app->request->post('compraid')));
+
+});
+
+$app->get('/deleteCompra', '\Controller\CompraController:deleteCompra')->setParams(array($app, $app->request->get('id')));
+
+
+
 $app->group('/compras', function() use ($app) {
-    // Listar
-    $app->get('/', '\Controller\CompraController:listCompras')->setParams(array($app));
+  $app->get('/', '\Controller\ListadoController:indexActionCompras')->setParams(array($app));
+  $app->get('/page', '\Controller\ListadoController:indexActionCompras')->setParams(array($app, $app->request->get('id')));
 
 });
 
@@ -231,8 +264,8 @@ $app->group('/ingresos', function() use ($app) {
 });
 
 $app->group('/egresos', function() use ($app) {
-    // Listar
-    $app->get('/', '\Controller\EgresoDetalleController:listEgresosDeCompra')->setParams(array($app, $app->request->get('id')));
+  $app->get('/', '\Controller\ListadoController:indexActionEgresos')->setParams(array($app));
+  $app->get('/page', '\Controller\ListadoController:indexActionEgresos')->setParams(array($app, $app->request->get('id')));
 
 });
 

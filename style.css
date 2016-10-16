@@ -210,6 +210,12 @@ form.formAltaProd {
 
 
 }
+
+form.formEditCompra img{
+  width:560px;
+  height:305px;
+}
+
 fieldset.fieldAltaProd{
     display: block;
     margin-left: 2px;

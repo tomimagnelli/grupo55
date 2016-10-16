@@ -8,7 +8,7 @@
 	<tr>
 		<th id="Proveedor">PROVEEDOR</th>
 		<th id="ProveedorCuit">PROVEEDOR CUIT</th>
-	
+
 		<th>ACCIONES</th>
 
 	</tr>
@@ -16,10 +16,14 @@
 		  <tr id="{{ compra.id }}">
 				<td>{{ compra.proveedor }}</td>
 				<td>{{ compra.proveedor_cuit }}</td>
-				
+
 				<td>
 					<a href="egresos?id={{ compra.id }}"> <input type="button" value="Ver productos agregados" /></i></a>
 					<a href="agregarproductoacompra?id={{ compra.id }}"> <input type="button" value="+Agregar producto" /></i></a>
+					<a href="editCompra?id={{ compra.id }}"> <input type="button" value="Editar Compra" /></i></a>
+					<a href="deleteCompra?id={{ compra.id }}"> <input type="button" value="Eliminar" /></i></a>
+
+
 				</td>
 			</tr>
 		{% endfor %}
