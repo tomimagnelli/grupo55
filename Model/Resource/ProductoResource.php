@@ -69,7 +69,15 @@ class ProductoResource extends AbstractResource {
 
           $total=$query->getResult();
 
-          if (count($total) == 0) {
+          $query_string2 = "
+           SELECT i FROM Model\Entity\IngresoDetalle i
+           WHERE i.producto = $id";
+
+           $query = $this->getEntityManager()->createQuery($query_string2);
+
+           $total2=$query->getResult();
+
+          if ((count($total) == 0)  && (count($total2) == 0)) {
 
                 $this->getEntityManager()->remove($producto);
                 $this->getEntityManager()->flush();

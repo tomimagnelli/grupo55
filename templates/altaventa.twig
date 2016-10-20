@@ -1,12 +1,12 @@
 {% extends "layout.twig" %}
 
 {% block contenido %}
-</nav>
+
 <form class="formAltaProd" method="post" action="altaventa">
   <fieldset class="fieldAltaProd" >
-
-	<label>Tipo venta: </label>
-  	<select name="ingreso_tipo_id">
+    <legend>Alta venta </legend>
+  <label for="ingreso_tipo_id">Tipo venta: </label>
+    <select name="ingreso_tipo_id" id="ingreso_tipo_id">
     <option value="" selected="selected">Seleccione</option>
        {% for tipo in tiposingreso %}
           <option value="{{ tipo.id }}">{{ tipo.nombre }}</option>
@@ -14,22 +14,22 @@
 
     </select>
 
-    <label>Producto: </label>
-    <select name="producto_id">
+    <label for="producto_id">Producto: </label>
+    <select name="producto_id" id="producto_id">
     <option value="" selected="selected">Seleccione</option>
      {% for producto in productos %}
         <option value="{{ producto.id }}">{{ producto.nombre }} {{ producto.marca }}</option>
      {% endfor %}
     </select>
 
-  	<label>Cantidad :</label>
-  	<input type="number" name="cantidad" placeholder="Ingrese cantidad" required>
-  	<label>Precio:</label>
-  	<input type="number" name="precio_unitario"  placeholder="$" required>
+    <label for="cantidad">Cantidad :</label>
+    <input type="number" id="cantidad"name="cantidad" placeholder="Ingrese cantidad" required>
+    <label for="precio_unitario">Precio:</label>
+    <input type="number" name="precio_unitario" id="precio_unitario" placeholder="$" required>
 
-  	<label>Descripcion:</label>
-    <input type="text" name="descripcion" placeholder="Descripcion del producto..." required>
-  	
+    <label for="descripcion">Descripcion:</label>
+    <input type="text" name="descripcion" id="descripcion" placeholder="Descripcion del producto..." required>
+    
   <input type="submit" value="Agregar"/>
 
   </fieldset>

@@ -1,13 +1,13 @@
 {% extends "layout.twig" %}
 
 {% block contenido %}
-    <h1 class="title" id="listado">Productos Faltantes</h1>
+
 		<table summary="Tabla de productos del buffet">
 		  <tr>
 		    <th id="Nombre">NOMBRE</th>
 		    <th id="Marca">MARCA</th>
 		    <th id="Stock">STOCK</th>
-		    <th id="Stock">STOCK MÍNIMO</th>
+		    <th id="Stockmin">STOCKMINIMO</th>
 		  </tr>
 			{% for producto in productos.iterator %}
 				<tr id="{{ producto.id }}">

@@ -10,6 +10,8 @@ use Model\Resource\ProductoResource;
 use Model\Resource\ConfiguracionResource;
 use Model\Resource\EgresoDetalleResource;
 use Model\Entity\EgresoDetalle;
+use Model\Resource\UsuarioResource;
+use Model\Entity\Usuario;
 
 
 class ListadoController {
@@ -85,18 +87,34 @@ class ListadoController {
     }
 
 
-    public function indexActionEgresos($app,$page = 1) {
-        $app->applyHook('must.be.administrador.or.gestion');
-        $egresos = EgresoDetalleResource::getInstance()->get();
-        $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
-        $paginator = EgresoDetalleResource::getInstance()->getPaginateEgreso($pageSize,$page);
-        $totalItems = count($paginator);
-        $pagesCount = ceil($totalItems / $pageSize);
-        echo $app->view->render('egresos.twig', array(
-            "egresos"     => $paginator,
-            "totalItems" => $totalItems,
-            "pagesCount" => $pagesCount
-        ));
+    public function indexActionEgresos($app, $idCompra, $page = 1){
+      $app->applyHook('must.be.administrador.or.gestion');
+      $egresos = EgresoDetalleResource::getInstance()->get();
+      $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
+      $paginator = EgresoDetalleResource::getInstance()->getPaginateEgreso($pageSize,$idCompra,$page);
+      $totalItems = count($paginator);
+      $pagesCount = ceil($totalItems / $pageSize);
+      echo $app->view->render('egresos.twig', array(
+          "egresos"     => $paginator,
+          "totalItems" => $totalItems,
+          "pagesCount" => $pagesCount,
+          "idCompra"   => $idCompra
+      ));
     }
+
+    public function indexActionUsuarios($app, $page = 1){
+      $app->applyHook('must.be.administrador.or.gestion');
+      $usuarios = UsuarioResource::getInstance()->get();
+      $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
+      $paginator = UsuarioResource::getInstance()->getPaginateUsuario($pageSize,$page);
+      $totalItems = count($paginator);
+      $pagesCount = ceil($totalItems / $pageSize);
+      echo $app->view->render('users.twig', array(
+          "usuarios"     => $paginator,
+          "totalItems" => $totalItems,
+          "pagesCount" => $pagesCount
+      ));
+    }
+
 
 }

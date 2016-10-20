@@ -8,12 +8,6 @@ use Model\Resource\ProductoResource;
 
 class EgresoDetalleController {
 
-  public function listEgresosDeCompra($app, $idCompra){
-  	$app->applyHook('must.be.administrador.or.gestion');
-    echo $app->view->render( "egresos.twig", array('egresos' => (EgresoDetalleResource::getInstance()->get($idCompra))));
-  }
-
-
 
    public function newEgresoDetalle($app,$compra, $producto,$cantidad,$precio_unitario, $egreso_tipo_id) {
         $app->applyHook('must.be.administrador.or.gestion');

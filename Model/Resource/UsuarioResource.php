@@ -5,6 +5,8 @@ use Model\Resource\AbstractResource;
 use vendor\doctrine\common\lib\Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Model\Entity\Usuario;
+use Model\Entity\Producto;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 /**
  * Class Resource
  * @package Model
@@ -104,15 +106,6 @@ class UsuarioResource extends AbstractResource {
         else return false;
     }
 
-     public function estaHabilitado($username, $pass)
-    {
-        $data = $this->getEntityManager()->getRepository('Model\Entity\Usuario')->findOneBy(array('usuario' => $username));
-        if ($data != null) {
-          if ($data->getHabilitado() == 0) return $data;
-          else return false;
-        }
-        else return false;
-    }
 
     public function ubicacion($id) {
       $usuario = $this->getEntityManager()->getReference('Model\Entity\Usuario', $id);
@@ -124,6 +117,52 @@ class UsuarioResource extends AbstractResource {
       $query->setParameter('idUser',$idUb);
       return $query->getResult();
   }
+
+  public function getPaginateUsuario($pageSize,$currentPage){
+      $em = $this->getEntityManager();
+      $dql = "SELECT u FROM Model\Entity\Usuario u";
+      $query = $em->createQuery($dql)->setFirstResult($pageSize * (intval($currentPage) - 1))->setMaxResults($pageSize);
+      $paginator = new Paginator($query, $fetchJoinCollection = true);
+      return $paginator;
+  }
+
+  public function estaHabilitado($username, $pass)
+      {
+          $data = $this->getEntityManager()->getRepository('Model\Entity\Usuario')->findOneBy(array('usuario' => $username));
+          if ($data != null) {
+            if ($data->getHabilitado() == 0) return $data;
+            else return false;
+          }
+          else return false;
+      }
+
+      public function existeUsuario ($username){
+       $data = $this->getEntityManager()->getRepository('Model\Entity\Usuario')->findOneBy(array('usuario' => $username));
+       if ($data != null){
+          return false;
+       }
+      else{
+          return true;
+       }
+      }
+
+
+      public function existeUsuarioEdit ($username, $id){
+       $data = $this->getEntityManager()->getRepository('Model\Entity\Usuario')->findOneBy(array('usuario' => $id));
+
+      if ($data != null){
+         if ( $username == $data->getUsuario()){
+          return true;
+          }
+          else{
+           $this->existeUsuario($username);
+          }
+      }
+
+      }
+
+
+
 
 }
 

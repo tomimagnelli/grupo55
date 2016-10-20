@@ -1,31 +1,36 @@
 {% extends "layout.twig" %}
 
 {% block contenido %}
-<body>
-<html>
+
+
 <form class="formAltaProd" method="post" action="edituser">
 
   <fieldset class="fieldAltaProd" >
+    <legend>Editar usuar</legend>
     <h3>Editar Usuario</h3>
     <label for="editName">Nombre: </label>
     <input type="text" name="nombre" id="editName" maxlength="45" value="{{ usuario.nombre }}" required/>
     <label for="editApellido">Apellido: </label>
     <input type="text" name="apellido" id="editApellido" maxlength="45" value="{{ usuario.apellido }}" required/>
-    <label for="editTelefono">Teléfono: </label>
+    <label for="editTelefono">Tel&eacute;fono: </label>
     <input type="number" name="telefono" id="editTelefono" maxlength="25" value="{{ usuario.telefono }}" required/>
     <label for="newRol">Rol: </label>
     <select id="newRol" name="rol_id" required>
-     <option value="" selected="selected">Seleccione</option>
-     <option value="1">Administrador</option>
-     <option value="2">Usuario Online</option>
-     <option value="3">Gestión</option>
+
+     <option value="">Seleccione</option>
+     <option {% if usuario.rol_id == 1 %}selected="selected" {% endif %} value="1">Administrador</option>
+     <option {% if usuario.rol_id == 2 %}selected="selected" {% endif %} value="2">Usuario Online</option>
+     <option {% if usuario.rol_id == 3 %}selected="selected" {% endif %}value="3">Gesti&oacute;n</option>
     </select>
-    <label for="newUbicacion" id="labelUbicacion">Ubicación: </label>
+    <label for="newUbicacion" id="labelUbicacion">Ubicaci&oacute;n: </label>
     <select id="newUbicacion" name="ubicacion_id">
-     <option value="" selected="selected">Seleccione</option>
+     <option value="" >Seleccione</option>
      {% for ubicacion in ubicaciones %}
-     <option value="{{ ubicacion.id }}">{{ ubicacion.nombre }} | {{ ubicacion.descripcion }}</option>
+     <option {% if ubicacion.id == usuario.ubicacion_id.id %} 
+            selected="selected"{% endif %} value="{{ ubicacion.id }}">{{ ubicacion.nombre }} | {{ ubicacion.descripcion }}</option>
+        
      {% endfor %}
+
     </select>
     <label for="editMail">Mail: </label>
     <input type="email" name="email" id="editMail" value="{{ usuario.email }}" required/>
@@ -34,13 +39,13 @@
     <label for="editUsername">Nombre de usuario: </label>
     <input type="text" name="user" id="editUsername" maxlength="20" value="{{ usuario.usuario }}" required/>
     <label for="editPassword">Contraseña: </label>
-    <input type="password" name="pass" id="editPassword" maxlength="20" placeholder="Contraseña" required/>
+    <input type="password" name="pass" id="editPassword" maxlength="20" placeholder="Contrase�a" required/>
     <input type="hidden" name="userid" value="{{ usuario.id }}"/>
     <label for="Habilitado">Habilitado </label>
         <select id="newHabilitado" name="habilitado" required>
-         <option value="" selected="selected">Seleccione</option>
-         <option value="0">Si</option>
-         <option value="1">No</option>
+         <option value="">Seleccione</option>
+         <option {% if usuario.habilitado == 0 %}selected="selected" {% endif %} value="0">Si</option>
+         <option {% if usuario.habilitado == 1 %}selected="selected" {% endif %}value="1">No</option>
         </select>
      <br><br>
     <input type="submit" value="Modificar"/>
@@ -48,7 +53,7 @@
   </fieldset>
 
 </form>
-</body>
-</html>
+
+
 
 {% endblock %}

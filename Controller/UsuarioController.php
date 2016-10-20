@@ -27,24 +27,36 @@ class UsuarioController {
          $error = true;
          $app->flash('error', 'El nombre debe tener menos de 50 caracteres');
     }
+    $existeusuario = UsuarioResource::getInstance()->existeUsuario($user);
+    if (!$existeusuario){
+         $error = true;
+        $app->flash('error', 'No se puede dar de alta. Ya existe ese nombre de usuario');
+        echo $app->redirect('/users/altausuario');
+
+    }
     if (!$error) {
         if (UsuarioResource::getInstance()->insert($user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id,$habilitado)){
            $app->flash('success', 'El usuario ha sido dado de alta exitosamente');
        } else {
           $app->flash('error', 'No se pudo dar de alta el usuario');
       }
+      echo $app->redirect('/users');
     }
-    echo $app->redirect('/users');
   }
 
   public function editUsuario($app,$user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id = null,$habilitado,$id) {
     $app->applyHook('must.be.administrador');
+    $existeusuario = UsuarioResource::getInstance()->existeUsuarioEdit($user, $id);
+
+
+
     if (UsuarioResource::getInstance()->edit($user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id,$habilitado,$id)){
        $app->flash('success', 'El usuario ha sido modificado exitosamente');
     } else {
       $app->flash('error', 'No se pudo modificar el usuario');
     }
     echo $app->redirect('/users');
+
   }
 
   public function registrarUsuario($app,$user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id = 2,$email,$ubicacion_id = null,$habilitado) {

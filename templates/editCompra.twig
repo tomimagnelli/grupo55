@@ -4,6 +4,7 @@
 </nav>
 <form class="formEditCompra" method="post" action="editCompra" enctype="multipart/form-data">
   <fieldset class="fieldAltaProd" >
+  <legend>Editar compra</legend>
 
 	<label>Proveedor:
   <br>
@@ -15,9 +16,9 @@
 <br>
     <label>Factura escaneada:</label>
     <br>
-    <img src="{{compra.factura}}" alt="factura" />
+    <img src="{{ baseUrl() }}/{{ compra.factura }}" alt="factura" />
 
-    <input type="file" name="myFileInfo" id="myFileInfo" value="{{ compra.factura }}">
+    <input type="file" name="myFileInfo" id="myFileInfo" value="{{ baseUrl() }}/{{ compra.factura }}">
     <input type="hidden" name="compraid" value="{{ compra.id }}"/>
 
     </form>

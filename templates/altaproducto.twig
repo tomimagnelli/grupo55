@@ -3,31 +3,32 @@
 {% block contenido %}
   <form class="formAltaProd" method="post" action="">
   <fieldset class="fieldAltaProd" >
-	<label>Nombre:</label>
-  	 <input type="text" name="nombre" id="newName" maxlength="55" placeholder="Nombre" required/>
-  	<label>Marca:</label>
-  	<input type="text" name="marca" placeholder="Marca..." required>
-  	<label>Cantidad de stock:</label>
-  	<input type="number" name="stock" placeholder="Cantidad stock..." required>
+    <legend>Alta de producto</legend>
+  <label for="nombre">Nombre:</label>
+     <input type="text" name="nombre" id="nombre" maxlength="55" placeholder="Nombre" required/>
+    <label for="marca">Marca:</label>
+    <input type="text" name="marca" id="marca"placeholder="Marca..." required>
+    <label for="stock">Cantidad de stock:</label>
+    <input type="number" name="stock" id="stock" placeholder="Cantidad stock..." required>
     
-  	<label>Cantidad m&iacute;nima de stock:</label>
-  	<input type="number" name="stock_minimo"  placeholder="Cant. minima de stock..." required>
-  	
-  	<label>Proovedor:</label>
-  	<input type="text" name="proovedor" placeholder="Proovedor..." required>
+    <label for="stock_minimo">Cantidad m&iacute;nima de stock:</label>
+    <input type="number" name="stock_minimo" id="stock_minimo"  placeholder="Cant. minima de stock..." required>
+    
+    <label for="proovedor">Proovedor:</label>
+    <input type="text" name="proovedor" id="proovedor"placeholder="Proovedor..." required>
   
-  	<label>Precio de venta unitario:</label>
-  	<input type="number" name="precio_venta_unitario" placeholder="Precio..." step="1" required="">
-    <label>Categor&iacute;a: </label>
-    <select name="categoria_id">
+    <label for="precio_venta_unitario">Precio de venta unitario:</label>
+    <input type="number" name="precio_venta_unitario" placeholder="Precio..." step="1" required="">
+    <label for="categoria_id">Categor&iacute;a: </label>
+    <select name="categoria_id" id="categoria_id">
     <option value="" selected="selected">Seleccione</option>
      {% for categoria in categorias %}
         <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
      {% endfor %}
     </select>
-    <label>Descripcion:</label>
-    <input type="text" name="descripcion" placeholder="Descripcion del producto..." required>
-  	 <input type="submit" value="Agregar"/>
+    <label for="descripcion">Descripcion:</label>
+    <input type="text" id="descripcion "name="descripcion" placeholder="Descripcion del producto..." required>
+     <input type="submit" value="Agregar"/>
 
   </fieldset>
   

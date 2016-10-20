@@ -1,0 +1,45 @@
+{% extends "layout.twig" %}
+
+{% block contenido %}
+<body>
+<form class="formAltaProd" method="post" action="editingreso">
+
+  <fieldset class="fieldAltaProd" >
+    <legend>Editar venta</legend>
+    <label for="producto_id">Producto: </label>
+    <select name="producto_id" id="producto_id">
+    <option value="">Seleccione</option>
+     {% for producto in productos %}
+        <option {% if ingreso_detalle.producto.id == producto.id %}selected="selected" {% endif %}value="{{ producto.id }}">{{ producto.nombre }} {{ producto.marca }}</option>
+     {% endfor %}
+    </select>
+
+
+    <label for="precio_unitario">Precio unitario</label>
+    <input type="number" name="precio_unitario" id="precio_unitario" maxlength="25" value="{{ ingreso_detalle.precio_unitario}}" required/>
+
+    <label for="cantidad">Cantidad: </label>
+    <input type="number" name="cantidad" id="cantidad" maxlength="25" value="{{ ingreso_detalle.cantidad}}" required/>
+
+    <label for="ingreso_tipo_id">Tipo venta: </label>
+    <select name="ingreso_tipo_id" id="ingreso_tipo_id">
+    <option value="">Seleccione</option>
+       {% for tipo in tiposingreso %}
+          <option {% if ingreso_detalle.ingreso_tipo_id.id == tipo.id %}selected="selected" {% endif %}value="{{ tipo.id }}">{{ tipo.nombre }}</option>
+       {% endfor %}
+
+    </select>
+
+    <label for="editDescripcion">Descripcion: </label>
+    <input type="text" name="descripcion" id="editDescripcion" maxlength="25" value="{{ ingreso_detalle.descripcion}}" required/>
+
+
+    <input type="hidden" name="ingresoid" value="{{ ingreso_detalle.id }}"/>
+    <input type="submit" value="Modificar"/>
+  </form>
+  </fieldset>
+
+</form>
+</body>
+
+{% endblock %}

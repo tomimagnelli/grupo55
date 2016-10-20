@@ -70,24 +70,27 @@ class EgresoDetalleResource extends AbstractResource {
     public function getEgresosDeCompra($idCompra)
         {
           $query_string = "
-              SELECT e.cantidad, e.precio_unitario, p.nombre, p.marca
+              SELECT e
               FROM Model\Entity\EgresoDetalle e
-              INNER JOIN Model\Entity\Producto p
-              WITH e.producto = p.id
               WHERE e.compra = :idCompra";
           $query = $this->getEntityManager()->createQuery($query_string);
           $query->setParameter('idCompra',$idCompra);
           return $query->getResult();
         }
 
-      public function getPaginateEgreso($pageSize,$currentPage){
-          $em = $this->getEntityManager();
-          $dql = "SELECT e FROM Model\Entity\EgresoDetalle e";
-          $query = $em->createQuery($dql)->setFirstResult($pageSize * (intval($currentPage) - 1))->setMaxResults($pageSize);
-          $paginator = new Paginator($query, $fetchJoinCollection = true);
-          return $paginator;
+        public function getPaginateEgreso($pageSize,$idCompra,$currentPage){
+            $em = $this->getEntityManager();
+            $dql = "
+                SELECT e
+                FROM Model\Entity\EgresoDetalle e
+                WHERE e.compra = :idCompra";
+            $query = $em->createQuery($dql);
+            $query->setParameter('idCompra',$idCompra);
+              $query->setFirstResult($pageSize * (intval($currentPage) - 1))->setMaxResults($pageSize);
+            $paginator = new Paginator($query, $fetchJoinCollection = true);
+            return $paginator;
 
-      }
+        }
 
 
      public function compra($id) {

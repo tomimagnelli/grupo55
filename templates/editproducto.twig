@@ -2,11 +2,10 @@
 
 {% block contenido %}
 <body>
-<html>
 <form class="formAltaProd" method="post" action="editProducto">
 
   <fieldset class="fieldAltaProd" >
-    <h3>Editar Usuario</h3>
+    <legend>Editar usuario</legend>
     <label for="editName">Nombre: </label>
     <input type="text" name="nombre" id="editName" maxlength="45" value="{{ producto.nombre }}" required/>
     <label for="editMarca">Marca: </label>
@@ -15,20 +14,20 @@
     <label for="editStock">Stock: </label>
     <input type="number" name="stock" id="editStock" maxlength="25" value="{{ producto.stock}}" required/>
 
- 	<label for="editStockMin">Cantidad minima de Stock: </label>
+  <label for="editStockMin">Cantidad minima de Stock: </label>
     <input type="number" name="stock_minimo" id="editStockMin" maxlength="25" value="{{ producto.stock_minimo}}" required/>
 
-     <label for="editProovedor">Proovedor: </label>
+     <label for="proovedor">Proovedor: </label>
     <input type="text" name="proovedor" id="proovedor" maxlength="25" value="{{ producto.proovedor}}" required/>
 
      <label for="editPrecio">Precio unitario: </label>
     <input type="number" name="precio_venta_unitario" id="editPrecio" maxlength="25" value="{{ producto.precio_venta_unitario}}" required/>
 
-    <label>Categor&iacute;a: </label>
-    <select name="categoria_id" required>
-    <option value="" selected="selected">Seleccione</option>
+    <label for="categoria_id">Categor&iacute;a: </label>
+    <select name="categoria_id" id="categoria_id"required>
+    <option value="" >Seleccione</option>
      {% for categoria in categorias %}
-        <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+        <option {% if producto.categoria_id.id == categoria.id %}selected="selected" {% endif %} value="{{ categoria.id }}">{{ categoria.nombre }}</option>
      {% endfor %}
     </select>
 
@@ -43,5 +42,5 @@
 
 </form>
 </body>
-</html>
+
 {% endblock %}

@@ -6,6 +6,7 @@ use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Model\Entity\IngresoDetalle;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Model\Entity\Producto;
+use Model\Entity\TipoIngreso;
 /**
  * Class Resource
  * @package Model
@@ -37,6 +38,31 @@ class IngresoDetalleResource extends AbstractResource {
            $data = $this->getEntityManager()->getRepository('Model\Entity\IngresoDetalle')->findOneBy(array('id'=> $id));
         }
         return $data;
+    }
+
+     public function delete($id)
+    {
+        $ingreso = $this->getEntityManager()->getReference('Model\Entity\IngresoDetalle', $id);
+        $this->getEntityManager()->remove($ingreso);
+        $this->getEntityManager()->flush();
+        return $this->get();
+    }
+
+    public function editVenta($producto,$cantidad,$precio_unitario,$ingreso_tipo_id,$descripcion, $id)
+    {
+        $ingreso = $this->getEntityManager()->getReference('Model\Entity\IngresoDetalle', $id);
+        $prod = ProductoResource::getInstance()->get($producto);
+        $tipo = TipoIngresoResource::getInstance()->get($ingreso_tipo_id);
+        $ingreso->setProducto($prod);
+        $ingreso->setCantidad($cantidad);
+        $ingreso->setPrecioUnitario($precio_unitario);
+        $ingreso->setIngresoTipoId($tipo);
+        $ingreso->setFecha();
+        $ingreso->setDescripcion($descripcion);
+    
+        $this->getEntityManager()->persist($ingreso);
+        $this->getEntityManager()->flush();
+        return $this->get();
     }
 
 

@@ -282,6 +282,13 @@ fieldset.fieldAltaProd{
     height: 3%;
 }
 
+.formAltaProd legend {
+  font-weight: bold;
+  border: 1px solid #ccc;
+  font-size: 16px;
+
+}
+
 .config input[type="text"],input[type="img"]{
   display: inline-block;
 }

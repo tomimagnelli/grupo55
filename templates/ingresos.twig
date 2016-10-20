@@ -9,6 +9,7 @@
 		<th id="IngresoDescripcion">Descripcion</th>
 		<th id="Cantidad">Cantidad</th>
 		<th id="PrecioUnitario">Precio unitario</th>
+		<th id="Acciones">Acciones</th>
 	</tr>
 
 		{% for ingreso_detalle in ingresos %}
@@ -20,6 +21,10 @@
 				<td>{{ ingreso_detalle.descripcion}}</td>
 				<td>{{ ingreso_detalle.cantidad }}</td>
 				<td>{{ ingreso_detalle.preciounitario }}</td>
+				<td>
+				<a href="editingreso?id={{ ingreso_detalle.id }}"> <input type="button" value="Editar" /> </a>
+				<a href="deleteVenta?id={{ ingreso_detalle.id }}"> <input type="button" value="Eliminar" /></i></a>
+				</td>
 
 		{% endfor %}
 

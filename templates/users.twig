@@ -2,7 +2,7 @@
 
 {% block contenido %}
 
-<a href="{{ baseUrl() }}/altausuario" target="rightframe"><input type="button" value="AGREGAR UN USUARIO" /></a>
+<a href="{{ baseUrl() }}/users/altausuario" target="rightframe"><input type="button" value="AGREGAR UN USUARIO" /></a>
 
 <table summary="Tabla de usuarios del buffet">
 	<tr>
@@ -26,9 +26,9 @@
 				<td>Gestion</td>
 				{% endif %}
 				<td>
-					<a href="edituser?id={{ usuario.id }}"> <input type="button" value="Editar" /> </a>
+					<a href="users/edituser?id={{ usuario.id }}"> <input type="button" value="Editar" /> </a>
 
-					<a href="delete?id={{ usuario.id }}"> <input type="button" value="Eliminar" /></i></a>
+					<a href="users/delete?id={{ usuario.id }}"> <input type="button" value="Eliminar" /></i></a>
 				</td>
 				{% if usuario.habilitado == 0 %}
 				<td>Si</td>
@@ -40,6 +40,8 @@
 			</tr>
 		{% endfor %}
 	</table>
+
+	{% include 'paginacion/paginacionUsuarios.twig' with {'pagesCount' : pagesCount} %}
 
 
 {% endblock %}
