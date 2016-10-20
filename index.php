@@ -249,23 +249,6 @@ $app->group('/ventasprod', function() use($app) {
 });
 
 
-
-$app->group('/altaventa', function() use($app) {
-    $app->get('/', '\Controller\IngresoDetalleController:showAltaVenta')->setParams(array($app));
-    $app->post('/', '\Controller\IngresoDetalleController:newIngresoDetalle')->setParams(
-          array($app,$app->request->post('ingreso_tipo_id'),
-          $app->request->post('producto_id'),
-          $app->request->post('cantidad'),
-          $app->request->post('precio_unitario'),
-          $app->request->post('descripcion')));
-
-  });
-
-
-
-
-
-
 $app->group('/compras', function() use ($app) {
   $app->get('/', '\Controller\ListadoController:indexActionCompras')->setParams(array($app));
   $app->get('/page', '\Controller\ListadoController:indexActionCompras')->setParams(array($app, $app->request->get('ids')));
@@ -338,6 +321,18 @@ $app->group('/ingresos', function() use ($app) {
   $app->get('/', '\Controller\ListadoController:indexActionIngresos')->setParams(array($app));
   $app->get('/page', '\Controller\ListadoController:indexActionIngresos')->setParams(array($app, $app->request->get('id')));
 
+
+  $app->group('/altaventa', function() use($app) {
+      $app->get('/', '\Controller\IngresoDetalleController:showAltaVenta')->setParams(array($app));
+      $app->post('/', '\Controller\IngresoDetalleController:newIngresoDetalle')->setParams(
+            array($app,$app->request->post('ingreso_tipo_id'),
+            $app->request->post('producto_id'),
+            $app->request->post('cantidad'),
+            $app->request->post('precio_unitario'),
+            $app->request->post('descripcion')));
+
+    });
+
   $app->group('/editingreso', function() use($app) {
       $app->get('/', '\Controller\IngresoDetalleController:showEditVenta')->setParams(array($app, $app->request->get('id')));
       $app->post('/', '\Controller\IngresoDetalleController:edit')->setParams(
@@ -350,7 +345,21 @@ $app->group('/ingresos', function() use ($app) {
 
 });
 
-$app->get('/deleteVenta', '\Controller\IngresoDetalleController:deleteIngreso')->setParams(array($app, $app->request->get('id'))); 
+$app->group('/ingresos/editingreso', function() use($app) {
+    $app->get('/', '\Controller\IngresoDetalleController:showEditVenta')->setParams(array($app, $app->request->get('id')));
+    $app->post('/', '\Controller\IngresoDetalleController:edit')->setParams(
+        array($app,$app->request->post('producto_id'),
+        $app->request->post('cantidad'),
+        $app->request->post('precio_unitario'),
+        $app->request->post('ingreso_tipo_id'),
+        $app->request->post('descripcion'),
+        $app->request->post('ingresoid')));
+
+});
+
+
+$app->get('/deleteVenta', '\Controller\IngresoDetalleController:deleteIngreso')->setParams(array($app, $app->request->get('id')));
+$app->get('/ingresos/deleteVenta', '\Controller\IngresoDetalleController:deleteIngreso')->setParams(array($app, $app->request->get('id')));
 
 });
 
