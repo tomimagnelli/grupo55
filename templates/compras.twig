@@ -2,9 +2,14 @@
 
 {% block contenido %}
 
-<a href="{{ baseUrl() }}/compras/altacompra" target="rightframe"><input type="button" value="Nueva compra" /></a>
 
-<table summary="Tabla de compras del Buffet">
+ <form action="{{ baseUrl() }}/compras/altacompra" target="rightframe" method="get">
+
+ <button type="submit">NUEVA COMPRA</button><br>
+  
+</form>
+
+<table>
 	<tr>
 		<th id="Proveedor">PROVEEDOR</th>
 		<th id="ProveedorCuit">PROVEEDOR CUIT</th>
@@ -18,10 +23,10 @@
 				<td>{{ compra.proveedor_cuit }}</td>
 
 				<td>
-					<a href="egresos/page?user={{ compra.id }}&ids=1"> <input type="button" value="Ver productos agregados" /></i></a>
-					<a href="agregarproductoacompra?id={{ compra.id }}"> <input type="button" value="+Agregar producto" /></i></a>
-					<a href="editCompra?id={{ compra.id }}"> <input type="button" value="Editar Compra" /></i></a>
-					<a href="deleteCompra?id={{ compra.id }}"> <input type="button" value="Eliminar" /></i></a>
+					<a href="egresos/page?user={{ compra.id }}&ids=1"> Ver productos agregados</a>
+					<a href="agregarproductoacompra?id={{ compra.id }}"> Agregar un producto </a>
+					<a href="editCompra?id={{ compra.id }}"> <img title="Editar compra" alt="Editar" src="{{ baseUrl() }}/uploads/editar.png"></a>
+					<a href="deleteCompra?id={{ compra.id }}"> <img title="Eliminar" alt="Eliminar" src="{{ baseUrl() }}/uploads/eliminar.png"></a>
 
 
 				</td>

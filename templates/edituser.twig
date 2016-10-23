@@ -13,7 +13,7 @@
     <label for="editApellido">Apellido: </label>
     <input type="text" name="apellido" id="editApellido" maxlength="45" value="{{ usuario.apellido }}" required/>
     <label for="editTelefono">Tel&eacute;fono: </label>
-    <input type="number" name="telefono" id="editTelefono" maxlength="25" value="{{ usuario.telefono }}" required/>
+    <input type="number" name="telefono" id="editTelefono" value="{{ usuario.telefono }}" required/>
     <label for="newRol">Rol: </label>
     <select id="newRol" name="rol_id" required>
 
@@ -35,24 +35,23 @@
     <label for="editMail">Mail: </label>
     <input type="email" name="email" id="editMail" value="{{ usuario.email }}" required/>
     <label for="editDocumento">Documento: </label>
-    <input type="number" name="documento" id="editDocumento" maxlength="8" value="{{ usuario.documento }}" required/>
+    <input type="number" name="documento" id="editDocumento" value="{{ usuario.documento }}" required/>
     <label for="editUsername">Nombre de usuario: </label>
     <input type="text" name="user" id="editUsername" maxlength="20" value="{{ usuario.usuario }}" required/>
     <label for="editPassword">Contraseña: </label>
     <input type="password" name="pass" id="editPassword" maxlength="20" placeholder="Contrase�a" required/>
     <input type="hidden" name="userid" value="{{ usuario.id }}"/>
-    <label for="Habilitado">Habilitado </label>
-        <select id="newHabilitado" name="habilitado" required>
+    <label for="habilitado">Habilitado </label>
+        <select name="habilitado" id="habilitado" required>
          <option value="">Seleccione</option>
          <option {% if usuario.habilitado == 0 %}selected="selected" {% endif %} value="0">Si</option>
          <option {% if usuario.habilitado == 1 %}selected="selected" {% endif %}value="1">No</option>
         </select>
      <br><br>
     <input type="submit" value="Modificar"/>
+    </fieldset>
   </form>
-  </fieldset>
-
-</form>
+  
 
 
 

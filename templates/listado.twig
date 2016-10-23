@@ -1,10 +1,15 @@
 {% extends "layout.twig" %}
 
 {% block contenido %}
-<a href="{{ baseUrl() }}/listado/altaproducto" target="rightframe"><input type="button" value="AGREGAR UN PRODUCTO" /></a>
+
+ <form action="{{ baseUrl() }}/listado/altaproducto" method="get">
+
+ <button type="submit">Alta de producto</button><br>
+  
+</form>
 
 
-<table summary="Tabla de productos del buffet">
+<table>
 	<tr>
 			<th id="Nombre">NOMBRE</th>
     		<th id="Marca">MARCA</th>
@@ -18,8 +23,9 @@
 				<td>{{ producto.marca }}</td>
 				<td>{{ producto.stock }}</td>
 				<td>
-					<a href="editProducto?id={{ producto.id }}"><input type="button" value="Editar" /></a>
-					<a href="delete?id={{ producto.id }}"><input type="button" value="Eliminar" /></a>
+					<a href="editProducto?id={{ producto.id }}"><img title="Editar" alt="Editar" src="{{ baseUrl() }}/uploads/editar.png"></a>
+
+					<a href="delete?id={{ producto.id }}"><img title="Eliminar" alt="Eliminar" src="{{ baseUrl() }}/uploads/eliminar.png"></a>
 				</td>
 			</tr>
 		{% endfor %}

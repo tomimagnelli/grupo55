@@ -1,7 +1,7 @@
 {% extends "layout.twig" %}
 
 {% block contenido %}
-</nav>
+
 <form class="formAltaProd" method="post" action="altausuario">
 
   <fieldset class="fieldAltaProd" >
@@ -10,9 +10,9 @@
         <label for="newName">Nombre: </label>
         <input type="text" name="nombre" id="newName" maxlength="55" value="{{nommbre}}" placeholder="Nombre" required/>
         <label for="newApellido">Apellido: </label>
-        <input type="text" name="apellido" id="newApellido" maxlength="45"value="{{apellido}}" placeholder="Apellido" required/>
+        <input type="text" name="apellido" id="newApellido" maxlength="45" value="{{apellido}}" placeholder="Apellido" required/>
         <label for="newTelefono">Teléfono: </label>
-        <input type="number" name="telefono" id="newTelefono" maxlength="25" value="{{telefono}}" placeholder="Tel.." required/>
+        <input type="number" name="telefono" id="newTelefono" value="{{telefono}}" placeholder="Tel.." required/>
         <label for="newRol">Rol: </label>
         <select id="newRol" name="rol_id" required>
          <option value="" selected="selected">Seleccione</option>
@@ -30,26 +30,25 @@
         <label for="newMail">Mail: </label>
         <input type="email" name="email" value="{{email}}" id="newMail" placeholder="Email.." required/>
         <label for="newDocumento">Documento: </label>
-        <input type="number" name="documento" id="newDocumento" value="{{documento}}" maxlength="8" placeholder="Documento" required/>
+        <input type="number" name="documento" id="newDocumento" value="{{documento}}"  placeholder="Documento" required/>
         <label for="newUsername">Nombre de usuario: </label>
         <input type="text" name="user" id="newUsername" maxlength="20" value="{{user}}" placeholder="Nombre de usuario" required/>
         <label for="newPassword">Contraseña: </label>
         <input type="password" name="pass" id="newPassword" maxlength="20" placeholder="Contraseña" required/>
         <label for="newPassword2">Repita Contraseña: </label>
         <input type="password" id="newPassword2" maxlength="20" placeholder="Repita contraseña" required />
-        <label for="Habilitado">Habilitado </label>
-        <select id="newHabilitado" name="habilitado" required>
+        <label for="habilitado">Habilitado </label>
+        <select id="habilitado" name="habilitado" required>
          <option value="" selected="selected">Seleccione</option>
          <option value="0">Si</option>
          <option value="1">No</option>
         </select>
          <br>
-        <input type="submit" value="Agregar"/>
+        <input type="submit" value="Agregar">
 
 
   </fieldset>
 
 </form>
-</body>
-</html>
+
 {% endblock %}

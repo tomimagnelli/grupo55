@@ -1,7 +1,7 @@
 {% extends "layout.twig" %}
 
 {% block contenido %}
-<table summary="Egresos de dinero del Buffet">
+<table>
 	<tr>
 		<th id="ProdctoNombre">Nombre del producto</th>
 		<th id="ProdctoMarca">Marca del producto</th>
@@ -19,8 +19,8 @@
 				<td>{{ egreso_detalle.cantidad }}</td>
 				<td>{{ egreso_detalle.preciounitario }}</td>
 				<td>
-					<a href="editegreso?id={{ egreso_detalle.id }}"><input type="button" value="Editar" /></a>
-					<a href="delete?id={{ egreso_detalle.id }}"><input type="button" value="Eliminar" /></a>
+					<a href="editegreso?id={{ egreso_detalle.id }}"><img title="Editar" alt="Editar" src="{{ baseUrl() }}/uploads/editar.png"></a>
+					<a href="delete?id={{ egreso_detalle.id }}"><img title="Eliminar" alt="Eliminar" src="{{ baseUrl() }}/uploads/eliminar.png"></a>
 				</td>
 
 		{% endfor %}

@@ -1,7 +1,7 @@
 {% extends "layout.twig" %}
 
 {% block contenido %}
-<body>
+
 <form class="formAltaProd" method="post" action="editegreso">
 
   <fieldset class="fieldAltaProd" >
@@ -15,10 +15,10 @@
     </select>
 
     <label for="cantidad">Cantidad: </label>
-    <input type="number" name="cantidad" id="cantidad" maxlength="25" value="{{ egreso_detalle.cantidad}}" required/>
+    <input type="number" name="cantidad" id="cantidad" value="{{ egreso_detalle.cantidad}}" required/>
 
     <label for="precio_unitario">Precio unitario</label>
-    <input type="number" name="precio_unitario" id="precio_unitario" maxlength="25" value="{{ egreso_detalle.precio_unitario}}" required/>
+    <input type="number" name="precio_unitario" id="precio_unitario" value="{{ egreso_detalle.precio_unitario}}" required/>
 
 
     <label for="egreso_tipo_id">Tipo venta: </label>
@@ -33,10 +33,11 @@
 
     <input type="hidden" name="egresoid" value="{{ egreso_detalle.id }}"/>
     <input type="submit" value="Modificar"/>
+     </fieldset>
   </form>
-  </fieldset>
+ 
 
-</form>
-</body>
+
+
 
 {% endblock %}

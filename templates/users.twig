@@ -2,9 +2,15 @@
 
 {% block contenido %}
 
-<a href="{{ baseUrl() }}/users/altausuario" target="rightframe"><input type="button" value="AGREGAR UN USUARIO" /></a>
 
-<table summary="Tabla de usuarios del buffet">
+
+ <form action="{{ baseUrl() }}/users/altausuario" target="rightframe" method="get">
+
+ <button type="submit">AGREGAR UN USUARIO</button><br>
+  
+</form>
+
+<table>
 	<tr>
 		<th id="Nombre">NOMBRE</th>
 		<th id="MiembroDesde">DOCUMENTO</th>
@@ -26,9 +32,9 @@
 				<td>Gestion</td>
 				{% endif %}
 				<td>
-					<a href="edituser?id={{ usuario.id }}"> <input type="button" value="Editar" /> </a>
+					<a href="edituser?id={{ usuario.id }}"> <img title="Editar" alt="Editar" src="{{ baseUrl() }}/uploads/editar.png"></a>
 
-					<a href="delete?id={{ usuario.id }}"> <input type="button" value="Eliminar" /></i></a>
+					<a href="delete?id={{ usuario.id }}"> <img title="Eliminar" alt="Eliminar" src="{{ baseUrl() }}/uploads/eliminar.png"></a>
 				</td>
 				{% if usuario.habilitado == 0 %}
 				<td>Si</td>

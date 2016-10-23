@@ -1,7 +1,7 @@
 {% extends "layout.twig" %}
 
 {% block contenido %}
-<body>
+
 <form class="formAltaProd" method="post" action="editingreso">
 
   <fieldset class="fieldAltaProd" >
@@ -16,10 +16,10 @@
 
 
     <label for="precio_unitario">Precio unitario</label>
-    <input type="number" name="precio_unitario" id="precio_unitario" maxlength="25" value="{{ ingreso_detalle.precio_unitario}}" required/>
+    <input type="number" name="precio_unitario" id="precio_unitario" value="{{ ingreso_detalle.precio_unitario}}" required/>
 
     <label for="cantidad">Cantidad: </label>
-    <input type="number" name="cantidad" id="cantidad" maxlength="25" value="{{ ingreso_detalle.cantidad}}" required/>
+    <input type="number" name="cantidad" id="cantidad" value="{{ ingreso_detalle.cantidad}}" required/>
 
     <label for="ingreso_tipo_id">Tipo venta: </label>
     <select name="ingreso_tipo_id" id="ingreso_tipo_id">
@@ -36,10 +36,8 @@
 
     <input type="hidden" name="ingresoid" value="{{ ingreso_detalle.id }}"/>
     <input type="submit" value="Modificar"/>
+    </fieldset>
   </form>
-  </fieldset>
-
-</form>
-</body>
+  
 
 {% endblock %}

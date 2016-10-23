@@ -1,13 +1,13 @@
 {% extends "layout.twig" %}
 
 {% block contenido %}
-  <form class="formAltaProd" method="post" action="">
+  <form class="formAltaProd" method="post" action="altaproducto">
   <fieldset class="fieldAltaProd" >
     <legend>Alta de producto</legend>
   <label for="nombre">Nombre:</label>
      <input type="text" name="nombre" id="nombre" maxlength="55" placeholder="Nombre" required/>
     <label for="marca">Marca:</label>
-    <input type="text" name="marca" id="marca"placeholder="Marca..." required>
+    <input type="text" name="marca" id="marca" placeholder="Marca..." required>
     <label for="stock">Cantidad de stock:</label>
     <input type="number" name="stock" id="stock" placeholder="Cantidad stock..." required>
     
@@ -15,10 +15,10 @@
     <input type="number" name="stock_minimo" id="stock_minimo"  placeholder="Cant. minima de stock..." required>
     
     <label for="proovedor">Proovedor:</label>
-    <input type="text" name="proovedor" id="proovedor"placeholder="Proovedor..." required>
+    <input type="text" name="proovedor" id="proovedor" placeholder="Proovedor..." required>
   
     <label for="precio_venta_unitario">Precio de venta unitario:</label>
-    <input type="number" name="precio_venta_unitario" placeholder="Precio..." step="1" required="">
+    <input type="number" name="precio_venta_unitario" id="precio_venta_unitario" placeholder="Precio..." step="1" required="">
     <label for="categoria_id">Categor&iacute;a: </label>
     <select name="categoria_id" id="categoria_id">
     <option value="" selected="selected">Seleccione</option>
@@ -27,13 +27,12 @@
      {% endfor %}
     </select>
     <label for="descripcion">Descripcion:</label>
-    <input type="text" id="descripcion "name="descripcion" placeholder="Descripcion del producto..." required>
+    <input type="text" id="descripcion" name="descripcion" placeholder="Descripcion del producto..." required>
      <input type="submit" value="Agregar"/>
 
   </fieldset>
   
 </form>
 
-</body>
-</html>
+
 {% endblock %}

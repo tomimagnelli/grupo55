@@ -4,8 +4,8 @@
   <form class="formAltaProd" method="post" action="agregarproductoacompra">
   <fieldset class="fieldAltaProd" >
     <legend>Agregar un producto a la compra</legend>
-    <label for="productos" id="labelproductos">Seleccione el producto: </label>
-    <select  name="producto" required>
+    <label for="producto">Seleccione el producto: </label>
+    <select id="producto" name="producto" required>
      <option value="" selected="selected">Seleccione</option>
      {% for producto in productos %}
      <option value="{{ producto.id }}">{{ producto.nombre }} | {{ producto.marca}}</option>
@@ -25,12 +25,11 @@
        {% endfor %}
 
     </select>
-  	<input type="submit" value="Agregar" /></a>
+  	<input type="submit" value="Agregar">
 
   </fieldset>
   
 </form>
 
-</body>
-</html>
+
 {% endblock %}

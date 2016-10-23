@@ -1,14 +1,14 @@
 {% extends "layout.twig" %}
 
 {% block contenido %}
-</nav>
+
 <form class="formEditCompra" method="post" action="editCompra" enctype="multipart/form-data">
   <fieldset class="fieldAltaProd" >
   <legend>Editar compra</legend>
 
 	<label>Proveedor:
   <br>
-  	<input type="text" name="editproveedor" placeholder="Nombre del proveedor"  value="{{ compra.proveedor }}"required></label>
+  	<input type="text" name="editproveedor" placeholder="Nombre del proveedor"  value="{{ compra.proveedor }}" required></label>
     <br>
   	<label>Cuit proveedor:</label>
     <br>
@@ -21,13 +21,12 @@
     <input type="file" name="myFileInfo" id="myFileInfo" value="{{ baseUrl() }}/{{ compra.factura }}">
     <input type="hidden" name="compraid" value="{{ compra.id }}"/>
 
-    </form>
+    
 <br>
 
      <input type="submit" value="Confirmar"/>
   </fieldset>
 
 </form>
-</body>
-</html>
+
 {% endblock %}

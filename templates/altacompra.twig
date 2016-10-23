@@ -1,25 +1,21 @@
 {% extends "layout.twig" %}
 
 {% block contenido %}
-</nav>
-<form class="formAltaProd" for= "formAltaProd"method="post" action="altacompra" enctype="multipart/form-data">
+
+<form class="formAltaProd" for="formAltaProd" method="post" action="altacompra" enctype="multipart/form-data">
   <fieldset class="fieldAltaProd"  >
      <legend>Agregar una compra</legend>
   <label for="proovedor">Proveedor:</label>
-    <input type="text" name="proveedor"  id="proovedor" placeholder="Nombre del proveedor" required></label>
+    <input type="text" name="proveedor"  id="proovedor" placeholder="Nombre del proveedor" required>
     <label for="proveedor_cuit" >Cuit proveedor:</label>
     <input type="text" id="proveedor_cuit" name="proveedor_cuit" placeholder="Cuit" required>
 
     <label for="MyFileInfo">Factura escaneada:</label>
-    <input type="file" id="myFileInfo" name="myFileInfo" id="myFileInfo">
-
-    </form>
-
+    <input type="file" id="MyFileInfo" name="myFileInfo">
 
      <input type="submit" value="Confirmar"/>
   </fieldset>
 
 </form>
-</body>
-</html>
+
 {% endblock %}

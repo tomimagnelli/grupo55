@@ -1,8 +1,14 @@
 {% extends "layout.twig" %}
 
 {% block contenido %}
-<a href="{{ baseUrl() }}/ingresos/altaventa" target="rightframe"><input type="button" value="NUEVA VENTA" /></a>
-<table summary="Igresos de dinero del Buffet">
+
+<form action="{{ baseUrl() }}/ingresos/altaventa" target="rightframe" method="get">
+
+ <button type="submit">NUEVA VENTA</button><br>
+  
+</form>
+
+<table>
 	<tr>
 		<th id="nombre">Nombre</th>
 		<th id="marca">Marca</th>
@@ -22,8 +28,9 @@
 				<td>{{ ingreso_detalle.cantidad }}</td>
 				<td>{{ ingreso_detalle.preciounitario }}</td>
 				<td>
-				<a href="editingreso?id={{ ingreso_detalle.id }}"> <input type="button" value="Editar" /> </a>
-				<a href="deleteVenta?id={{ ingreso_detalle.id }}"> <input type="button" value="Eliminar" /></i></a>
+				<a href="editingreso?id={{ ingreso_detalle.id }}"><img title="Editar" alt="Editar" src="{{ baseUrl() }}/uploads/editar.png"></a>
+
+				<a href="deleteVenta?id={{ ingreso_detalle.id }}"><img title="Eliminar" alt="Eliminar" src="{{ baseUrl() }}/uploads/eliminar.png"></a>
 				</td>
 
 		{% endfor %}
