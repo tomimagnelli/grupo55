@@ -7,6 +7,7 @@
 		<th id="ProdctoMarca">Marca del producto</th>
 		<th id="Cantidad">Cantidad</th>
 		<th id="ProdctoId">Precio unitario</th>
+		<th id="acciones">Acciones</th>
 	</tr>
 
 		{% for egreso_detalle in egresos %}
@@ -17,6 +18,10 @@
 				<td>{{ egreso_detalle.producto.marca }}</td>
 				<td>{{ egreso_detalle.cantidad }}</td>
 				<td>{{ egreso_detalle.preciounitario }}</td>
+				<td>
+					<a href="editegreso?id={{ egreso_detalle.id }}"><input type="button" value="Editar" /></a>
+					<a href="delete?id={{ egreso_detalle.id }}"><input type="button" value="Eliminar" /></a>
+				</td>
 
 		{% endfor %}
 

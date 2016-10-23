@@ -18,8 +18,8 @@
 				<td>{{ producto.marca }}</td>
 				<td>{{ producto.stock }}</td>
 				<td>
-					<a href="listado/editProducto?id={{ producto.id }}"><input type="button" value="Editar" /></a>
-					<a href="listado/delete?id={{ producto.id }}"><input type="button" value="Eliminar" /></a>
+					<a href="editProducto?id={{ producto.id }}"><input type="button" value="Editar" /></a>
+					<a href="delete?id={{ producto.id }}"><input type="button" value="Eliminar" /></a>
 				</td>
 			</tr>
 		{% endfor %}

@@ -8,11 +8,11 @@
   <legend>Alta Usuario </legend>
   <h3>Nuevo Usuario</h3>
         <label for="newName">Nombre: </label>
-        <input type="text" name="nombre" id="newName" maxlength="55" placeholder="Nombre" required/>
+        <input type="text" name="nombre" id="newName" maxlength="55" value="{{nommbre}}" placeholder="Nombre" required/>
         <label for="newApellido">Apellido: </label>
-        <input type="text" name="apellido" id="newApellido" maxlength="45" placeholder="Apellido" required/>
+        <input type="text" name="apellido" id="newApellido" maxlength="45"value="{{apellido}}" placeholder="Apellido" required/>
         <label for="newTelefono">Teléfono: </label>
-        <input type="number" name="telefono" id="newTelefono" maxlength="25" placeholder="Tel.." required/>
+        <input type="number" name="telefono" id="newTelefono" maxlength="25" value="{{telefono}}" placeholder="Tel.." required/>
         <label for="newRol">Rol: </label>
         <select id="newRol" name="rol_id" required>
          <option value="" selected="selected">Seleccione</option>
@@ -28,11 +28,11 @@
          {% endfor %}
         </select>
         <label for="newMail">Mail: </label>
-        <input type="email" name="email" id="newMail" placeholder="Email.." required/>
+        <input type="email" name="email" value="{{email}}" id="newMail" placeholder="Email.." required/>
         <label for="newDocumento">Documento: </label>
-        <input type="number" name="documento" id="newDocumento" maxlength="8" placeholder="Documento" required/>
+        <input type="number" name="documento" id="newDocumento" value="{{documento}}" maxlength="8" placeholder="Documento" required/>
         <label for="newUsername">Nombre de usuario: </label>
-        <input type="text" name="user" id="newUsername" maxlength="20" placeholder="Nombre de usuario" required/>
+        <input type="text" name="user" id="newUsername" maxlength="20" value="{{user}}" placeholder="Nombre de usuario" required/>
         <label for="newPassword">Contraseña: </label>
         <input type="password" name="pass" id="newPassword" maxlength="20" placeholder="Contraseña" required/>
         <label for="newPassword2">Repita Contraseña: </label>

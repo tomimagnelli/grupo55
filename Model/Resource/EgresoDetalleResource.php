@@ -104,6 +104,31 @@ class EgresoDetalleResource extends AbstractResource {
       return $query->getResult();
     }
 
+    public function delete($id)
+        {
+            $egreso = $this->getEntityManager()->getReference('Model\Entity\EgresoDetalle', $id);
+            $this->getEntityManager()->remove($egreso);
+            $this->getEntityManager()->flush();
+            return $this->get();
+        }
+
+
+    public function editEgreso($producto,$cantidad,$precio_unitario,$egreso_tipo_id, $id)
+   {
+       $egreso = $this->getEntityManager()->getReference('Model\Entity\EgresoDetalle', $id);
+       $prod = ProductoResource::getInstance()->get($producto);
+       $tipo = TipoEgresoResource::getInstance()->get($egreso_tipo_id);
+       $egreso->setProducto($prod);
+       $egreso->setCantidad($cantidad);
+       $egreso->setPrecioUnitario($precio_unitario);
+       $egreso->setEgresoTipoId($tipo);
+       $egreso->setFecha();
+
+       $this->getEntityManager()->persist($egreso);
+       $this->getEntityManager()->flush();
+       return $this->get();
+   }
+
     public function producto($id) {
       $egreso = $this->getEntityManager()->getReference('Model\Entity\EgresoDetalle', $id);
       $query_string = "

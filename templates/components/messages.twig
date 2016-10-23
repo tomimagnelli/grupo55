@@ -4,10 +4,21 @@
 			{{ flash.success }}
 		</p>
 	</div>
-{% else %}
+{% endif %}
+{% if flash.error is not empty %}
 	<div class="flash error">
 		<p>
 			{{ flash.error }}
+		</p>
+	</div>
+{% endif %}
+{% if flash.errors is not empty %}
+	<div class="flash error">
+		<p>
+	{% for key,  error in flash.errors %}
+			* {{ error }}
+			<br>
+	{% endfor %}
 		</p>
 	</div>
 {% endif %}

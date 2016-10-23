@@ -26,9 +26,9 @@
 				<td>Gestion</td>
 				{% endif %}
 				<td>
-					<a href="users/edituser?id={{ usuario.id }}"> <input type="button" value="Editar" /> </a>
+					<a href="edituser?id={{ usuario.id }}"> <input type="button" value="Editar" /> </a>
 
-					<a href="users/delete?id={{ usuario.id }}"> <input type="button" value="Eliminar" /></i></a>
+					<a href="delete?id={{ usuario.id }}"> <input type="button" value="Eliminar" /></i></a>
 				</td>
 				{% if usuario.habilitado == 0 %}
 				<td>Si</td>

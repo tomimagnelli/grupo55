@@ -20,24 +20,86 @@ class ProductoController {
     echo $app->view->render( "altaproducto.twig", array('categorias' => (CategoriaResource::getInstance()->get())));
   }
 
-  public function newProducto($app,$nombre,$marca,$stock,$stock_minimo,$proovedor,$precio_venta_unitario,$categoria_id = null,$descripcion) {
+  public function newProducto($app,$nombre,$marca,$stock,$stock_minimo,$proveedor,$precio_venta_unitario,$categoria_id = null,$descripcion) {
     $app->applyHook('must.be.administrador.or.gestion');
-    if (ProductoResource::getInstance()->insert($nombre,$marca,$stock,$stock_minimo,$proovedor,$precio_venta_unitario,$categoria_id,$descripcion)){
-       $app->flash('success', 'El producto ha sido dado de alta exitosamente');
-    } else {
-      $app->flash('error', 'No se pudo dar de alta el producto');
-    }
-    echo $app->redirect('/listado');
+
+    $errors = [];
+      if (!Validator::hasLength(45, $nombre)) {
+           $errors[] = 'El nombre debe tener menos de 45 caracteres';
+      }
+      if (!Validator::hasLength(45, $marca)) {
+           $errors[] = 'La marca debe tener menos de 45 caracteres';
+      }
+      if (!Validator::hasLength(45, $proveedor)) {
+           $errors[] = 'El proveedor debe tener menos de 45 caracteres';
+      }
+      if (!Validator::hasLength(45, $descripcion)) {
+           $errors[] = 'La descripcion debe tener menos de 20 caracteres';
+      }
+      if(!Validator::isNumeric($stock)) {
+          $errors[] = 'El stock debe ser numérico';
+      }
+      if(!Validator::isNumeric($stock_minimo)) {
+          $errors[] = 'El stock minimo debe ser numérico';
+      }
+      if(!Validator::isNumeric($precio_venta_unitario)) {
+          $errors[] = 'El precio de venta unitario debe ser numérico';
+      }
+
+      if (sizeof($errors) == 0) {
+        if (ProductoResource::getInstance()->insert($nombre,$marca,$stock,$stock_minimo,$proveedor,$precio_venta_unitario,$categoria_id,$descripcion)){
+           $app->flash('success', 'El producto ha sido dado de alta exitosamente');
+        } else {
+          $app->flash('error', 'No se pudo dar de alta el producto');
+        }
+        echo $app->redirect('/listado/page?ids=1');
+       } else {
+          $app->flash('errors', $errors);
+          echo $app->redirect('/listado/altaproducto');
+      }
+
+
   }
 
-  public function editProducto($app,$nombre,$marca,$stock,$stock_minimo,$proovedor,$precio_venta_unitario,$categoria_id = null,$descripcion,$id) {
+  public function editProducto($app,$nombre,$marca,$stock,$stock_minimo,$proveedor,$precio_venta_unitario,$categoria_id = null,$descripcion,$id) {
     $app->applyHook('must.be.administrador.or.gestion');
-    if (ProductoResource::getInstance()->edit($nombre,$marca,$stock,$stock_minimo,$proovedor,$precio_venta_unitario,$categoria_id,$descripcion,$id)){
-       $app->flash('success', 'El producto ha sido modificado exitosamente');
-    } else {
-      $app->flash('error', 'No se pudo modificar el producto');
-    }
-    echo $app->redirect('/listado');
+
+    $errors = [];
+      if (!Validator::hasLength(45, $nombre)) {
+           $errors[] = 'El nombre debe tener menos de 45 caracteres';
+      }
+      if (!Validator::hasLength(45, $marca)) {
+           $errors[] = 'La marca debe tener menos de 45 caracteres';
+      }
+      if (!Validator::hasLength(45, $proveedor)) {
+           $errors[] = 'El proveedor debe tener menos de 45 caracteres';
+      }
+      if (!Validator::hasLength(45, $descripcion)) {
+           $errors[] = 'La descripcion debe tener menos de 20 caracteres';
+      }
+      if(!Validator::isNumeric($stock)) {
+          $errors[] = 'El stock debe ser numérico';
+      }
+      if(!Validator::isNumeric($stock_minimo)) {
+          $errors[] = 'El stock minimo debe ser numérico';
+      }
+      if(!Validator::isNumeric($precio_venta_unitario)) {
+          $errors[] = 'El precio de venta unitario debe ser numérico';
+      }
+
+      if (sizeof($errors) == 0) {
+        if (ProductoResource::getInstance()->edit($nombre,$marca,$stock,$stock_minimo,$proveedor,$precio_venta_unitario,$categoria_id,$descripcion,$id)){
+           $app->flash('success', 'El producto ha sido modificado exitosamente');
+        } else {
+          $app->flash('error', 'No se pudo modificar el producto');
+        }
+        echo $app->redirect('/listado/page?ids=1');
+       } else {
+          $app->flash('errors', $errors);
+          echo $app->redirect('/listado/editProducto?id=' .$id);
+      }
+
+
   }
 
   public function deleteProducto($app, $id) {
@@ -47,7 +109,7 @@ class ProductoController {
     } else {
       $app->flash('error', 'No se pudo eliminar el producto');
     }
-    $app->redirect('/listado');
+    $app->redirect('/listado/page?ids=1');
   }
 
   public function showProducto($app, $id){

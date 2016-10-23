@@ -49,21 +49,21 @@ class IngresoDetalleResource extends AbstractResource {
     }
 
     public function editVenta($producto,$cantidad,$precio_unitario,$ingreso_tipo_id,$descripcion, $id)
-    {
-        $ingreso = $this->getEntityManager()->getReference('Model\Entity\IngresoDetalle', $id);
-        $prod = ProductoResource::getInstance()->get($producto);
-        $tipo = TipoIngresoResource::getInstance()->get($ingreso_tipo_id);
-        $ingreso->setProducto($prod);
-        $ingreso->setCantidad($cantidad);
-        $ingreso->setPrecioUnitario($precio_unitario);
-        $ingreso->setIngresoTipoId($tipo);
-        $ingreso->setFecha();
-        $ingreso->setDescripcion($descripcion);
-    
-        $this->getEntityManager()->persist($ingreso);
-        $this->getEntityManager()->flush();
-        return $this->get();
-    }
+      {
+          $ingreso = $this->getEntityManager()->getReference('Model\Entity\IngresoDetalle', $id);
+          $prod = ProductoResource::getInstance()->get($producto);
+          $tipo = TipoIngresoResource::getInstance()->get($ingreso_tipo_id);
+          $ingreso->setProducto($prod);
+          $ingreso->setCantidad($cantidad);
+          $ingreso->setPrecioUnitario($precio_unitario);
+          $ingreso->setIngresoTipoId($tipo);
+          $ingreso->setFecha();
+          $ingreso->setDescripcion($descripcion);
+
+          $this->getEntityManager()->persist($ingreso);
+          $this->getEntityManager()->flush();
+          return $this->get();
+      }
 
 
 

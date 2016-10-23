@@ -18,9 +18,9 @@
 				<td>{{ compra.proveedor_cuit }}</td>
 
 				<td>
-					<a href="compras/egresos?user={{ compra.id }}"> <input type="button" value="Ver productos agregados" /></i></a>
-					<a href="compras/agregarproductoacompra?id={{ compra.id }}"> <input type="button" value="+Agregar producto" /></i></a>
-					<a href="compras/editCompra?id={{ compra.id }}"> <input type="button" value="Editar Compra" /></i></a>
+					<a href="egresos/page?user={{ compra.id }}&ids=1"> <input type="button" value="Ver productos agregados" /></i></a>
+					<a href="agregarproductoacompra?id={{ compra.id }}"> <input type="button" value="+Agregar producto" /></i></a>
+					<a href="editCompra?id={{ compra.id }}"> <input type="button" value="Editar Compra" /></i></a>
 					<a href="deleteCompra?id={{ compra.id }}"> <input type="button" value="Eliminar" /></i></a>
 
 

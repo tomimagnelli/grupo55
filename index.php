@@ -89,11 +89,9 @@ $app->group('/backend', function() use($app) {
 });
 
 $app->group('/listado', function() use($app) {
-     $app->get('/', '\Controller\ListadoController:indexActionListado')->setParams(array($app));
      $app->get('/page', '\Controller\ListadoController:indexActionListado')->setParams(array($app, $app->request->get('ids')));
 
      $app->get('/delete', '\Controller\ProductoController:deleteProducto')->setParams(array($app, $app->request->get('id')));
-     $app->get('/listado/delete', '\Controller\ProductoController:deleteProducto')->setParams(array($app, $app->request->get('id')));
 
      $app->get('/editProducto', '\Controller\ProductoController:showProducto')->setParams(array($app, $app->request->get('id')));
 
@@ -109,19 +107,6 @@ $app->group('/listado', function() use($app) {
             $app->request->post('productoid'))
     );
 
-    $app->get('/listado/editProducto', '\Controller\ProductoController:showProducto')->setParams(array($app, $app->request->get('id')));
-
-    $app->post('/listado/editProducto', '\Controller\ProductoController:editProducto')->setParams(
-           array($app, $app->request->post('nombre'),
-           $app->request->post('marca'),
-           $app->request->post('stock'),
-           $app->request->post('stock_minimo'),
-           $app->request->post('proovedor'),
-           $app->request->post('precio_venta_unitario'),
-           $app->request->post('categoria_id'),
-           $app->request->post('descripcion'),
-           $app->request->post('productoid'))
-    );
 
     $app->group('/altaproducto', function() use($app) {
         $app->get('/', '\Controller\ProductoController:showAltaProducto')->setParams(array($app));
@@ -142,19 +127,16 @@ $app->group('/listado', function() use($app) {
 
 
 $app->group('/faltantes', function() use($app) {
-  $app->get('/', '\Controller\ListadoController:indexActionFaltantes')->setParams(array($app));
   $app->get('/page', '\Controller\ListadoController:indexActionFaltantes')->setParams(array($app, $app->request->get('id')));
 });
 
 $app->group('/stockminimo', function() use($app) {
-  $app->get('/', '\Controller\ListadoController:indexActionStockMin')->setParams(array($app));
   $app->get('/page', '\Controller\ListadoController:indexActionStockMin')->setParams(array($app, $app->request->get('id')));
 });
 
 
 $app->group('/users', function() use ($app, $userResource) {
     // Listar
-    $app->get('/', '\Controller\ListadoController:indexActionUsuarios')->setParams(array($app));
     $app->get('/page', '\Controller\ListadoController:indexActionUsuarios')->setParams(array($app, $app->request->get('id')));
 
     $app->group('/altausuario', function() use($app, $userResource) {
@@ -176,24 +158,6 @@ $app->group('/users', function() use ($app, $userResource) {
 
     });
 
-    $app->group('/users/altausuario', function() use($app, $userResource) {
-       $app->get('/', '\Controller\UsuarioController:cargaUbicaciones')->setParams(array($app));
-
-
-        $app->post('/', '\Controller\UsuarioController:newUsuario')->setParams(
-              array($app, $app->request->post('user'),
-              $app->request->post('pass'),
-              $app->request->post('nombre'),
-              $app->request->post('apellido'),
-              $app->request->post('documento'),
-              $app->request->post('telefono'),
-              $app->request->post('rol_id'),
-              $app->request->post('email'),
-              $app->request->post('ubicacion_id'),
-              $app->request->post('habilitado'))
-      );
-
-    });
 
     $app->group('/edituser', function() use($app, $userResource) {
         $app->get('/', '\Controller\UsuarioController:showUsuario')->setParams(array($app, $app->request->get('id'), $app->request->get('cat')));
@@ -214,27 +178,7 @@ $app->group('/users', function() use ($app, $userResource) {
 
     });
 
-    $app->group('/users/edituser', function() use($app, $userResource) {
-        $app->get('/', '\Controller\UsuarioController:showUsuario')->setParams(array($app, $app->request->get('id'), $app->request->get('cat')));
-
-        $app->post('/', '\Controller\UsuarioController:editUsuario')->setParams(
-               array($app, $app->request->post('user'),
-               $app->request->post('pass'),
-               $app->request->post('nombre'),
-               $app->request->post('apellido'),
-               $app->request->post('documento'),
-               $app->request->post('telefono'),
-               $app->request->post('rol_id'),
-               $app->request->post('email'),
-               $app->request->post('ubicacion_id'),
-               $app->request->post('habilitado'),
-               $app->request->post('userid'))
-       );
-
-    });
-
     $app->get('/delete', '\Controller\UsuarioController:deleteUsuario')->setParams(array($app, $app->request->get('id')));
-    $app->get('/users/delete', '\Controller\UsuarioController:deleteUsuario')->setParams(array($app, $app->request->get('id')));
 
 
 
@@ -250,7 +194,6 @@ $app->group('/ventasprod', function() use($app) {
 
 
 $app->group('/compras', function() use ($app) {
-  $app->get('/', '\Controller\ListadoController:indexActionCompras')->setParams(array($app));
   $app->get('/page', '\Controller\ListadoController:indexActionCompras')->setParams(array($app, $app->request->get('ids')));
 
   $app->group('/altacompra', function() use($app) {
@@ -260,15 +203,25 @@ $app->group('/compras', function() use ($app) {
               $app->request->post('proveedor_cuit')));
 
         });
-  $app->group('/egresos', function() use ($app) {
-        $app->get('/', '\Controller\ListadoController:indexActionEgresos')->setParams(array($app, $app->request->get('user')));
-        $app->get('/page', '\Controller\ListadoController:indexActionEgresos')->setParams(array($app, $app->request->get('user'),$app->request->get('ids')));
-      });
-  $app->group('/compras/egresos', function() use ($app) {
-        $app->get('/', '\Controller\ListadoController:indexActionEgresos')->setParams(array($app,$app->request->get('user')));
-        $app->get('/page', '\Controller\ListadoController:indexActionEgresos')->setParams(array($app, $app->request->get('user'),$app->request->get('ids')));
 
-    });
+
+        $app->group('/egresos', function() use ($app) {
+              $app->get('/page', '\Controller\ListadoController:indexActionEgresos')->setParams(array($app, $app->request->get('user'),$app->request->get('ids')));
+              $app->group('/editegreso', function() use($app) {
+                      $app->get('/', '\Controller\EgresoDetalleController:showEditEgreso')->setParams(array($app, $app->request->get('id')));
+                      $app->post('/', '\Controller\EgresoDetalleController:edit')->setParams(
+                     array($app,$app->request->post('producto_id'),
+                     $app->request->post('cantidad'),
+                     $app->request->post('precio_unitario'),
+                     $app->request->post('egreso_tipo_id'),
+                     $app->request->post('egresoid')));
+
+              });
+
+              $app->get('/delete', '\Controller\EgresoDetalleController:deleteEgreso')->setParams(array($app, $app->request->get('id')));
+
+      });
+
     $app->group('/agregarproductoacompra', function() use($app) {
        $app->get('/', '\Controller\CompraController:showAltaCompra2')->setParams(array($app,$app->request->get('id')));
          $app->post('/', '\Controller\EgresoDetalleController:newEgresoDetalle')->setParams(
@@ -280,17 +233,7 @@ $app->group('/compras', function() use ($app) {
 
 
     });
-    $app->group('/compras/agregarproductoacompra', function() use($app) {
-       $app->get('/', '\Controller\CompraController:showAltaCompra2')->setParams(array($app,$app->request->get('id')));
-         $app->post('/', '\Controller\EgresoDetalleController:newEgresoDetalle')->setParams(
-              array($app,$app->request->post('compra'),
-              $app->request->post('producto'),
-              $app->request->post('cantidad'),
-              $app->request->post('precio_unitario'),
-              $app->request->post('egreso_tipo_id')));
 
-
-    });
 
     $app->group('/editCompra', function() use($app) {
           $app->get('/', '\Controller\CompraController:showEditCompra')->setParams(array($app, $app->request->get('id')));
@@ -301,24 +244,12 @@ $app->group('/compras', function() use ($app) {
 
     });
 
-
-    $app->group('/compras/editCompra', function() use($app) {
-          $app->get('/', '\Controller\CompraController:showEditCompra')->setParams(array($app, $app->request->get('id')));
-          $app->post('/', '\Controller\CompraController:editCompra')->setParams(
-                   array($app, $app->request->post('editproveedor'),
-                   $app->request->post('editproveedor_cuit'),
-                  $app->request->post('compraid')));
-
-    });
-
     $app->get('/deleteCompra', '\Controller\CompraController:deleteCompra')->setParams(array($app, $app->request->get('id')));
-    $app->get('/compras/deleteCompra', '\Controller\CompraController:deleteCompra')->setParams(array($app, $app->request->get('id')));
 
 
 });
 
 $app->group('/ingresos', function() use ($app) {
-  $app->get('/', '\Controller\ListadoController:indexActionIngresos')->setParams(array($app));
   $app->get('/page', '\Controller\ListadoController:indexActionIngresos')->setParams(array($app, $app->request->get('id')));
 
 
@@ -345,21 +276,9 @@ $app->group('/ingresos', function() use ($app) {
 
 });
 
-$app->group('/ingresos/editingreso', function() use($app) {
-    $app->get('/', '\Controller\IngresoDetalleController:showEditVenta')->setParams(array($app, $app->request->get('id')));
-    $app->post('/', '\Controller\IngresoDetalleController:edit')->setParams(
-        array($app,$app->request->post('producto_id'),
-        $app->request->post('cantidad'),
-        $app->request->post('precio_unitario'),
-        $app->request->post('ingreso_tipo_id'),
-        $app->request->post('descripcion'),
-        $app->request->post('ingresoid')));
-
-});
 
 
 $app->get('/deleteVenta', '\Controller\IngresoDetalleController:deleteIngreso')->setParams(array($app, $app->request->get('id')));
-$app->get('/ingresos/deleteVenta', '\Controller\IngresoDetalleController:deleteIngreso')->setParams(array($app, $app->request->get('id')));
 
 });
 

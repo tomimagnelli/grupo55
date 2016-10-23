@@ -34,13 +34,28 @@ class CompraController {
 
  public function editCompra($app,$editproveedor,$editproveedor_cuit,$compraid) {
    $app->applyHook('must.be.administrador');
-   if (CompraResource::getInstance()->edit($app,$editproveedor,$editproveedor_cuit,$compraid)){
-      $app->flash('success', 'La compra ha sido modificado exitosamente');
-   } else {
-     $app->flash('error', 'No se pudo modificar la compra');
+   $errors = [];
+   if (!Validator::hasLength(45, $editproveedor)) {
+        $errors[] = 'El proveedor debe tener menos de 45 caracteres';
    }
-   echo $app->redirect('/compras');
+   if(!Validator::isNumeric($editproveedor_cuit)) {
+       $errors[] = 'El cuit debe ser numérico';
+   }
+
+   if (sizeof($errors) == 0) {
+     if (CompraResource::getInstance()->edit($app,$editproveedor,$editproveedor_cuit,$compraid)){
+        $app->flash('success', 'La compra ha sido modificado exitosamente');
+     } else {
+       $app->flash('error', 'No se pudo modificar la compra');
+     }
+     echo $app->redirect('/compras/page?ids=1');
+    } else {
+       $app->flash('errors', $errors);
+       echo $app->redirect('/compras/editCompra?id=' .$compraid);
+   }
  }
+
+
 
  public function deleteCompra($app, $id) {
    $app->applyHook('must.be.administrador');
@@ -49,17 +64,31 @@ class CompraController {
    } else {
      $app->flash('error', 'No se pudo eliminar la compra');
    }
-   $app->redirect('/compras');
+   $app->redirect('/compras/page?ids=1');
  }
 
   public function newCompra($app,$proveedor,$proveedor_cuit) {
     $app->applyHook('must.be.administrador.or.gestion');
-    if (CompraResource::getInstance()->insert($app,$proveedor,$proveedor_cuit)){
-       $app->flash('success', 'La compra ha sido dado de alta exitosamente');
-    } else {
-      $app->flash('error', 'No se pudo dar de alta la compra');
+    $errors = [];
+    if (!Validator::hasLength(45, $proveedor)) {
+         $errors[] = 'El proveedor debe tener menos de 45 caracteres';
     }
-    echo $app->redirect('/compras');
+    if(!Validator::isNumeric($proveedor_cuit)) {
+        $errors[] = 'El cuit debe ser numérico';
+    }
+
+    if (sizeof($errors) == 0) {
+      if (CompraResource::getInstance()->insert($app,$proveedor,$proveedor_cuit)){
+        $app->flash('success', 'La compra ha sido dado de alta exitosamente');
+      } else {
+        $app->flash('error', 'No se pudo dar de alta la compra');
+      }
+      echo $app->redirect('/compras/page?ids=1');
+    } else {
+        $app->flash('errors', $errors);
+        echo $app->redirect('/compras/altacompra');
+    }
+
   }
 }
 ?>

@@ -148,14 +148,14 @@ class UsuarioResource extends AbstractResource {
 
 
       public function existeUsuarioEdit ($username, $id){
-       $data = $this->getEntityManager()->getRepository('Model\Entity\Usuario')->findOneBy(array('usuario' => $id));
+       $data = $this->get($id);
 
       if ($data != null){
          if ( $username == $data->getUsuario()){
           return true;
           }
           else{
-           $this->existeUsuario($username);
+          return $this->existeUsuario($username);
           }
       }
 
