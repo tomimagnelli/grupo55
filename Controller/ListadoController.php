@@ -12,6 +12,8 @@ use Model\Resource\EgresoDetalleResource;
 use Model\Entity\EgresoDetalle;
 use Model\Resource\UsuarioResource;
 use Model\Entity\Usuario;
+use Model\Resource\MenuDelDiaResource;
+use Model\Entity\MenuDelDia;
 
 
 class ListadoController {
@@ -111,6 +113,20 @@ class ListadoController {
       $pagesCount = ceil($totalItems / $pageSize);
       echo $app->view->render('users.twig', array(
           "usuarios"     => $paginator,
+          "totalItems" => $totalItems,
+          "pagesCount" => $pagesCount
+      ));
+    }
+
+    public function indexActionMenu($app, $page = 1){
+      $app->applyHook('must.be.administrador.or.gestion');
+      $menus = MenuDelDiaResource::getInstance()->get();
+      $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
+      $paginator = MenuDelDiaResource::getInstance()->getPaginateMenu($pageSize,$page);
+      $totalItems = count($paginator);
+      $pagesCount = ceil($totalItems / $pageSize);
+      echo $app->view->render('menu.twig', array(
+          "menus"     => $paginator,
           "totalItems" => $totalItems,
           "pagesCount" => $pagesCount
       ));

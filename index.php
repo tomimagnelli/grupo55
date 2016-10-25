@@ -297,6 +297,24 @@ $app->group('/config', function() use($app) {
            array($app, $app->request->post('menuTitulo'),$app->request->post('menuInfo')));
 });
 
+$app->group('/menu', function() use ($app) {
+  $app->get('/page', '\Controller\ListadoController:indexActionMenu')->setParams(array($app, $app->request->get('id')));
+  $app->get('/altamenu', '\Controller\MenuController:showAltaMenu')->setParams(array($app));
+  $app->post('/altamenu', '\Controller\MenuController:newMenu')->setParams(
+       array($app,$app->request->post('fecha'),
+       $app->request->post('producto'),
+       $app->request->post('habilitado')));
+
+
+
+
+});
+
+$app->group('/pedidos', function() use($app) {
+     $app->get('/', '\Controller\PedidoController:listPedidos')->setParams(array($app, $app->request->get('id')));
+     $app->get('/delete', '\Controller\PedidoController:deletePedido')->setParams(array($app, $app->request->get('id')));
+});
+
 
 
 

@@ -1,0 +1,39 @@
+{% extends "layout.twig" %}
+
+{% block contenido %}
+
+
+
+
+<table>
+	<tr>
+		<th id="Usuario">Usuario</th>
+		<th id="Estado">Estado del pedido</th>
+		<th id="Fecha">Fecha del pedido</th>
+		<th id="Observacion">Observacion</th>
+		<th>ACCIONES</th>
+
+	</tr>
+		{% for pedido in pedidos %}
+		  <tr id="{{ pedido.id }}">
+		  	<td>{{ pedido.usuario.nombre }}</td>
+			<td>{{ pedido.estado.nombre }}</td>
+			<td>{{ pedido.fecha_alta|date("d/m/Y") }}</td>
+			<td>{{ pedido.observacion}}</td>
+
+			<td>
+					<a href=""> Ver productos del pedido</a>
+					<a href=""> Agregar un producto al pedido</a>
+					<a href=""> <img title="Editar pedido" alt="Editar" src="{{ baseUrl() }}/uploads/editar.png"></a>
+					<a href="delete?id={{ pedido.id }}"> <img title="Eliminar" alt="Eliminar" src="{{ baseUrl() }}/uploads/eliminar.png"></a>
+					<a href=""> <img title="Aceptar pedido" alt="Aceptar" src="{{ baseUrl() }}/uploads/aceptar.jpg"></a>
+					<a href=""> <img title="Cancelar pedido" alt=Cancelar src="{{ baseUrl() }}/uploads/cancelar.jpg"></a>
+
+
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+
+{% endblock %}

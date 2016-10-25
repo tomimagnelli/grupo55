@@ -1,0 +1,28 @@
+{% extends "layout.twig" %}
+
+{% block contenido %}
+
+<form class="formAltaProd" for="formAltaProd" method="post" action="altamenu" enctype="multipart/form-data">
+  <fieldset class="fieldAltaProd"  >
+  <label for="fecha">Fecha:</label>
+    <input type="date" name="fecha"  id="fecha" required>
+    <label for="producto">Seleccione el producto: </label>
+    <select id="producto" name="producto" required>
+     <option value="" selected="selected">Seleccione</option>
+     {% for producto in productos %}
+     <option value="{{ producto.id }}">{{ producto.nombre }} | {{ producto.marca}}</option>
+     {% endfor %}
+    </select>
+    <label for="habilitado">Habilitado </label>
+    <select id="habilitado" name="habilitado" required>
+     <option value="" selected="selected">Seleccione</option>
+     <option value="0">Si</option>
+     <option value="1">No</option>
+    </select>
+
+     <input type="submit" value="Confirmar"/>
+  </fieldset>
+
+</form>
+
+{% endblock %}
