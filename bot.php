@@ -38,7 +38,8 @@ use Model\Resource\MenuDelDiaResource;
           break;
       case '/hoy':
           $msg['text'] = 'El menú del día es:' . PHP_EOL;
-          $msg["text"].= MenuDelDiaResource::getInstance()->hoy() . PHP_EOL;
+          $productos = MenuDelDiaResource::getInstance()->hoy();
+          $msg["text"].= $productos . PHP_EOL;
           break;
       case '/manana':
       $msg['text'] = 'El menú de mañana es:' . PHP_EOL;
