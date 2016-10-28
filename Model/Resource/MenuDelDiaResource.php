@@ -67,18 +67,17 @@ class MenuDelDiaResource extends AbstractResource {
       $menu = new MenuDelDia();
       $fecha = (new \DateTime())->format('Y-m-d');
       $query_string = "
-          SELECT m.producto.nombre
+          SELECT m
           FROM Model\Entity\MenuDelDia m
           WHERE m.fecha = :fecha";
       $query = $this->getEntityManager()->createQuery($query_string);
       $query->setParameter('fecha',$fecha);
       $menus = $query->getResult();
-
+      $productos="";
       foreach ($menus as $value) {
-      $productos .= 'echo $value';
-      }
+      $productos .= ($value->getProducto()->getNombre());      }
       return $productos;
-
+      //ver en twig $menus
     }
 
 }

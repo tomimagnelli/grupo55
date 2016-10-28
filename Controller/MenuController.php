@@ -12,7 +12,7 @@ class MenuController {
 
   public function showAltaMenu($app){
       $app->applyHook('must.be.administrador');
-      echo $app->view->render( "altamenu.twig", array('productos' => (ProductoResource::getInstance()->get())));
+      echo $app->view->render( "altamenu.twig", array('productos' => (ProductoResource::getInstance()->get()), 'hoy' =>(MenuDelDiaResource::getInstance()->hoy())));
 
     }
 
