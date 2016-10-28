@@ -40,7 +40,7 @@ use Model\Resource\MenuDelDiaResource;
           $msg['text'] = 'El menú del día es:' . PHP_EOL;
           $menus= array( 'menus'  => (MenuDelDiaResource::getInstance()->hoy2()));
           foreach ($menus.menus as $value) {
-          $msg["text"] .=  $value.producto.nombre;
+          $msg["text"] .=  ($value->getProducto()->getNombre());
           }
           return ((string) $productos);
           break;
