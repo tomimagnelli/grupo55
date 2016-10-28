@@ -69,6 +69,11 @@ class Producto
         return $this->id;
     }
 
+    /**
+     * Gets the value of nombre.
+     *
+     * @return string
+     */
     public function getNombre()
     {
         return $this->nombre;
