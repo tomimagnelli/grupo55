@@ -80,5 +80,12 @@ class MenuDelDiaResource extends AbstractResource {
       //ver en twig $menus
     }
 
+    public function hoy2(){
+
+      $productos= "holas";
+      return $productos;
+    }
+
+
 }
 ?>
