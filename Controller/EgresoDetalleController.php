@@ -7,6 +7,8 @@ use Model\Entity\Producto;
 use Model\Resource\ProductoResource;
 use Model\Entity\TipoEgreso;
 use Model\Resource\TipoEgresoResource;
+use Model\Entity\Compra;
+use Model\Resource\CompraResource;
 
 class EgresoDetalleController {
 
@@ -29,6 +31,9 @@ class EgresoDetalleController {
 
       }
 
+    public function showBusquedaIngresos($app, $desde, $hasta){
+    echo $app->view->render( "busquedaEgresos.twig", array('egresos' => (EgresoDetalleResource::getInstance()->get()),'productos' => (ProductoResource::getInstance()->get()), 'desde' => ($desde), 'hasta' => ($hasta), 'tiposingreso' => (TipoEgresoResource::getInstance()->get())));
+  }
     public function edit($app,$producto,$cantidad,$precio_unitario,$egreso_tipo_id,$id) {
        $app->applyHook('must.be.administrador');
 

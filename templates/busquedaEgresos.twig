@@ -1,0 +1,54 @@
+{% extends "layout.twig" %}
+
+{% block contenido %}
+
+<input type="text" id="botoninfo "name="botoninfo" value='{{ desde|date("d/m/Y") }} a {{ hasta|date("d/m/Y") }}'></input>
+<table>
+	<tr>
+		<th id="proovedor">Proovedor</th>
+		<th id="nombre">Nombre</th>
+		<th id="marca">Marca</th>
+		<th id="Cantidad">Cantidad</th>
+		<th id="PrecioUnitario">Precio unitario</th>
+		<th id="Fecha">Fecha</th>
+	</tr>
+
+		{% for egreso_detalle in egresos %}
+		{% if  egreso_detalle.fecha|date("d/m/Y") >= desde|date("d/m/Y")  and egreso_detalle.fecha|date("d/m/Y") <= hasta|date("d/m/Y") %}
+		
+	<tr>
+				<td>{{ egreso_detalle.compra.proveedor}}</td>
+				<td>{{ egreso_detalle.producto.nombre}}</td>
+				<td>{{ egreso_detalle.producto.marca}}</td>
+				<td>{{ egreso_detalle.cantidad }}</td>
+				<td>{{ egreso_detalle.preciounitario }}</td>
+				<td>{{ egreso_detalle.fecha|date("d/m/Y") }}</td>
+
+	</tr>
+		{% endif %}
+		{% endfor %}
+		
+
+	</table>
+
+	{% set total = 0 %}
+	{% set cant = 0 %}
+	{% for egreso_detalle in egresos %}
+
+		{% if  egreso_detalle.fecha|date("d/m/Y") >= desde|date("d/m/Y")  and egreso_detalle.fecha|date("d/m/Y") <= hasta|date("d/m/Y") %}
+				{% set cant = cant + '1'%}
+				{% set actual = (egreso_detalle.preciounitario * egreso_detalle.cantidad) %}
+				{% set total = total + actual %}
+		{% endif %}
+
+	{% endfor%}
+	<table>
+	<th id="cant">Encontrados:</th>
+	<th id="cant total"> {{ cant }} </th>
+	<th id="tot">Total recaudado:</th>
+	<th id="suma total"> $ {{ total }} </th>
+
+	</table>
+	
+
+{% endblock %}

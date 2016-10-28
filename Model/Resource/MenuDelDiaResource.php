@@ -63,6 +63,18 @@ class MenuDelDiaResource extends AbstractResource {
         return $this->get();
     }
 
+    public function hoy(){
+      $menu = new MenuDelDia();
+      $fecha = new \DateTime()->format('Y-m-d');
+      $query_string = "
+          SELECT m.producto
+          FROM Model\Entity\MenuDelDia m
+          WHERE m.fecha = :fecha";
+      $query = $this->getEntityManager()->createQuery($query_string);
+      $query->setParameter('fecha',$fecha);
+      return $query->getResult();
+
+    }
 
 }
 ?>

@@ -1,0 +1,29 @@
+{% extends "layout.twig" %}
+
+{% block contenido %}
+<table>
+	<tr>
+		<th id="ProdctoNombre">Nombre del producto</th>
+		<th id="ProdctoMarca">Marca del producto</th>
+		<th id="Cantidad">Cantidad</th>
+		<th id="ProdctoId">Precio unitario</th>
+	</tr>
+
+		{% for pedido_detalle in pedidos %}
+
+	<tr>
+
+				<td>{{ pedido_detalle.producto.nombre }}</td>
+				<td>{{ pedido_detalle.producto.marca }}</td>
+				<td>{{ pedido_detalle.cantidad }}</td>
+				<td>{{ pedido_detalle.producto.precio_venta_unitario }}</td>
+
+		{% endfor %}
+
+	</tr>
+
+	</table>
+	{% include 'paginacion/paginacionPedidosUsuarioProd.twig' with {'pagesCount' : pagesCount, 'idPedido' : idPedido} %}
+
+
+{% endblock %}

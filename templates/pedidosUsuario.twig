@@ -1,0 +1,45 @@
+{% extends "layout.twig" %}
+
+{% block contenido %}
+
+
+ <form action="{{ baseUrl() }}/pedidosUsuario/altaPedido" target="rightframe" method="get">
+
+ <button type="submit">NUEVO PEDIDO</button><br>
+
+</form>
+
+<table>
+	<tr>
+		<th id="Pedido">FECHA</th>
+    <th id="Observacion">OBSERVACION</th>
+    <th id="Estado">ESTADO</th>
+    <th>ACCIONES</th>
+
+	</tr>
+		{% for pedido in pedidos %}
+    {% if pedido.usuario.id == session.id %}
+		  <tr id="{{ pedido.id }}">
+				<td>{{ pedido.fecha_alta |date("d/m/Y") }}</td>
+				<td>{{ pedido.observacion }}</td>
+        <td>{{ pedido.estado.nombre }}</td>
+
+
+				<td>
+					<a href="pedidosUsuarioProd/page?pid={{ pedido.id }}&id=1"> Ver productos agregados</a>
+          {% if pedido.estado is null %}
+					<a href="agregarProductoPedido?id={{ pedido.id }}"> Agregar un producto </a>
+          <a href="enviarPedido?id={{ pedido.id }}&userId={{session.id}}"> Enviar Pedido </a>
+          {% endif %}
+
+				</td>
+			</tr>
+    {% endif %}
+		{% endfor %}
+	</table>
+
+
+
+{% include 'paginacion/paginacionPedidosUsuario.twig' with {'pagesCount' : pagesCount} %}
+
+{% endblock %}

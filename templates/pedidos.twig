@@ -15,6 +15,7 @@
 
 	</tr>
 		{% for pedido in pedidos %}
+		 {% if pedido.estado is not null %}
 		  <tr id="{{ pedido.id }}">
 		  	<td>{{ pedido.usuario.nombre }}</td>
 			<td>{{ pedido.estado.nombre }}</td>
@@ -22,15 +23,13 @@
 			<td>{{ pedido.observacion}}</td>
 
 			<td>
-					<a href=""> Ver productos del pedido</a>
-					<a href=""> Agregar un producto al pedido</a>
-					<a href=""> <img title="Editar pedido" alt="Editar" src="{{ baseUrl() }}/uploads/editar.png"></a>
-					<a href="delete?id={{ pedido.id }}"> <img title="Eliminar" alt="Eliminar" src="{{ baseUrl() }}/uploads/eliminar.png"></a>
-					<a href=""> <img title="Aceptar pedido" alt="Aceptar" src="{{ baseUrl() }}/uploads/aceptar.jpg"></a>
-					<a href=""> <img title="Cancelar pedido" alt=Cancelar src="{{ baseUrl() }}/uploads/cancelar.jpg"></a>
+					<a href=""> Ver productos del pedido</a> ||
+					<a href="aceptar?id={{ pedido.id }}"> <img title="Aceptar pedido" alt="Aceptar" src="{{ baseUrl() }}/uploads/aceptar.jpg"></a>
+					<a href="cancelar?id={{ pedido.id }}"> <img title="Cancelar pedido" alt=Cancelar src="{{ baseUrl() }}/uploads/cancelar.jpg"></a>
 
 
 			</td>
+			{% endif %}
 		</tr>
 		{% endfor %}
 	</table>

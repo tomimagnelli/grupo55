@@ -1,0 +1,16 @@
+{% extends "layout.twig" %}
+
+{% block contenido %}
+
+<form class="formAltaProd" for="formAltaProd" method="post" action="altaPedido" enctype="multipart/form-data">
+  <fieldset class="fieldAltaProd"  >
+  <label for="proovedor">Observacion:</label>
+    <input type="text" name="observacion"  id="observacion" placeholder="observacion">
+      <input type="hidden" name="userId"  id="userId" value="{{session.id}}">
+
+     <input type="submit" value="Confirmar"/>
+  </fieldset>
+
+</form>
+
+{% endblock %}

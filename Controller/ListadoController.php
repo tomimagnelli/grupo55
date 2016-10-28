@@ -14,6 +14,10 @@ use Model\Resource\UsuarioResource;
 use Model\Entity\Usuario;
 use Model\Resource\MenuDelDiaResource;
 use Model\Entity\MenuDelDia;
+use Model\Resource\PedidoResource;
+use Model\Entity\Pedido;
+use Model\Resource\PedidoDetalleResource;
+use Model\Entity\PedidoDetalle;
 
 
 class ListadoController {
@@ -129,6 +133,35 @@ class ListadoController {
           "menus"     => $paginator,
           "totalItems" => $totalItems,
           "pagesCount" => $pagesCount
+      ));
+    }
+
+    public function indexActionPedidosUsuario($app, $page = 1, $userId){
+      $app->applyHook('must.be.administrador.or.online');
+      $pedidos = PedidoResource::getInstance()->get();
+      $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
+      $paginator = PedidoResource::getInstance()->getPaginatePedidosUsuario($pageSize,$page,$userId);
+      $totalItems = count($paginator);
+      $pagesCount = ceil($totalItems / $pageSize);
+      echo $app->view->render('pedidosUsuario.twig', array(
+          "pedidos"     => $paginator,
+          "totalItems" => $totalItems,
+          "pagesCount" => $pagesCount
+      ));
+    }
+
+    public function indexActionPedidosUsuarioProd($app, $idPedido, $page = 1){
+      $app->applyHook('must.be.administrador.or.online');
+      $pedidos = PedidoDetalleResource::getInstance()->get();
+      $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
+      $paginator = PedidoDetalleResource::getInstance()->getPaginatePedidosUsuarioProd($pageSize, $idPedido,$page);
+      $totalItems = count($paginator);
+      $pagesCount = ceil($totalItems / $pageSize);
+      echo $app->view->render('pedidosUsuarioProd.twig', array(
+          "pedidos"     => $paginator,
+          "totalItems" => $totalItems,
+          "pagesCount" => $pagesCount,
+          "idPedido"   => $idPedido
       ));
     }
 

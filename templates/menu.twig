@@ -19,7 +19,7 @@
 	</tr>
 		{% for menu in menus %}
 		  <tr id="{{ menu.id }}">
-				<td>{{ menu.fecha |date ("d/m/y") }}</td>
+				<td>{{ menu.fecha  }}</td>
 				<td>{{ menu.producto.nombre }}</td>
 				<td>
 					<a href="editmenu?id={{ menu.id }}"> <img title="Editar" alt="Editar" src="{{ baseUrl() }}/uploads/editar.png"></a>

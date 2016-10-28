@@ -1,0 +1,20 @@
+{% extends "layout.twig" %}
+{% block contenido %}
+<form class="formLogin" method="post" action="{{ baseUrl() }}/egresosentre/busquedaEgresos">
+	<fieldset>
+     <legend>Buscar egresos</legend>
+	<label for="fechadesde">Fecha desde:</label> <br>
+	<input type="date" name="fechadesde" id="fechadesde" required placeholder="fechadesde">
+	<br><br>
+	<label for="fechahasta">Fecha hasta:</label><br>
+	<input type="date" name="fechahasta" id="fechahasta" required placeholder="fechahasta">
+	<br><br>
+
+	<input type="submit" />
+	
+	</fieldset>
+
+</form>
+
+
+{% endblock %}

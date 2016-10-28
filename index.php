@@ -45,7 +45,13 @@ $app->post('/', function() use ($app, $userResource) {
     	$_SESSION['user']=$user->getUsuario();
     	$_SESSION['rol']=$user->getRol_Id();
     	$app->flash('success', 'Usuario logueado correctamente como '. $user->getUsuario());
-    	$app->redirect('/backend');
+      if (($_SESSION['rol']) == 2){
+        $app->redirect('/');
+      }
+      else{
+        $app->redirect('/backend');
+      }
+
       }
       else {
         $app->flash('error', 'Usuario Inhabilitado');
@@ -312,8 +318,68 @@ $app->group('/menu', function() use ($app) {
 
 $app->group('/pedidos', function() use($app) {
      $app->get('/', '\Controller\PedidoController:listPedidos')->setParams(array($app, $app->request->get('id')));
-     $app->get('/delete', '\Controller\PedidoController:deletePedido')->setParams(array($app, $app->request->get('id')));
+     $app->get('/aceptar', '\Controller\PedidoController:aceptarPedido')->setParams(array($app, $app->request->get('id')));
+$app->get('/cancelar', '\Controller\PedidoController:cancelarPedido')->setParams(array($app, $app->request->get('id')));
 });
+
+$app->group('/pedidosUsuario', function() use($app) {
+     $app->get('/page', '\Controller\ListadoController:indexActionPedidosUsuario')->setParams(array($app, $app->request->get('id'),$app->request->get('userId')));
+
+     $app->group('/pedidosUsuarioProd', function() use ($app) {
+           $app->get('/page', '\Controller\ListadoController:indexActionPedidosUsuarioProd')->setParams(array($app, $app->request->get('pid'),$app->request->get('id')));
+     });
+
+     $app->get('/altaPedido', '\Controller\PedidoController:showAltaPedido')->setParams(array($app));
+
+     $app->post('/altaPedido', '\Controller\PedidoController:newPedido')->setParams(
+          array($app,$app->request->post('observacion'),
+          $app->request->post('userId')));
+
+    $app->get('/agregarProductoPedido', '\Controller\PedidoDetalleController:showAgregarProdutcoPedido')->setParams(array($app,$app->request->get('id')));
+    $app->post('/agregarProductoPedido', '\Controller\PedidoDetalleController:newProducto')->setParams(
+         array($app,$app->request->post('producto'),
+         $app->request->post('cant'),
+         $app->request->post('userId'),
+         $app->request->post('pedido')));
+
+
+    $app->get('/enviarPedido', '\Controller\PedidoController:enviarPedido')->setParams(array($app, $app->request->get('id'),$app->request->get('userId')));
+
+
+
+});
+
+$app->group('/ingresosentre', function() use($app) {
+
+
+      $app->get('/', function() use($app){
+        echo $app->view->render('ingresosentre.twig');
+       });
+
+       $app->group('/busquedaIngresos', function() use($app) {
+
+          $app->post('/', '\Controller\IngresoDetalleController:showBusquedaIngresos')->setParams(
+               array($app,$app->request->post('fechadesde'),
+              $app->request->post('fechahasta')));
+          });
+     });
+
+$app->group('/egresosentre', function() use($app) {
+
+
+      $app->get('/', function() use($app){
+        echo $app->view->render('egresosentre.twig');
+       });
+
+       $app->group('/busquedaEgresos', function() use($app) {
+
+          $app->post('/', '\Controller\EgresoDetalleController:showBusquedaIngresos')->setParams(
+               array($app,$app->request->post('fechadesde'),
+              $app->request->post('fechahasta')));
+          });
+
+});
+
 
 
 

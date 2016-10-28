@@ -38,7 +38,12 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
      * @var DateTime
      */
     protected $fecha_alta;
-   
+    /**
+    * @Column(type="integer")
+    * @var int
+    */
+
+
 
 
      /**
@@ -89,7 +94,7 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
          return $this;
      }
 
-    
+
 
      /**
       * Gets the value of producto_id.
@@ -120,7 +125,7 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
             return $this->fecha_alta;
     }
 
-  
+
     public function setFecha()
     {
         $this->fecha_alta = new \DateTime("now");
@@ -146,7 +151,7 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
       */
      public function setUsuario($usuario)
      {
-         $this->usuario_id = $usuario_id;
+         $this->usuario = $usuario;
 
          return $this;
      }
@@ -174,7 +179,8 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 
         return $this;
     }
-     
+
+
   }
 
 ?>

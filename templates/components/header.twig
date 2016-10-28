@@ -16,7 +16,12 @@
   <ul>
     <li><a href="{{ baseUrl() }}/">Inicio</a></li>
 		  {% if session.user is not null %}
-				<li><a href="{{ baseUrl() }}/backend">Operaciones</a></li>
+				{% if session.rol == 1 or session.rol == 3  %}
+					<li><a href="{{ baseUrl() }}/backend">Operaciones</a></li>
+				{% endif %}
+				{% if session.rol == 2 %}
+					<li><a href="{{ baseUrl() }}/pedidosUsuario/page?id=1&userId={{ session.id }}">Pedidos</a></li>
+				{% endif %}
 				<li><a href="{{ baseUrl() }}/logout">Cerrar Sesi&oacute;n</a></li>
 			{% else %}
     <li><a href="{{ baseUrl() }}/login">Iniciar Sesi&oacute;n</a></li>

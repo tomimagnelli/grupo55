@@ -20,6 +20,11 @@ class IngresoDetalleController {
    echo $app->view->render( "editingreso.twig", array('ingreso_detalle' => ($ingreso_detalle),'productos' => (ProductoResource::getInstance()->get()), 'tiposingreso' => (TipoIngresoResource::getInstance()->get())));
  }
 
+
+  public function showBusquedaIngresos($app, $desde, $hasta){
+    echo $app->view->render( "busquedaIngresos.twig", array('ingresos' => (IngresoDetalleResource::getInstance()->get()),'productos' => (ProductoResource::getInstance()->get()), 'desde' => ($desde), 'hasta' => ($hasta), 'tiposingreso' => (TipoIngresoResource::getInstance()->get())));
+  }
+
   public function cargaTiposIngreso($app){
       $app->applyHook('must.be.administrador');
       echo $app->view->render( "altaventa.twig", array('tiposingreso' => (TipoIngresoResource::getInstance()->get())));
@@ -72,6 +77,18 @@ class IngresoDetalleController {
     echo $app->redirect('/ingresos/page?id=1');
 
    }
+
+   public function buscarIngresos ($app, $fechadesde, $fechahasta){
+         $app->applyHook('must.be.administrador');
+          if (IngresoDetalleResource::getInstance()->buscarIngresos($id)) {
+                $app->flash('success', 'Busqueda finalizada');
+          } 
+          else {
+               $app->flash('error', 'No se encontraron resultados');
+          }
+          $app->redirect('/busquedaingresos');
+   }
+
   }
 
 

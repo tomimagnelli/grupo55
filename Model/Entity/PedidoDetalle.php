@@ -30,7 +30,7 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
      * @var integer
      */
      protected $cantidad;
-   
+
 
 
      /**
@@ -74,9 +74,9 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
       *
       * @return self
       */
-     public function setPedido($pedido_id)
+     public function setPedido($pedido)
      {
-         $this->pedido = $pedido_id;
+         $this->pedido_id = $pedido;
 
          return $this;
      }
@@ -129,7 +129,7 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
          return $this;
      }
 
-     
+
   }
 
 ?>
