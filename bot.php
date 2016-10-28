@@ -1,6 +1,7 @@
 <?php
 
 require_once 'vendor/autoload.php';
+use Model\Resource\MenuDelDiaResource;
 
     $returnArray = true;
     $rawData = file_get_contents('php://input');
@@ -37,6 +38,7 @@ require_once 'vendor/autoload.php';
           break;
       case '/hoy':
           $msg['text'] = 'El menú del día es:' . PHP_EOL;
+          $msg["text"].= MenuDelDiaResource::getInstance()->hoy();
           break;
       case '/manana':
       $msg['text'] = 'El menú de mañana es:' . PHP_EOL;
