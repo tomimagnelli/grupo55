@@ -67,7 +67,7 @@ class MenuDelDiaResource extends AbstractResource {
       $menu = new MenuDelDia();
       $fecha = (new \DateTime())->format('Y-m-d');
       $query_string = "
-          SELECT m
+          SELECT m.producto.nombre
           FROM Model\Entity\MenuDelDia m
           WHERE m.fecha = :fecha";
       $query = $this->getEntityManager()->createQuery($query_string);
@@ -75,7 +75,7 @@ class MenuDelDiaResource extends AbstractResource {
       $menus = $query->getResult();
 
       foreach ($menus as $value) {
-      $productos .=  'echo "$value.producto.nombre"';
+      $productos .=  "$value";
       }
       return $productos;
 
