@@ -72,7 +72,12 @@ class MenuDelDiaResource extends AbstractResource {
           WHERE m.fecha = :fecha";
       $query = $this->getEntityManager()->createQuery($query_string);
       $query->setParameter('fecha',$fecha);
-      return $query->getResult();
+      $menus = $query->getResult();
+
+      foreach ($menus as $value) {
+      $productos .=  "$value.producto.nombre <br>";
+      }
+      return $productos;
 
     }
 
