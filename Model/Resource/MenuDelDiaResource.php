@@ -75,7 +75,7 @@ class MenuDelDiaResource extends AbstractResource {
       $menus = $query->getResult();
 
       foreach ($menus as $value) {
-      $productos .=  $value.producto.nombre;
+      $productos .=  'echo "$value.producto.nombre"';
       }
       return $productos;
 
