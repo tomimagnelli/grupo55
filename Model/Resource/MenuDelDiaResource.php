@@ -80,6 +80,24 @@ class MenuDelDiaResource extends AbstractResource {
       //ver en twig $menus
     }
 
+    public function hoy2(){
+      $menu = new MenuDelDia();
+      $fecha = (new \DateTime())->format('Y-m-d');
+      $query_string = "
+          SELECT m
+          FROM Model\Entity\MenuDelDia m
+          WHERE m.fecha = :fecha";
+      $query = $this->getEntityManager()->createQuery($query_string);
+      $query->setParameter('fecha',$fecha);
+      return $query->getResult();
+      //$productos="";
+      //foreach ($menus as $value) {
+      //$productos .= ($value->getProducto()->getNombre()); }
+      //return ((string) $productos);
+      //ver en twig $menus
+    }
+
+
 
 }
 ?>
