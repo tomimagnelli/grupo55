@@ -75,15 +75,9 @@ class MenuDelDiaResource extends AbstractResource {
       $menus = $query->getResult();
       $productos="";
       foreach ($menus as $value) {
-      $productos .= (string) ($value->getProducto()->getNombre()); }
-      return $productos;
+      $productos .= ($value->getProducto()->getNombre()); }
+      return ((string) $productos);
       //ver en twig $menus
-    }
-
-    public function hoy2(){
-
-      $productos= "holas";
-      return $productos;
     }
 
 
