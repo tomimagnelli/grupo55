@@ -65,9 +65,9 @@ class MenuDelDiaResource extends AbstractResource {
 
     public function hoy(){
       $menu = new MenuDelDia();
-      $fecha = new \DateTime()->format('Y-m-d');
+      $fecha = (new \DateTime())->format('Y-m-d');
       $query_string = "
-          SELECT m.producto
+          SELECT m
           FROM Model\Entity\MenuDelDia m
           WHERE m.fecha = :fecha";
       $query = $this->getEntityManager()->createQuery($query_string);
