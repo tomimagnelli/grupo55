@@ -15,7 +15,6 @@
 
 	</tr>
 		{% for pedido in pedidos %}
-		 {% if pedido.estado is not null %}
 		  <tr id="{{ pedido.id }}">
 		  	<td>{{ pedido.usuario.nombre }}</td>
 			<td>{{ pedido.estado.nombre }}</td>
@@ -23,16 +22,18 @@
 			<td>{{ pedido.observacion}}</td>
 
 			<td>
-					<a href=""> Ver productos del pedido</a> ||
+					<a href="pedidosUsuarioProd/page?pid={{ pedido.id }}&id=1"> Ver productos agregados</a>
+					{% if pedido.estado.nombre == "Pendiente" %}
 					<a href="aceptar?id={{ pedido.id }}"> <img title="Aceptar pedido" alt="Aceptar" src="{{ baseUrl() }}/uploads/aceptar.jpg"></a>
 					<a href="cancelar?id={{ pedido.id }}"> <img title="Cancelar pedido" alt=Cancelar src="{{ baseUrl() }}/uploads/cancelar.jpg"></a>
-
+					{% endif %}
 
 			</td>
-			{% endif %}
 		</tr>
 		{% endfor %}
 	</table>
+	{% include 'paginacion/paginacionPedidos.twig' with {'pagesCount' : pagesCount} %}
+
 
 
 {% endblock %}

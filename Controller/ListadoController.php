@@ -18,6 +18,8 @@ use Model\Resource\PedidoResource;
 use Model\Entity\Pedido;
 use Model\Resource\PedidoDetalleResource;
 use Model\Entity\PedidoDetalle;
+use Model\Resource\EstadoResource;
+
 
 
 class ListadoController {
@@ -53,12 +55,14 @@ class ListadoController {
     public function indexActionListado($app,$page = 1) {
         $app->applyHook('must.be.administrador.or.gestion');
         $productos = ProductoResource::getInstance()->get();
+        $prodgrafico=ProductoResource::getInstance()->grafico();
         $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
         $paginator = ProductoResource::getInstance()->getPaginateListado($pageSize,$page);
         $totalItems = count($paginator);
         $pagesCount = ceil($totalItems / $pageSize);
         echo $app->view->render('listado.twig', array(
             "productos"     => $paginator,
+            "prodgrafico"  => $prodgrafico,
             "totalItems" => $totalItems,
             "pagesCount" => $pagesCount
         ));
@@ -162,6 +166,20 @@ class ListadoController {
           "totalItems" => $totalItems,
           "pagesCount" => $pagesCount,
           "idPedido"   => $idPedido
+      ));
+    }
+
+    public function indexActionPedidos($app, $page = 1){
+      $app->applyHook('must.be.administrador.or.online');
+      $pedidos = PedidoResource::getInstance()->get();
+      $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
+      $paginator = PedidoResource::getInstance()->getPaginatePedidos($pageSize,$page);
+      $totalItems = count($paginator);
+      $pagesCount = ceil($totalItems / $pageSize);
+      echo $app->view->render('pedidos.twig', array(
+          "pedidos"     => $paginator,
+          "totalItems" => $totalItems,
+          "pagesCount" => $pagesCount
       ));
     }
 

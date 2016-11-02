@@ -18,7 +18,7 @@ class PedidoDetalleController {
 
     public function showAgregarProdutcoPedido($app,$id){
         $app->applyHook('must.be.online');
-        echo $app->view->render( "agregarProductoPedido.twig", array('menus' => (MenuDelDiaResource::getInstance() -> get()), 'pedido' => (PedidoResource::getInstance() -> get($id))));
+        echo $app->view->render( "agregarProductoPedido.twig", array('menus' => (MenuDelDiaResource::getInstance() -> menusHoy()), 'pedido' => (PedidoResource::getInstance() -> get($id))));
 
       }
 

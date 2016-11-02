@@ -19,14 +19,18 @@ class MenuController {
     public function newMenu($app,$fecha, $producto,$habilitado) {
          $app->applyHook('must.be.administrador.or.gestion');
 
+          if(ProductoResource::getInstance()->hayStock($producto)){
+             if (MenuDelDiaResource::getInstance()->insert($fecha, $producto, $habilitado)){
+                   $app->flash('success', 'Menu dado de alta correctamente');
+             } else {
+                   $app->flash('error', 'No se pudo dar de alta el menu');
+                 }
+             echo $app->redirect('/menu/page?id=1');
 
-           if (MenuDelDiaResource::getInstance()->insert($fecha, $producto, $habilitado)){
-                 $app->flash('success', 'Menu dado de alta correctamente');
-           } else {
-                 $app->flash('error', 'No se pudo dar de alta el menu');
-               }
+         }else{
+           $app->flash('error', 'No hay stock del producto seleccionado');
            echo $app->redirect('/menu/page?id=1');
-
+         }
        }
 
 }

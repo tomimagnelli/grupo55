@@ -317,9 +317,12 @@ $app->group('/menu', function() use ($app) {
 });
 
 $app->group('/pedidos', function() use($app) {
-     $app->get('/', '\Controller\PedidoController:listPedidos')->setParams(array($app, $app->request->get('id')));
+    $app->get('/page', '\Controller\ListadoController:indexActionPedidos')->setParams(array($app, $app->request->get('id')));
      $app->get('/aceptar', '\Controller\PedidoController:aceptarPedido')->setParams(array($app, $app->request->get('id')));
-$app->get('/cancelar', '\Controller\PedidoController:cancelarPedido')->setParams(array($app, $app->request->get('id')));
+     $app->get('/cancelar', '\Controller\PedidoController:cancelarPedido')->setParams(array($app, $app->request->get('id')));
+     $app->group('/pedidosUsuarioProd', function() use ($app) {
+           $app->get('/page', '\Controller\ListadoController:indexActionPedidosUsuarioProd')->setParams(array($app, $app->request->get('pid'),$app->request->get('id')));
+     });
 });
 
 $app->group('/pedidosUsuario', function() use($app) {

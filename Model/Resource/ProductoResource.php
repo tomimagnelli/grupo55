@@ -145,6 +145,22 @@ class ProductoResource extends AbstractResource {
       return $paginator;
   }
 
+  public function grafico(){
+    $query_string = "
+        SELECT p
+        FROM Model\Entity\Producto p";
+    $query = $this->getEntityManager()->createQuery($query_string);
+    $productos = $query->getResult();
+      $prod ="[";
+    foreach ($productos as $value) {
+      $prod .= "'";
+    $prod .= $value->getNombre();
+    $prod .= "'";
+    $prod .=",";}
+    $prod .="]";
+    return  $prod;
+  }
+
    public function sumarStock($id,$cantidad)
   {
     $this->getEntityManager()->persist($this->get($id)->sumar($cantidad));
@@ -155,6 +171,41 @@ class ProductoResource extends AbstractResource {
   {
     $this->getEntityManager()->persist($this->get($id)->descontar($cantidad));
     $this->getEntityManager()->flush();
+  }
+
+  public function hayStock($producto){
+
+    $query_string = " SELECT p FROM Model\Entity\Producto p
+                      WHERE (p.id = :producto_id) and (p.stock > 0)";
+
+    $query = $this->getEntityManager()->createQuery($query_string);
+    $query->setParameter('producto_id',$producto);
+    $query2= $query->getResult();
+
+    if (count($query2) == 0){
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
+  public function controlarStock($producto, $cantidad){
+
+    $query_string = " SELECT p FROM Model\Entity\Producto p
+                      WHERE (p.id = :producto_id) and (p.stock >= :cantidad)";
+
+    $query = $this->getEntityManager()->createQuery($query_string);
+    $query->setParameter('producto_id',$producto);
+    $query->setParameter('cantidad',$cantidad);
+    $query2= $query->getResult();
+
+    if (count($query2) == 0){
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
 }

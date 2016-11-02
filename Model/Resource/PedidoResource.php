@@ -9,6 +9,7 @@ use Model\Entity\Producto;
 use Model\Entity\Usuario;
 use Model\Resource\UsuarioResource;
 use Model\Entity\Pedido;
+use Model\Entity\Estado;
 /**
  * Class Resource
  * @package Model
@@ -64,6 +65,19 @@ class PedidoResource extends AbstractResource {
 
     }
 
+    public function getPaginatePedidos($pageSize,$currentPage){
+      $em = $this->getEntityManager();
+      $dql = "
+          SELECT p
+          FROM Model\Entity\Pedido p
+          where p.estado is not null";
+
+      $query = $em->createQuery($dql);
+        $query->setFirstResult($pageSize * (intval($currentPage) - 1))->setMaxResults($pageSize);
+      $paginator = new Paginator($query, $fetchJoinCollection = true);
+      return $paginator;
+
+  }
     public function Nuevo ($observacion,$userId){
         $pedido = new Pedido();
         $user = UsuarioResource::getInstance()->get($userId);

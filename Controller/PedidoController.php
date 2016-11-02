@@ -10,13 +10,11 @@ use Model\Resource\UsuarioResource;
 use Model\Entity\Estado;
 use Model\Resource\EstadoResource;
 use Model\Resource\MenuDelDiaResource;
+use Model\Resource\PedidoDetalleResource;
 
 class PedidoController {
 
-  public function listPedidos($app){
-    $app->applyHook('must.be.administrador.or.gestion');
-    echo $app->view->render( "pedidos.twig", array('pedidos' => (PedidoResource::getInstance()->get()),'estados' => (EstadoResource::getInstance()->get()), 'productos' => (ProductoResource::getInstance()->get()), 'usuarios' => (UsuarioResource::getInstance()->get())));
-  }
+
 
   public function showAltaPedido($app){
       $app->applyHook('must.be.online');
@@ -32,7 +30,7 @@ class PedidoController {
     } else {
       $app->flash('error', 'No se pudo eliminar el producto');
     }
-    $app->redirect('/pedidos');
+    $app->redirect('/pedidos/page?id=1');
   }
 
   public function newPedido($app,$observacion,$userId) {
@@ -59,13 +57,20 @@ class PedidoController {
 
      public function aceptarPedido($app, $id) {
     $app->applyHook('must.be.administrador.or.gestion');
-    if (PedidoResource::getInstance()->aceptar($id)) {
-      $app->flash('success', 'Pedido aceptado');
-    } else {
-      $app->flash('error', 'No se pudo aceptar');
+    if(PedidoDetalleResource::getInstance()->aceptarStock($id)){
+       PedidoDetalleResource::getInstance()->descontarStock($id);
+
+        if (PedidoResource::getInstance()->aceptar($id)) {
+          $app->flash('success', 'Pedido aceptado');
+        } else {
+          $app->flash('error', 'No se pudo aceptar');
+        }
+        $app->redirect('/pedidos/page?id=1');
+    }else{
+    $app->flash('error', 'No hay stock');
+    $app->redirect('/pedidos/page?id=1');
     }
-    $app->redirect('/pedidos');
-  }
+      }
 
    public function cancelarPedido($app, $id) {
     $app->applyHook('must.be.administrador.or.gestion');
@@ -74,7 +79,7 @@ class PedidoController {
     } else {
       $app->flash('error', 'No se pudo cancelar');
     }
-    $app->redirect('/pedidos');
+    $app->redirect('/pedidos/page?id=1');
   }
 
 

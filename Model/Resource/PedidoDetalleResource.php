@@ -71,7 +71,36 @@ class PedidoDetalleResource extends AbstractResource {
         return $this->get();
     }
 
+    public function aceptarStock($idPedido){
+      $query_string = "
+          SELECT p
+          FROM Model\Entity\PedidoDetalle p
+          WHERE p.pedido_id = :idPedido";
+      $query = $this->getEntityManager()->createQuery($query_string);
+      $query->setParameter('idPedido',$idPedido);
+      $pedidos = $query->getResult();
+      foreach ($pedidos as $value) {
+        if (ProductoResource::getInstance()->controlarStock($value->getProducto()->getId(),$value->getCantidad())){
+        }else{
+          return false;
+        }
+    }
 
+      return true;
    }
 
+   public function descontarStock($idPedido){
+     $query_string = "
+         SELECT p
+         FROM Model\Entity\PedidoDetalle p
+         WHERE p.pedido_id = :idPedido";
+     $query = $this->getEntityManager()->createQuery($query_string);
+     $query->setParameter('idPedido',$idPedido);
+     $pedidos = $query->getResult();
+     foreach ($pedidos as $value) {
+       ProductoResource::getInstance()->descontarStock($value->getProducto()->getId(),$value->getCantidad());
+     }
+ }
+
+}
 ?>

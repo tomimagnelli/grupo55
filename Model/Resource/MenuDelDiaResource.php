@@ -76,11 +76,10 @@ class MenuDelDiaResource extends AbstractResource {
       $productos="";
       foreach ($menus as $value) {
       $productos .= ($value->getProducto()->getNombre()); }
-      return ((string) $productos);
-      //ver en twig $menus
+      return  $productos;
     }
 
-    public function hoy2(){
+    public function menusHoy(){
       $menu = new MenuDelDia();
       $fecha = (new \DateTime())->format('Y-m-d');
       $query_string = "
@@ -90,12 +89,11 @@ class MenuDelDiaResource extends AbstractResource {
       $query = $this->getEntityManager()->createQuery($query_string);
       $query->setParameter('fecha',$fecha);
       return $query->getResult();
-      //$productos="";
-      //foreach ($menus as $value) {
-      //$productos .= ($value->getProducto()->getNombre()); }
-      //return ((string) $productos);
-      //ver en twig $menus
+
+
     }
+
+
 
 
 
