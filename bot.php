@@ -46,9 +46,15 @@ use Controller\BotController;
                 $msg['text'] .= $hoy;
               }
               break;
-      case '/manana':
-      $msg['text'] = 'El menú de mañana es:' . PHP_EOL;
-          break;
+              case '/manana':
+                $msg['text'] = 'El menú de mañana es:' . PHP_EOL;
+                $manana = BotController::getInstance()->manana();
+                if ($manana == '') {
+                  $msg['text'] .= 'Lo sentimos, no hay menu del dia habilitado para mañana';
+                } else {
+                    $msg['text'] .= $manana;
+                }
+              break;
       default:
           $msg['text']  = 'Lo siento, no es un comando válido.' . PHP_EOL;
           $msg['text'] .= 'Prueba /help para ver la lista de comandos disponibles';

@@ -81,6 +81,26 @@ class MenuDelDiaResource extends AbstractResource {
       return  $productos;
     }
 
+
+    public function manana(){
+      $manana = date("d-m-Y", time()+86400);
+      $fecha = (new \DateTime(manana))->format('Y-m-d');
+      $query_string = "
+          SELECT m
+          FROM Model\Entity\MenuDelDia m
+          WHERE m.fecha = :fecha";
+      $query = $this->getEntityManager()->createQuery($query_string);
+      $query->setParameter('fecha',$fecha);
+      $menus = $query->getResult();
+      $productos="";
+      foreach ($menus as $value) {
+        if($value->getHabilitado() == 0){
+          $productos .= ($value->getProducto()->getNombre()) . PHP_EOL;
+        }
+      }
+      return  $productos;
+    }
+
     public function menusHoy(){
       $menu = new MenuDelDia();
       $fecha = (new \DateTime())->format('Y-m-d');
