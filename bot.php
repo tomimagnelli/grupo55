@@ -29,14 +29,16 @@ use Controller\BotController;
           $msg['text'] .= '¿Como puedo ayudarte? Puedes utilizar el comando /help';
           $msg['reply_to_message_id'] = null;
           break;
-      case '/help':
-          $msg['text']  = 'Los comandos disponibles son estos:' . PHP_EOL;
-          $msg['text'] .= '/start --> Inicializa el bot'  . PHP_EOL;
-          $msg['text'] .= '/manana --> Muestra el menú del día de mañana'  . PHP_EOL;
-          $msg['text'] .= '/help --> Muestra esta ayuda'  . PHP_EOL;
-          $msg['text'] .= '/hoy --> Muestra el menú del día de hoy' . PHP_EOL;
-          $msg['reply_to_message_id'] = null;
-          break;
+          case '/help':
+              $msg['text']  = 'Los comandos disponibles son estos:' . PHP_EOL;
+              $msg['text'] .= '/start --> Inicializa el bot'  . PHP_EOL;
+              $msg['text'] .= '/manana --> Muestra el menú del día de mañana'  . PHP_EOL;
+              $msg['text'] .= '/help --> Muestra esta ayuda'  . PHP_EOL;
+              $msg['text'] .= '/hoy --> Muestra el menú del día de hoy' . PHP_EOL;
+              $msg['text'] .= '/sub --> Permite suscribirse a las notificaciones del bot' . PHP_EOL;
+              $msg['text'] .= '/unsub --> No recibir más las notificaciones del bot' . PHP_EOL;
+              $msg['reply_to_message_id'] = null;
+              break;
           case '/hoy':
               $msg['text'] = 'El menú del día es:' . PHP_EOL;
               $hoy = BotController::getInstance()->hoy();
