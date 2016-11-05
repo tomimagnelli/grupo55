@@ -32,7 +32,7 @@ $botController = BotController::getInstance();
 
 
 
-$app->get('/', '\Controller\HomeController:showHome')->setParams(array($app));
+$app->get('/', '\Controller\HomeController:showHome')->setParams(array($app, 'menu' => BotController::getInstance()->hoy()));
 
 
 // login...
@@ -419,7 +419,7 @@ $app->get('/bot', function() use ($app, $botController) {
     } else {
       $app->flash('error', 'No se pudo notificar a los subscriptos o no hay menu habilitado para hoy');
     }
-    $app->redirect('/menu');
+    $app->redirect('/menu/page?id=1');
 });
 
 

@@ -8,7 +8,7 @@ use Model\Resource\UbicacionResource;
 
 class HomeController {
 
-   public function showHome($app){
+   public function showHome($app,$menu){
 
     $configResource = ConfiguracionResource::getInstance();
     echo $app->view->render( "home.twig",
@@ -17,6 +17,7 @@ class HomeController {
       'imgDescripcion' => ($configResource->get('imgDescripcion')),
       'tituloMenu' => ($configResource->get('tituloMenu')),
       'infoMenu' => ($configResource->get('infoMenu')),
+      'menu' => $menu,
       'imgMenu' => ($configResource->get('imgMenu')), 'ubicaciones' => (UbicacionResource::getInstance()->get())));
   }
 }
