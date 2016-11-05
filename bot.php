@@ -36,10 +36,15 @@ use Model\Resource\MenuDelDiaResource;
           $msg['text'] .= '/hoy --> Muestra el menú del día de hoy' . PHP_EOL;
           $msg['reply_to_message_id'] = null;
           break;
-      case '/hoy':
-          $msg['text'] = 'El menú del día es:' . PHP_EOL;
-          $msg["text"] .=  MenuDelDiaResource::getInstance()->hoy();
-          break;
+          case '/hoy':
+              $msg['text'] = 'El menú del día es:' . PHP_EOL;
+              $hoy = BotController::getInstance()->hoy();
+              if ($hoy == '') {
+                $msg['text'] .= 'Lo sentimos, no hay menu del dia habilitado para hoy';
+              } else {
+                $msg['text'] .= $hoy;
+              }
+              break;
       case '/manana':
       $msg['text'] = 'El menú de mañana es:' . PHP_EOL;
           break;

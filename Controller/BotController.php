@@ -1,9 +1,9 @@
 <?php
 
 namespace Controller;
-use Model\Entity\Subscripto;
-use Model\Resource\MenuResource;
-use Model\Resource\SubscriptoResource;
+//use Model\Entity\Subscripto;
+use Model\Resource\MenuDelDiaResource;
+//use Model\Resource\SubscriptoResource;
 
 class BotController {
   private static $instance;
@@ -18,11 +18,11 @@ class BotController {
   private function __construct() {}
 
   public function hoy() {
-    return MenuResource::getInstance()->hoy();
+    return MenuDelDiaResource::getInstance()->hoy();
   }
 
   public function manana() {
-    return MenuResource::getInstance()->manana();
+    return MenuDelDiaResource::getInstance()->manana();
   }
 
   public function sub($chat_id) {
