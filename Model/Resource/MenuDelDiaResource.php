@@ -63,9 +63,11 @@ class MenuDelDiaResource extends AbstractResource {
         return $this->get();
     }
 
+
+
     public function hoy() {
-    $hoy = date("y-m-d");
-    $fecha = new \DateTime($hoy);
+    $fecha = (new \DateTime())->format('Y-m-d');
+
     $menus = $this->getByFecha($fecha);
     $productos=[];
     foreach ($menus as $menu) {
@@ -117,7 +119,6 @@ class MenuDelDiaResource extends AbstractResource {
     return $query->getResult();
     }
     }
-
 
     public function menusHoy(){
       $menu = new MenuDelDia();
