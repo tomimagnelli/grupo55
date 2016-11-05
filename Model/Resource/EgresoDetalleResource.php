@@ -139,6 +139,60 @@ class EgresoDetalleResource extends AbstractResource {
       $query->setParameter('idEgreso',$idProducto);
       return $query->getResult();
     }
+    public function buscar ($desde, $hasta){
+
+
+          $query_string = " SELECT c FROM Model\Entity\Compra c
+                            WHERE (c.fecha >= :fechadesde) and (c.fecha <= :fechahasta)";
+
+          $query = $this->getEntityManager()->createQuery($query_string);
+
+          $query->setParameter('fechadesde',$desde);
+          $query->setParameter('fechahasta',$hasta);
+
+          return $query->getResult();
+
+      }
+
+
+    public function buscarDetalles($compra){
+
+      $idcompra = $compra->getId();
+
+      $query_string = " SELECT ed FROM Model\Entity\EgresoDetalle ed
+                        WHERE ed.compra = :idCompra";
+
+      $query = $this->getEntityManager()->createQuery($query_string);
+      $query->setParameter('idCompra',$idcompra);
+
+      return $query->getResult();
+
+
+    }
+    
+
+
+    public function sumaEgresos($egresos){
+
+      $total = 0;
+      foreach ($egresos as $e) {
+
+
+              $sumactual = 0;
+              $detalles = $this->buscarDetalles($e);
+              foreach ($detalles as $d) {
+                $prod = ProductoResource::getInstance()->get($d->getProducto()->getId());
+                $sumactual = $sumactual + ($d->getCantidad() * $d->getPrecioUnitario());
+              }
+
+              $total = $total + $sumactual;
+        
+        
+      }
+
+      return $total;
+ 
+    }
 
    }
 

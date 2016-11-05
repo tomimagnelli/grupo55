@@ -124,6 +124,74 @@ class IngresoDetalleResource extends AbstractResource {
 
     }
 
+    public function buscar ($desde, $hasta){
+
+
+      $query_string = " SELECT i FROM Model\Entity\IngresoDetalle i
+                        WHERE (i.fecha >= :fechadesde) and (i.fecha <= :fechahasta)";
+
+      $query = $this->getEntityManager()->createQuery($query_string);
+
+      $query->setParameter('fechadesde',$desde);
+      $query->setParameter('fechahasta',$hasta);
+
+      return $query->getResult();
+
+    }
+    public function buscarpedidos($desde, $hasta){
+
+
+      $query_string = " SELECT p FROM Model\Entity\Pedido p
+                        WHERE (p.fecha_alta >= :fechadesde) and (p.fecha_alta <= :fechahasta)";
+
+      $query = $this->getEntityManager()->createQuery($query_string);
+
+      $query->setParameter('fechadesde',$desde);
+      $query->setParameter('fechahasta',$hasta);
+
+      return $query->getResult();
+
+
+    }
+
+    public function buscarDetalles($pedido){
+
+      $idpedido = $pedido->getId();
+
+      $query_string = " SELECT pd FROM Model\Entity\PedidoDetalle pd
+                        WHERE pd.pedido_id = :idPedido";
+
+      $query = $this->getEntityManager()->createQuery($query_string);
+      $query->setParameter('idPedido',$idpedido);
+
+      return $query->getResult();
+
+
+    }
+
+    public function sumaPedidos($pedidos){
+
+      $total = 0;
+      foreach ($pedidos as $p) {
+
+          if ($p->getEstado()->getNombre() == 'Entregado') {
+
+              $sumactual = 0;
+              $detalles = $this->buscarDetalles($p);
+              foreach ($detalles as $d) {
+                $prod = ProductoResource::getInstance()->get($d->getProducto()->getId());
+                $sumactual = $sumactual + ($d->getCantidad() * $prod->getPrecio_Venta_Unitario());
+              }
+
+              $total = $total + $sumactual;
+        }
+        
+      }
+
+      return $total;
+ 
+    }
+
    }
 
 ?>

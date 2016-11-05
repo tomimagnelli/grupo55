@@ -1,0 +1,28 @@
+{% extends "layout.twig" %}
+
+{% block contenido %}
+<table>
+	<tr>
+		<th id="ProdctoNombre">Nombre del producto</th>
+		<th id="ProdctoMarca">Marca del producto</th>
+		<th id="Cantidad">Cantidad</th>
+		<th id="ProdctoId">Precio unitario</th>
+	</tr>
+
+		{% for egreso in egresos %}
+
+	<tr>
+
+				<td>{{ egreso.producto.nombre }}</td>
+				<td>{{ egreso.producto.marca }}</td>
+				<td>{{ egreso.cantidad }}</td>
+				<td>{{ egreso.producto.precio_unitario }}</td>
+
+		{% endfor %}
+
+	</tr>
+
+	</table>
+
+
+{% endblock %}

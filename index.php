@@ -352,6 +352,22 @@ $app->group('/pedidosUsuario', function() use($app) {
 
 });
 
+$app->group('/gananciasentre', function() use($app) {
+
+
+      $app->get('/', function() use($app){
+        echo $app->view->render('gananciasentre.twig');
+       });
+
+       $app->group('/ganancias', function() use($app) {
+
+          $app->post('/', '\Controller\GananciaController:showBusquedaGanancias')->setParams(
+               array($app,$app->request->post('fechadesde'),
+              $app->request->post('fechahasta')));
+          });
+
+});
+
 $app->group('/ingresosentre', function() use($app) {
 
 
@@ -364,7 +380,15 @@ $app->group('/ingresosentre', function() use($app) {
           $app->post('/', '\Controller\IngresoDetalleController:showBusquedaIngresos')->setParams(
                array($app,$app->request->post('fechadesde'),
               $app->request->post('fechahasta')));
+
+           $app->group('/pedidosUsuarioProd', function() use ($app) {
+           $app->get('/page', '\Controller\ListadoController:indexActionPedidosUsuarioProd')->setParams(array($app, $app->request->get('pid'),$app->request->get('id')));
+             });
+
           });
+
+        
+
      });
 
 $app->group('/egresosentre', function() use($app) {
@@ -376,7 +400,9 @@ $app->group('/egresosentre', function() use($app) {
 
        $app->group('/busquedaEgresos', function() use($app) {
 
-          $app->post('/', '\Controller\EgresoDetalleController:showBusquedaIngresos')->setParams(
+         $app->get('/egresoscompra', '\Controller\ListadoController:indexActionEgresos')->setParams(array($app, $app->request->get('user'),$app->request->get('ids')));
+
+          $app->post('/', '\Controller\EgresoDetalleController:showBusquedaEgresos')->setParams(
                array($app,$app->request->post('fechadesde'),
               $app->request->post('fechahasta')));
           });

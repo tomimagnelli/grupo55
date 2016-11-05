@@ -5,48 +5,61 @@
 <input type="text" id="botoninfo "name="botoninfo" value='{{ desde|date("d/m/Y") }} a {{ hasta|date("d/m/Y") }}'></input>
 <table>
 	<tr>
+		<th id="tipo"> Tipo de ingreso</th>
 		<th id="nombre">Nombre</th>
 		<th id="marca">Marca</th>
 		<th id="IngresoDescripcion">Descripcion</th>
 		<th id="Cantidad">Cantidad</th>
 		<th id="PrecioUnitario">Precio unitario</th>
 		<th id="Acciones">Fecha</th>
+		
 	</tr>
 
-		{% for ingreso_detalle in ingresos %}
+		{% set total = 0 %}
+		{% set cant = 0 %}
 
-		{% if  ingreso_detalle.fecha|date("d/m/Y") >= desde|date("d/m/Y")  and ingreso_detalle.fecha|date("d/m/Y") <= hasta|date("d/m/Y") %}
-					
+		{% for ingreso_detalle in ingresosentre %}
+		
+				{% set cant = cant + '1'%}
+				{% set actual = (ingreso_detalle.producto.precio_venta_unitario * ingreso_detalle.cantidad) %}
+				{% set total = total + actual %}
 	<tr>
+		
+				<td>Mostrador</td>
 				<td>{{ ingreso_detalle.producto.nombre}}</td>
 				<td>{{ ingreso_detalle.producto.marca}}</td>
 				<td>{{ ingreso_detalle.descripcion}}</td>
 				<td>{{ ingreso_detalle.cantidad }}</td>
-				<td>{{ ingreso_detalle.preciounitario }}</td>
+				<td>{{ ingreso_detalle.producto.precio_venta_unitario }}</td>
 				<td>{{ ingreso_detalle.fecha|date("d/m/Y") }}</td>
+				
 
 	</tr>
-		{% endif %}
 		{% endfor %}
+
+
+		{% for pedido in pedidos%}
+				
+		<tr>
+				<td>Pedido online {{ pedido.id }}</td>
+				<td><a href="pedidosUsuarioProd/page?pid={{ pedido.id }}&id=1">Ver productos del pedido</a></td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>{{ pedido.fecha_alta|date("d/m/Y") }}</td>
+			
+		{% endfor%}
+		</tr>
 		
 
 	</table>
-	{% set total = 0 %}
-	{% set cant = 0 %}
-	{% for ingreso_detalle in ingresos %}
 
-		{% if  ingreso_detalle.fecha|date("d/m/Y") >= desde|date("d/m/Y")  and ingreso_detalle.fecha|date("d/m/Y") <= hasta|date("d/m/Y") %}
-				{% set cant = cant + '1'%}
-				{% set actual = (ingreso_detalle.preciounitario * ingreso_detalle.cantidad) %}
-				{% set total = total + actual %}
-		{% endif %}
-
-	{% endfor%}
 	<table>
 	<th id="cant">Encontrados:</th>
-	<th id="cant total"> {{ cant }} </th>
+	<th id="cant total"> {{ cant + cantpedidos }} </th>
 	<th id="tot">Total recaudado:</th>
-	<th id="suma total"> $ {{ total }} </th>
+	<th id="suma total"> $ {{ total + sumapedidos}} </th>
 
 	</table>
 	

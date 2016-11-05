@@ -5,6 +5,10 @@ use Model\Entity\IngresoDetalle;
 use Model\Resource\IngresoDetalleResource;
 use Model\Entity\Producto;
 use Model\Resource\ProductoResource;
+use Model\Entity\Pedido;
+use Model\Resource\PedidoResource;
+use Model\Entity\PedidoDetalle;
+use Model\Resource\PedidoDetalleResource;
 use Model\Entity\TipoIngreso;
 use Model\Resource\TipoIngresoResource;
 
@@ -21,8 +25,13 @@ class IngresoDetalleController {
  }
 
 
-  public function showBusquedaIngresos($app, $desde, $hasta){
-    echo $app->view->render( "busquedaIngresos.twig", array('ingresos' => (IngresoDetalleResource::getInstance()->get()),'productos' => (ProductoResource::getInstance()->get()), 'desde' => ($desde), 'hasta' => ($hasta), 'tiposingreso' => (TipoIngresoResource::getInstance()->get())));
+ 
+  public function showBusquedaIngresos($app, $desde, $hasta){ 
+    $ingresosentre = IngresoDetalleResource::getInstance()-> buscar($desde, $hasta);
+    $pedidos = IngresoDetalleResource::getInstance()-> buscarpedidos($desde, $hasta);
+    $sumapedidos = IngresoDetalleResource::getInstance()-> sumaPedidos($pedidos);
+
+    echo $app->view->render( "busquedaIngresos.twig", array('ingresos' => (IngresoDetalleResource::getInstance()->get()),'ingresosentre' => ($ingresosentre),'pedidos' => ($pedidos),'productos' => (ProductoResource::getInstance()->get()),'pedidosdetalle' => (PedidoDetalleResource::getInstance()->get()),'sumapedidos' => ($sumapedidos), 'desde' => ($desde), 'hasta' => ($hasta), 'tiposingreso' => (TipoIngresoResource::getInstance()->get())));
   }
 
   public function cargaTiposIngreso($app){
