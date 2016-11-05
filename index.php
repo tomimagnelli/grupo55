@@ -5,6 +5,8 @@ require_once 'Model/Resource/UsuarioResource.php';
 use Model\Entity\Usuario;
 use Model\Resource\UsuarioResource;
 use Controller\UsuarioController;
+use Controller\BotController;
+
 
 session_start();
 
@@ -306,6 +308,7 @@ $app->group('/config', function() use($app) {
 $app->group('/menu', function() use ($app) {
   $app->get('/page', '\Controller\ListadoController:indexActionMenu')->setParams(array($app, $app->request->get('id')));
   $app->get('/altamenu', '\Controller\MenuController:showAltaMenu')->setParams(array($app));
+  $app->get('/notificar', '\Controller\BotController:notificar');
   $app->post('/altamenu', '\Controller\MenuController:newMenu')->setParams(
        array($app,$app->request->post('fecha'),
        $app->request->post('producto'),
