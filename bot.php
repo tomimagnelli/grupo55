@@ -55,11 +55,25 @@ use Controller\BotController;
                     $msg['text'] .= $manana;
                 }
               break;
-      default:
-          $msg['text']  = 'Lo siento, no es un comando válido.' . PHP_EOL;
-          $msg['text'] .= 'Prueba /help para ver la lista de comandos disponibles';
-          break;
-      }
+              case '/sub':
+              if (BotController::getInstance()->sub($msg['chat_id'])) {
+                $msg['text'] = 'Ha sido subscripto exitosamente' . PHP_EOL;
+              } else {
+                $msg['text'] = 'No se pudo subscribir o usted ya se encuentra subscripto' . PHP_EOL;
+              }
+              break;
+          case '/unsub':
+            if (BotController::getInstance()->unsub($msg['chat_id'])) {
+              $msg['text'] = 'Ya no está subscripto a las notificaciones' . PHP_EOL;
+            } else {
+              $msg['text'] = 'No se pudo efectuar la operación' . PHP_EOL;
+            }
+              break;
+          default:
+              $msg['text']  = 'Lo siento, no es un comando válido.' . PHP_EOL;
+              $msg['text'] .= 'Prueba /help para ver la lista de comandos disponibles';
+              break;
+          }
       $url = 'https://api.telegram.org/bot273495052:AAGqjFPCVrKr3hkdXOoQIkPIC4Ss0NwbZZE/sendMessage';
       $options = array(
       'http' => array(

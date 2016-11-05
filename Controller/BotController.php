@@ -47,7 +47,7 @@ class BotController {
         $msg['disable_web_page_preview'] = true;
         $msg['reply_to_message_id'] = null;
         $msg['reply_markup'] = null;
-        $url = 'https://api.telegram.org/bot296497556:AAFlvyDLjO921sqBVHhpTaV1W5D5GoUFRUw/sendMessage';
+        $url = 'https://api.telegram.org/bot273495052:AAGqjFPCVrKr3hkdXOoQIkPIC4Ss0NwbZZE/sendMessage';
         $options = array(
           'http' => array(
             'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
