@@ -28,6 +28,7 @@ $view->getEnvironment()->addGlobal('server', $_SERVER);
 $userResource = UsuarioResource::getInstance();
 require_once 'permissions.php';
 
+$botController = BotController::getInstance();
 
 
 
@@ -308,7 +309,6 @@ $app->group('/config', function() use($app) {
 $app->group('/menu', function() use ($app) {
   $app->get('/page', '\Controller\ListadoController:indexActionMenu')->setParams(array($app, $app->request->get('id')));
   $app->get('/altamenu', '\Controller\MenuController:showAltaMenu')->setParams(array($app));
-  $app->get('/notificar', '\Controller\BotController:notificar');
   $app->post('/altamenu', '\Controller\MenuController:newMenu')->setParams(
        array($app,$app->request->post('fecha'),
        $app->request->post('producto'),
@@ -318,6 +318,7 @@ $app->group('/menu', function() use ($app) {
 
 
 });
+
 
 $app->group('/pedidos', function() use($app) {
     $app->get('/page', '\Controller\ListadoController:indexActionPedidos')->setParams(array($app, $app->request->get('id')));
@@ -411,6 +412,16 @@ $app->group('/egresosentre', function() use($app) {
           });
 
 });
+
+$app->get('/bot', function() use ($app, $botController) {
+    if ($botController->notificar()) {
+      $app->flash('success', 'Se han realizado las notificaciones correctamente');
+    } else {
+      $app->flash('error', 'No se pudo notificar a los subscriptos o no hay menu habilitado para hoy');
+    }
+    $app->redirect('/menu');
+});
+
 
 
 
