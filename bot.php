@@ -65,11 +65,8 @@ use Controller\BotController;
               }
               break;
           case '/unsub':
-            if (BotController::getInstance()->unsub($msg['chat_id'])) {
+              BotController::getInstance()->unsub($msg['chat_id']);
               $msg['text'] = 'Ya no está subscripto a las notificaciones' . PHP_EOL;
-            } else {
-              $msg['text'] = 'No se pudo efectuar la operación' . PHP_EOL;
-            }
               break;
           default:
               $msg['text']  = 'Lo siento, no es un comando válido.' . PHP_EOL;
