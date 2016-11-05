@@ -61,7 +61,7 @@ class SubscriptoResource extends AbstractResource {
       $this->getEntityManager()->remove($sub);
       $this->getEntityManager()->flush();
     } catch (\Doctrine\DBAL\DBALException $e) {
-       return false;
+       // return false;
     }
     return $this->get();
   }
