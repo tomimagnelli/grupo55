@@ -83,8 +83,7 @@ class MenuDelDiaResource extends AbstractResource {
 
 
     public function manana(){
-      $manana = date("d-m-Y", time()+86400);
-      $fecha = (new \DateTime(manana))->format('Y-m-d');
+      $fecha = (new \DateTime('tomorrow'))->format('Y-m-d');
       $query_string = "
           SELECT m
           FROM Model\Entity\MenuDelDia m
