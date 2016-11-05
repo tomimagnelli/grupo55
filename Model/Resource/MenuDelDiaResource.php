@@ -75,7 +75,7 @@ class MenuDelDiaResource extends AbstractResource {
       $productos="";
       foreach ($menus as $value) {
         if($value->getHabilitado() == 0){
-          $productos .= ($value->getProducto()->getNombre()) . PHP_EOL;
+          $productos .= ($value->getProducto()->getNombre()). "||" . PHP_EOL;
         }
       }
       return  $productos;
