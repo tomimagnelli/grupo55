@@ -1,9 +1,9 @@
 <?php
 
 namespace Controller;
-//use Model\Entity\Subscripto;
+use Model\Entity\Subscripto;
 use Model\Resource\MenuDelDiaResource;
-//use Model\Resource\SubscriptoResource;
+use Model\Resource\SubscriptoResource;
 
 class BotController {
   private static $instance;
