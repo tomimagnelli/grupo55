@@ -64,7 +64,6 @@ class MenuDelDiaResource extends AbstractResource {
     }
 
     public function hoy(){
-      $menu = new MenuDelDia();
       $fecha = (new \DateTime())->format('Y-m-d');
       $query_string = "
           SELECT m

@@ -2,6 +2,7 @@
 
 require_once 'vendor/autoload.php';
 use Model\Resource\MenuDelDiaResource;
+use Controler\BotController.php;
 
     $returnArray = true;
     $rawData = file_get_contents('php://input');

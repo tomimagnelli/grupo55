@@ -304,7 +304,7 @@ $app->group('/config', function() use($app) {
 });
 
 $app->group('/menu', function() use ($app) {
-  $app->get('/page', '\Controller\ListadoController:indexActionMenu')->setParams(array($app, $app->request->get('id')));
+  $app->get('/page', '\Controller\ListadoController:indexActionMenu')->setParams(array($app, $app->request->get('id'), 'menu' => ));
   $app->get('/altamenu', '\Controller\MenuController:showAltaMenu')->setParams(array($app));
   $app->post('/altamenu', '\Controller\MenuController:newMenu')->setParams(
        array($app,$app->request->post('fecha'),
@@ -387,7 +387,7 @@ $app->group('/ingresosentre', function() use($app) {
 
           });
 
-        
+
 
      });
 
