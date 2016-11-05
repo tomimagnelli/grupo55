@@ -73,8 +73,9 @@ class MenuDelDiaResource extends AbstractResource {
       $query->setParameter('fecha',$fecha);
       $menus = $query->getResult();
       $productos="";
-      foreach ($menus as $value) {
-      $productos .= ($value->getProducto()->getNombre()); }
+      if($value->getProducto()->getHabilitado() == 0){
+        $productos .= ($value->getProducto()->getNombre()) . PHP_EOL; }
+      }
       return  $productos;
     }
 
