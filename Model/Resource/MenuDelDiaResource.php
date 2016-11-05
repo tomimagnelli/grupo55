@@ -63,21 +63,61 @@ class MenuDelDiaResource extends AbstractResource {
         return $this->get();
     }
 
-    public function hoy(){
-      $menu = new MenuDelDia();
-      $fecha = (new \DateTime())->format('Y-m-d');
-      $query_string = "
-          SELECT m
-          FROM Model\Entity\MenuDelDia m
-          WHERE m.fecha = :fecha";
-      $query = $this->getEntityManager()->createQuery($query_string);
-      $query->setParameter('fecha',$fecha);
-      $menus = $query->getResult();
-      $productos="";
-      foreach ($menus as $value) {
-      $productos .= ($value->getProducto()->getNombre()); }
-      return  $productos;
+    public function hoy() {
+    $hoy = date("y-m-d");
+    $fecha = new \DateTime($hoy);
+    $menus = $this->getByFecha($fecha);
+    $productos=[];
+    foreach ($menus as $menu) {
+    if ($menu->getHabilitado() == 0) {
+      $productos[]= $this->producto($menu->getId());
     }
+    }
+    $infoMenu = "";
+    foreach ($productos as $producto) {
+    foreach ($producto as $productoi) {
+      $infoMenu .= '* ' . $productoi["nombre"] . '-' . PHP_EOL;;
+    }
+    }
+    return $infoMenu;
+    }
+
+    public function manana() {
+    $manana = date("d-m-Y", time()+86400);
+    $fecha = new \DateTime($manana);
+    $menus = $this->getByFecha($fecha);
+    $productos=[];
+    foreach ($menus as $menu) {
+    if ($menu->getHabilitado() == 1) {
+      $productos[]= $this->producto($menu->getId());
+    }
+    }
+    $infoMenu = "";
+    foreach ($productos as $producto) {
+    foreach ($producto as $productoi) {
+      $infoMenu .= '* ' . $productoi["nombre"] . '-' . PHP_EOL;;
+    }
+    }
+    return $infoMenu;
+    }
+
+    public function getByFecha($fecha = null) {
+    if ($fecha === null) {
+    $query_string = "
+        SELECT m FROM Model\Entity\MenuDelDia m
+        GROUP BY m.fecha";
+    $query = $this->getEntityManager()->createQuery($query_string);
+    return $query->getResult();
+    } else {
+    $query_string = "
+        SELECT m FROM Model\Entity\MenuDelDia m
+        WHERE m.fecha = :fecha";
+    $query = $this->getEntityManager()->createQuery($query_string);
+    $query->setParameter('fecha',$fecha);
+    return $query->getResult();
+    }
+    }
+
 
     public function menusHoy(){
       $menu = new MenuDelDia();
