@@ -63,6 +63,27 @@ class MenuDelDiaResource extends AbstractResource {
         return $this->get();
     }
 
+    public function delete($id)
+    {
+        $menu = $this->getEntityManager()->getReference('Model\Entity\MenuDelDia', $id);
+        $this->getEntityManager()->remove($menu);
+        $this->getEntityManager()->flush();
+        return $this->get();
+    }
+
+      public function edit($fecha,$producto,$habilitado, $menuid)
+     {
+         $menu = $this->getEntityManager()->getReference('Model\Entity\MenuDelDia', $menuid);
+         $prod = ProductoResource::getInstance()->get($producto);
+         $menu->setFecha($fecha);
+         $menu->setProducto($prod);
+         $menu->setHabilitado($habilitado);
+      
+         $this->getEntityManager()->persist($menu);
+         $this->getEntityManager()->flush();
+         return $this->get();
+     }
+
     public function hoy(){
       $fecha = (new \DateTime())->format('Y-m-d');
       $query_string = "

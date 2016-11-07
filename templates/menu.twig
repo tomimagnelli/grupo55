@@ -22,12 +22,13 @@
 		<th>ACCIONES</th>
 		<th>HABILITADO</th>
 	</tr>
+		{% autoescape 'html' %}
 		{% for menu in menus %}
 		  <tr id="{{ menu.id }}">
 				<td>{{ menu.fecha  }}</td>
-				<td>{{ menu.producto.nombre }}</td>
+				<td>{{ menu.producto.nombre }} {{ menu.producto.marca }}</td>
 				<td>
-					<a href="editmenu?id={{ menu.id }}"> <img title="Editar" alt="Editar" src="{{ baseUrl() }}/uploads/editar.png"></a>
+					<a href="editMenu?id={{ menu.id }}"> <img title="Editar" alt="Editar" src="{{ baseUrl() }}/uploads/editar.png"></a>
 
 					<a href="delete?id={{ menu.id }}"> <img title="Eliminar" alt="Eliminar" src="{{ baseUrl() }}/uploads/eliminar.png"></a>
 				</td>
@@ -40,6 +41,7 @@
 
 			</tr>
 		{% endfor %}
+		{% endautoescape %}
 	</table>
 
 	{% include 'paginacion/paginacionMenu.twig' with {'pagesCount' : pagesCount} %}

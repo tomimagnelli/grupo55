@@ -9,7 +9,7 @@
 		<th id="ProdctoId">Precio unitario</th>
 		<th id="acciones">Acciones</th>
 	</tr>
-
+		{% autoescape 'html' %}
 		{% for egreso_detalle in egresos %}
 
 	<tr>
@@ -24,6 +24,7 @@
 				</td>
 
 		{% endfor %}
+		{% endautoescape %}
 
 	</tr>
 

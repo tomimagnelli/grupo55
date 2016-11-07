@@ -1,4 +1,4 @@
-{% extends "layout.twig" %}
+{% extends "layout.twig" %} 
 
 {% block contenido %}
 
@@ -14,15 +14,9 @@
 		<th id="Acciones">Fecha</th>
 		
 	</tr>
-
-		{% set total = 0 %}
-		{% set cant = 0 %}
-
+		{% autoescape 'html' %}
 		{% for ingreso_detalle in ingresosentre %}
 		
-				{% set cant = cant + '1'%}
-				{% set actual = (ingreso_detalle.producto.precio_venta_unitario * ingreso_detalle.cantidad) %}
-				{% set total = total + actual %}
 	<tr>
 		
 				<td>Mostrador</td>
@@ -36,13 +30,14 @@
 
 	</tr>
 		{% endfor %}
+		{% endautoescape %}
 
-
+		{% autoescape 'html' %}
 		{% for pedido in pedidos%}
 				
 		<tr>
 				<td>Pedido online {{ pedido.id }}</td>
-				<td><a href="pedidosUsuarioProd/page?pid={{ pedido.id }}&id=1">Ver productos del pedido</a></td>
+				<td>-</td>
 				<td>-</td>
 				<td>-</td>
 				<td>-</td>
@@ -50,16 +45,15 @@
 				<td>{{ pedido.fecha_alta|date("d/m/Y") }}</td>
 			
 		{% endfor%}
+		{% endautoescape %}
 		</tr>
 		
 
 	</table>
 
 	<table>
-	<th id="cant">Encontrados:</th>
-	<th id="cant total"> {{ cant + cantpedidos }} </th>
 	<th id="tot">Total recaudado:</th>
-	<th id="suma total"> $ {{ total + sumapedidos}} </th>
+	<th id="suma total"> $ {{ sumaingresos + sumapedidos}} </th>
 
 	</table>
 	

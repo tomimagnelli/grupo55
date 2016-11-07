@@ -9,9 +9,11 @@
     <label for="producto_id">Producto: </label>
     <select name="producto_id" id="producto_id" required>
     <option value="">Seleccione</option>
+    {% autoescape 'html' %}
      {% for producto in productos %}
         <option {% if egreso_detalle.producto.id == producto.id %}selected="selected" {% endif %}value="{{ producto.id }}">{{ producto.nombre }} {{ producto.marca }}</option>
      {% endfor %}
+     {% endautoescape %}
     </select>
 
     <label for="cantidad">Cantidad: </label>
@@ -24,9 +26,11 @@
     <label for="egreso_tipo_id">Tipo venta: </label>
     <select name="egreso_tipo_id" id="egreso_tipo_id" required>
     <option value="">Seleccione</option>
+         {% autoescape 'html' %}
        {% for tipo in tiposegreso %}
           <option {% if egreso_detalle.egreso_tipo_id.id == tipo.id %}selected="selected" {% endif %}value="{{ tipo.id }}">{{ tipo.nombre }}</option>
        {% endfor %}
+       {% endautoescape %}
 
     </select>
 

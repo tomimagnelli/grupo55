@@ -37,6 +37,7 @@ class EgresoDetalleController {
 
     echo $app->view->render( "busquedaEgresos.twig", array('compras' => (CompraResource::getInstance()->get()),'egresos' => (EgresoDetalleResource::getInstance()->get()),'comprasentre' => ($comprasentre),'productos' => (ProductoResource::getInstance()->get()),'egresosdetalle' => (EgresoDetalleResource::getInstance()->get()),'sumaegresos' => ($sumaegresos), 'desde' => ($desde), 'hasta' => ($hasta), 'tiposegreso' => (TipoEgresoResource::getInstance()->get())));
   }
+  
     public function edit($app,$producto,$cantidad,$precio_unitario,$egreso_tipo_id,$id) {
        $app->applyHook('must.be.administrador');
 

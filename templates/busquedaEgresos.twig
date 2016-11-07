@@ -1,4 +1,4 @@
-{% extends "layout.twig" %}
+{% extends "layout.twig" %} 
 
 {% block contenido %}
 
@@ -7,10 +7,11 @@
 	<tr>
 		<th id="compra">Compra</th>
 		<th id="proveedor">Proveedor</th>
-		<th id="acciones">Acciones</th>
+	
 		<th id="fecha">Fecha</th>
 		
 	</tr>
+		{% autoescape 'html' %}
 
 		{% for compra in comprasentre %}
 		
@@ -18,30 +19,21 @@
 	<tr>
 				<td>Compra {{ compra.id }} </td>
 				<td>{{ compra.proveedor}}</td>
-				<td><a href="/egresosentre/busquedaEgresos/page?user={{ compra.id }}&ids=1">Ver productos de la compra</a></td>
+		
 				<td>{{ compra.fecha|date("d/m/Y") }}</td>
 
 	</tr>
 	
 		{% endfor %}
+
+		{% endautoescape %}
 		
 
 	</table>
 
-	{% set total = 0 %}
-	{% set cant = 0 %}
-	{% for egreso_detalle in egresos %}
 
-		{% if  egreso_detalle.fecha|date("d/m/Y") >= desde|date("d/m/Y")  and egreso_detalle.fecha|date("d/m/Y") <= hasta|date("d/m/Y") %}
-				{% set cant = cant + '1'%}
-				{% set actual = (egreso_detalle.preciounitario * egreso_detalle.cantidad) %}
-				{% set total = total + actual %}
-		{% endif %}
-
-	{% endfor%}
 	<table>
-	<th id="cant">Encontrados:</th>
-	<th id="cant total">  </th>
+
 	<th id="tot">Total recaudado:</th>
 	<th id="suma total"> $ {{ sumaegresos }} </th>
 

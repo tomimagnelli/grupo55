@@ -26,12 +26,13 @@ class IngresoDetalleController {
 
 
  
-  public function showBusquedaIngresos($app, $desde, $hasta){ 
+    public function showBusquedaIngresos($app, $desde, $hasta){ 
     $ingresosentre = IngresoDetalleResource::getInstance()-> buscar($desde, $hasta);
+    $sumaingresos = IngresoDetalleResource::getInstance()-> sumaingresos($ingresosentre);
     $pedidos = IngresoDetalleResource::getInstance()-> buscarpedidos($desde, $hasta);
     $sumapedidos = IngresoDetalleResource::getInstance()-> sumaPedidos($pedidos);
 
-    echo $app->view->render( "busquedaIngresos.twig", array('ingresos' => (IngresoDetalleResource::getInstance()->get()),'ingresosentre' => ($ingresosentre),'pedidos' => ($pedidos),'productos' => (ProductoResource::getInstance()->get()),'pedidosdetalle' => (PedidoDetalleResource::getInstance()->get()),'sumapedidos' => ($sumapedidos), 'desde' => ($desde), 'hasta' => ($hasta), 'tiposingreso' => (TipoIngresoResource::getInstance()->get())));
+    echo $app->view->render( "busquedaIngresos.twig", array('ingresos' => (IngresoDetalleResource::getInstance()->get()),'ingresosentre' => ($ingresosentre),'pedidos' => ($pedidos),'productos' => (ProductoResource::getInstance()->get()),'pedidosdetalle' => (PedidoDetalleResource::getInstance()->get()),'sumapedidos' => ($sumapedidos),'sumaingresos' => ($sumaingresos), 'desde' => ($desde), 'hasta' => ($hasta), 'tiposingreso' => (TipoIngresoResource::getInstance()->get())));
   }
 
   public function cargaTiposIngreso($app){

@@ -86,7 +86,7 @@ class IngresoDetalleResource extends AbstractResource {
         $ingreso_detalle->setIngresoTipoId($tipoingreso);
         $ingreso_detalle->setProducto($prod);
         $ingreso_detalle->setCantidad($cantidad);
-        $ingreso_detalle->setPrecioUnitario($precio_unitario);
+        $ingreso_detalle->setPrecioUnitario($prod->getPrecio_Venta_Unitario());
         $ingreso_detalle->setDescripcion($descripcion);
         $ingreso_detalle->setFecha();
         return $ingreso_detalle;
@@ -142,10 +142,9 @@ class IngresoDetalleResource extends AbstractResource {
 
 
       $query_string = " SELECT p FROM Model\Entity\Pedido p
-                        WHERE (p.fecha_alta >= :fechadesde) and (p.fecha_alta <= :fechahasta)";
+                        WHERE (p.fecha_alta >= :fechadesde) AND (p.fecha_alta <= :fechahasta) AND (p.estado IS NOT NULL)";
 
       $query = $this->getEntityManager()->createQuery($query_string);
-
       $query->setParameter('fechadesde',$desde);
       $query->setParameter('fechahasta',$hasta);
 
@@ -169,28 +168,77 @@ class IngresoDetalleResource extends AbstractResource {
 
     }
 
+    public function sumaingresos($ingresos){
+
+     $total= 0;
+     foreach ($ingresos as $i){
+        $prod = ProductoResource::getInstance()->get($i->getProducto()->getId());
+        $total = $total + ( $i->getCantidad() * $prod->getPrecio_Venta_Unitario() );
+     }
+
+     return $total;
+
+
+    }
+
     public function sumaPedidos($pedidos){
 
       $total = 0;
       foreach ($pedidos as $p) {
 
-          if ($p->getEstado()->getNombre() == 'Entregado') {
+         if ($p->getEstado() != null){
+              if ($p->getEstado()->getNombre() == 'Entregado') {
 
-              $sumactual = 0;
-              $detalles = $this->buscarDetalles($p);
-              foreach ($detalles as $d) {
-                $prod = ProductoResource::getInstance()->get($d->getProducto()->getId());
-                $sumactual = $sumactual + ($d->getCantidad() * $prod->getPrecio_Venta_Unitario());
-              }
+                  $sumactual = 0;
+                  $detalles = $this->buscarDetalles($p);
+                  foreach ($detalles as $d) {
+                    $prod = ProductoResource::getInstance()->get($d->getProducto()->getId());
+                    $sumactual = $sumactual + ($d->getCantidad() * $prod->getPrecio_Venta_Unitario());
+                  }
 
-              $total = $total + $sumactual;
-        }
+                  $total = $total + $sumactual;
+            }
+          }
+          
         
       }
 
       return $total;
  
     }
+
+    public function getSumIngresos($desde,$hasta)
+    {
+        $query_string = "
+            SELECT sum(i.precio_unitario * i.cantidad) as y, i.fecha as name
+            FROM Model\Entity\IngresoDetalle i
+            WHERE i.fecha between :desde AND :hasta
+            GROUP by i.fecha
+            ORDER by i.fecha";
+
+        $query = $this->getEntityManager()->createQuery($query_string);
+        $query->setParameter('desde', new \DateTime($desde));
+        $query->setParameter('hasta', new \DateTime($hasta));
+
+        return $query->getResult();
+    }
+
+     public function getVentasEntre($desde,$hasta)
+  {
+      $query_string = "
+          SELECT sum(i.cantidad) as y, CONCAT(p.nombre,'-',p.marca) as name
+          FROM Model\Entity\IngresoDetalle i JOIN Model\Entity\Producto p
+          WHERE i.producto=p.id AND i.fecha between :desde AND :hasta
+          GROUP By i.producto
+          ";
+
+      $query = $this->getEntityManager()->createQuery($query_string);
+      $query->setParameter('desde', new \DateTime($desde));
+      $query->setParameter('hasta', new \DateTime($hasta));
+
+      return $query->getResult();
+  }
+
 
    }
 

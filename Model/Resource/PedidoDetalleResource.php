@@ -102,5 +102,39 @@ class PedidoDetalleResource extends AbstractResource {
      }
  }
 
+ public function getSumPedidos($desde,$hasta)
+ {
+     $query_string = "
+         SELECT sum(p.precio_unitario * pd.cantidad) as y, pe.fecha_alta as name
+         FROM Model\Entity\PedidoDetalle pd JOIN Model\Entity\Pedido pe 
+         WHERE pe.estado= :estado AND pe.id = pd.pedido_id AND pe.fecha_alta between :desde AND :hasta
+         GROUP BY pe.fecha_alta
+         ORDER by pe.fecha_alta";
+
+     $query = $this->getEntityManager()->createQuery($query_string);
+     $estado = $this->getEntityManager()->getRepository('Model\Entity\Estado')->findOneBy(array('nombre'=> "Entregado"));
+     $query->setParameter('desde', new \DateTime($desde));
+     $query->setParameter('hasta', new \DateTime($hasta));
+     $query->setParameter('estado', $estado);
+
+     return $query->getResult();
+ }
+
+ public function getVentasEntre($desde,$hasta)
+  {
+      $query_string = "
+          SELECT sum(i.cantidad) as y, CONCAT(p.nombre,'-',p.marca) as name
+          FROM Model\Entity\IngresoDetalle i JOIN Model\Entity\Producto p
+          WHERE i.producto=p.id AND i.fecha between :desde AND :hasta
+          GROUP By i.producto
+          ";
+
+      $query = $this->getEntityManager()->createQuery($query_string);
+      $query->setParameter('desde', new \DateTime($desde));
+      $query->setParameter('hasta', new \DateTime($hasta));
+
+      return $query->getResult();
+  }
+
 }
 ?>

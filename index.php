@@ -307,13 +307,26 @@ $app->group('/config', function() use($app) {
 });
 
 $app->group('/menu', function() use ($app) {
+
   $app->get('/page', '\Controller\ListadoController:indexActionMenu')->setParams(array($app, $app->request->get('id')));
+
+  $app->get('/delete', '\Controller\MenuController:deleteMenu')->setParams(array($app, $app->request->get('id')));
+
   $app->get('/altamenu', '\Controller\MenuController:showAltaMenu')->setParams(array($app));
   $app->post('/altamenu', '\Controller\MenuController:newMenu')->setParams(
        array($app,$app->request->post('fecha'),
        $app->request->post('producto'),
        $app->request->post('habilitado')));
 
+  $app->group('/editMenu', function() use($app) {
+          $app->get('/', '\Controller\MenuController:showEditMenu')->setParams(array($app, $app->request->get('id')));
+          $app->post('/', '\Controller\MenuController:editMenu')->setParams(
+                   array($app, $app->request->post('fecha'),
+                   $app->request->post('producto'),
+                   $app->request->post('habilitado'),
+                  $app->request->post('menuid')));
+
+    });
 
 
 
@@ -352,8 +365,16 @@ $app->group('/pedidosUsuario', function() use($app) {
 
     $app->get('/enviarPedido', '\Controller\PedidoController:enviarPedido')->setParams(array($app, $app->request->get('id'),$app->request->get('userId')));
 
+    $app->get('/cancelarPedidoUsuario', '\Controller\PedidoController:cancelarPedidoUsuario')->setParams(array($app, $app->request->get('id'),$app->request->get('userId')));
 
+    
+      $app->group('/pedidosEntreFechas', function() use($app) {
+      $app->post('/', '\Controller\PedidoController:pedidosEntreFechas')->setParams(
+               array($app,$app->request->post('fechadesde'),
+              $app->request->post('fechahasta'),$app->request->post('userId')));
+          });
 
+ 
 });
 
 $app->group('/gananciasentre', function() use($app) {

@@ -8,7 +8,7 @@
 		<th id="Cantidad">Cantidad</th>
 		<th id="ProdctoId">Precio unitario</th>
 	</tr>
-
+		{% autoescape 'html' %}
 		{% for pedido_detalle in pedidos %}
 
 	<tr>
@@ -19,6 +19,7 @@
 				<td>{{ pedido_detalle.producto.precio_venta_unitario }}</td>
 
 		{% endfor %}
+		{% endautoescape %}
 
 	</tr>
 

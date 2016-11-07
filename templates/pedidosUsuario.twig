@@ -9,6 +9,17 @@
 
 </form>
 
+<form action="{{ baseUrl() }}/pedidosUsuario/pedidosEntreFechas" target="rightframe" method="post">
+<label>Buscar entre</label>
+<input type="date" name="fechadesde" />
+<input type="date" name="fechahasta" />
+<input type="hidden" name="userId" value={{session.id}} />
+
+ <button type="submit">Buscar</button><br>
+
+</form>
+<br>
+
 <table>
 	<tr>
 		<th id="Pedido">FECHA</th>
@@ -17,10 +28,11 @@
     <th>ACCIONES</th>
 
 	</tr>
+	{% autoescape 'html' %}
 		{% for pedido in pedidos %}
     {% if pedido.usuario.id == session.id %}
 		  <tr id="{{ pedido.id }}">
-				<td>{{ pedido.fecha_alta |date("d/m/Y") }}</td>
+				<td>{{ pedido.fecha|date("d/m/Y H:i:s") }}</td>
 				<td>{{ pedido.observacion }}</td>
         <td>{{ pedido.estado.nombre }}</td>
 
@@ -32,10 +44,16 @@
           <a href="enviarPedido?id={{ pedido.id }}&userId={{session.id}}"> Enviar Pedido </a>
           {% endif %}
 
+          {% if pedido.estado.id == 1 %}
+          	<a href="cancelarPedidoUsuario?id={{ pedido.id }}&userId={{session.id}}"> <img title="Cancelar pedido" alt=Cancelar src="{{ baseUrl() }}/uploads/cancelar.jpg"></a>
+
+          {% endif %}
+
 				</td>
 			</tr>
     {% endif %}
 		{% endfor %}
+		{% endautoescape %}
 	</table>
 
 

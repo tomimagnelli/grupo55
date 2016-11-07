@@ -17,7 +17,7 @@
 		<th id="PrecioUnitario">Precio unitario</th>
 		<th id="Acciones">Acciones</th>
 	</tr>
-
+		{% autoescape 'html' %}
 		{% for ingreso_detalle in ingresos %}
 
 	<tr>
@@ -34,6 +34,7 @@
 				</td>
 
 		{% endfor %}
+		{% endautoescape %}
 
 	</tr>
 

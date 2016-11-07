@@ -23,9 +23,11 @@
         <label for="newUbicacion" id="labelUbicacion">Ubicación: </label>
         <select id="newUbicacion" name="ubicacion_id">
          <option value="" selected="selected">Seleccione</option>
+         {% autoescape 'html' %}
          {% for ubicacion in ubicaciones %}
          <option value="{{ ubicacion.id }}">{{ ubicacion.nombre }} | {{ ubicacion.descripcion }}</option>
          {% endfor %}
+         {% endautoescape %}
         </select>
         <label for="newMail">Mail: </label>
         <input type="email" name="email" value="{{email}}" id="newMail" placeholder="Email.." required/>

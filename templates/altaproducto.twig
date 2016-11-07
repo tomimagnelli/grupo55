@@ -22,9 +22,11 @@
     <label for="categoria_id">Categor&iacute;a: </label>
     <select name="categoria_id" id="categoria_id">
     <option value="" selected="selected">Seleccione</option>
+    {% autoescape 'html' %}
      {% for categoria in categorias %}
         <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
      {% endfor %}
+     {% endautoescape %}
     </select>
     <label for="descripcion">Descripcion:</label>
     <input type="text" id="descripcion" name="descripcion" placeholder="Descripcion del producto..." required>

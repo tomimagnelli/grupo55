@@ -9,9 +9,11 @@
     <label for="producto">Seleccione el producto: </label>
     <select id="producto" name="producto" required>
      <option value="" selected="selected">Seleccione</option>
+     {% autoescape 'html' %}
      {% for producto in productos %}
      <option value="{{ producto.id }}">{{ producto.nombre }} | {{ producto.marca}}</option>
      {% endfor %}
+     {% endautoescape %}
     </select>
     <label for="habilitado">Habilitado </label>
     <select id="habilitado" name="habilitado" required>

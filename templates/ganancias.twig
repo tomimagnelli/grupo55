@@ -4,46 +4,53 @@
 
 <input type="text" id="botoninfo "name="botoninfo" value='{{ desde|date("d/m/Y") }} a {{ hasta|date("d/m/Y") }}'></input>
 
-	{% set totali = 0 %}
-	{% set canti = 0 %}
-	{% for ingreso_detalle in ingresos %}
-
-		{% if  ingreso_detalle.fecha|date("d/m/Y") >= desde|date("d/m/Y")  and ingreso_detalle.fecha|date("d/m/Y") <= hasta|date("d/m/Y") %}
-				{% set canti = canti + '1'%}
-				{% set actual = (ingreso_detalle.preciounitario * ingreso_detalle.cantidad) %}
-				{% set totali = totali + actual %}
-		{% endif %}
-
-	{% endfor%}
 	<table>
-	<th id="canti">Ganancias entre las fechas:</th>
-	<th id="cant totali"> {{ canti }} </th>
+
 	<th id="toti">Total recaudado en ganancias:</th>
-	<th id="sum totali"> $ {{ totali }} </th>
+	<th id="sum totali"> $ {{ sumaingresosdetalle }} </th>
 
-	{% set total = 0 %}
-	{% set cant = 0 %}
-	{% for egreso_detalle in egresos %}
-
-		{% if  egreso_detalle.fecha|date("d/m/Y") >= desde|date("d/m/Y")  and egreso_detalle.fecha|date("d/m/Y") <= hasta|date("d/m/Y") %}
-				{% set cant = cant + '1'%}
-				{% set actual = (egreso_detalle.preciounitario * egreso_detalle.cantidad) %}
-				{% set total = total + actual %}
-		{% endif %}
-
-	{% endfor%}
-	<table>
-	<th id="cant">Gastos ente las fechas:</th>
-	<th id="cant total"> {{ cant }} </th>
-	<th id="tot">Total invertido en compras:</th>
-	<th id="suma total"> $ {{ total }} </th>
+	
+	<table> 
+	<th id="tot">Total de egresos en compras:</th>
+	<th id="suma total"> $ {{ sumaegresosdetalle }} </th>
 
 	</table>
 
 	<table>
-	<th id="resumen">Resumen</th>
-	<th id="resumentotal"> $ {{ totali }} - $ {{ total }} = $ {{ totali - total }}</th>
+	<th id="resumen">Balance</th>
+	<th id="resumentotal"> $ {{ total }}</th>
 	</table>
+
+	<table>
+	<tr>
+		<th>Producto</th>
+		<th>Cantidad vendida desde {{ desde|date("d/m/Y") }} hasta {{ hasta|date("d/m/Y") }}</th>
+	</tr>
+
+		{% autoescape 'html' %}
+		{% for producto in productos%}
+		<tr>
+			<td>{{ producto.name }}</td>
+			<td>{{ producto.y }} </td>
+		</tr>
+		{% endfor %}
+		{% endautoescape %}
+	
+	</table>
+
+	<script type="text/javascript">
+	$(function () {
+			Highcharts.chart('container',{{json|json_encode|raw}});
+		})
+		</script>
+		<script type="text/javascript">
+$(function () {
+    Highcharts.chart('container2',{{json2|json_encode|raw}});
+  })
+  </script>
+	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+	<div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
 
 	
 

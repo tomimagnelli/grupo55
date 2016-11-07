@@ -22,6 +22,11 @@ class PedidoController {
 
     }
 
+    public function pedidosEntreFechas($app, $desde, $hasta,$userid){ 
+    $pedidosentre = PedidoResource::getInstance()-> buscar($desde, $hasta, $userid);
+
+    echo $app->view->render( "pedidosEntreFechas.twig", array('pedidos' => ($pedidosentre),'productos' => (ProductoResource::getInstance()->get()),'desde' => ($desde), 'hasta' => ($hasta), 'estados' => (EstadoResource::getInstance()->get())));
+  }
 
   public function deletePedido($app, $id) {
     $app->applyHook('must.be.administrador.or.gestion');
@@ -73,14 +78,49 @@ class PedidoController {
       }
 
    public function cancelarPedido($app, $id) {
-    $app->applyHook('must.be.administrador.or.gestion');
-    if (PedidoResource::getInstance()->cancelar($id)) {
-      $app->flash('success', 'Pedido cancelado');
-    } else {
-      $app->flash('error', 'No se pudo cancelar');
-    }
-    $app->redirect('/pedidos/page?id=1');
-  }
+
+
+          $app->applyHook('must.be.administrador.or.gestion');
+          if (PedidoResource::getInstance()->cancelar($id)) {
+               $app->flash('success', 'Pedido cancelado');
+          } 
+          else {
+             $app->flash('error', 'No se pudo cancelar');
+          }
+        $app->redirect('/pedidos/page?id=1');
+
+   }
+
+   public function cancelarPedidoUsuario($app, $id, $userId) {
+
+          $pedido = PedidoResource::getInstance()->get($id);
+        $fechapedido = $pedido->getFecha()->format('Y-m-d H:i:s');
+        $fechaactual = (new \DateTime())->format('Y-m-d H:i:s');
+  
+         $minutos = (strtotime($fechaactual)-strtotime($fechapedido))/60;
+         $minutos = abs($minutos); $minutos = floor($minutos);
+
+         if ($minutos > 30) {
+            $app->flash('error', 'No se puede cancelar el pedido, pasaron mas de 30 min');
+            $app->redirect('/pedidosUsuario/page?id=1&userId=' .$userId);
+         }
+
+        else {
+
+          
+          if (PedidoResource::getInstance()->cancelar($id)) {
+               $app->flash('success', 'Pedido cancelado');
+          } 
+          else {
+             $app->flash('error', 'No se pudo cancelar');
+          }
+        $app->redirect('/pedidosUsuario/page?id=1&userId=' .$userId);
+
+        }
+
+   }
+
+    
 
 
 }

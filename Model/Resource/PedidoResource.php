@@ -126,6 +126,26 @@ public function cancelar($id)
        return $this->get();
 }
 
+  public function buscar ($desde, $hasta, $userid){
+
+
+          $query_string = " SELECT p FROM Model\Entity\Pedido p
+                            WHERE (p.fecha_alta >= :fechadesde) and (p.fecha_alta <= :fechahasta)
+                            and (p.usuario = :userId)";
+
+          $query = $this->getEntityManager()->createQuery($query_string);
+
+          $query->setParameter('fechadesde',$desde);
+          $query->setParameter('fechahasta',$hasta);
+          $query->setParameter('userId',$userid);
+
+
+          return $query->getResult();
+
+      }
+
+
+
 
    }
 

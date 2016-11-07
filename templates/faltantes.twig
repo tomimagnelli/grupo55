@@ -9,6 +9,7 @@
 		    <th id="Stock">STOCK</th>
 		    <th id="Stockmin">STOCKMINIMO</th>
 		  </tr>
+		  {% autoescape 'html' %}
 			{% for producto in productos.iterator %}
 				<tr id="{{ producto.id }}">
 					<td>{{ producto.nombre }}</td>
@@ -17,6 +18,7 @@
 					<td>{{ producto.stock_minimo }}</td>
 				</tr>
 			{% endfor %}
+			{% endautoescape %}
 		  </table>
 {% include 'paginacion/paginacionFaltantes.twig' with {'pagesCount' : pagesCount} %}
 {% endblock %}

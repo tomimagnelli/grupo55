@@ -26,9 +26,11 @@
     <label for="categoria_id">Categor&iacute;a: </label>
     <select name="categoria_id" id="categoria_id" required>
     <option value="" >Seleccione</option>
+      {% autoescape 'html' %}
      {% for categoria in categorias %}
         <option {% if producto.categoria_id.id == categoria.id %}selected="selected" {% endif %} value="{{ categoria.id }}">{{ categoria.nombre }}</option>
      {% endfor %}
+     {% endautoescape %}
     </select>
 
     <label for="editDescripcion">Descripcion: </label>

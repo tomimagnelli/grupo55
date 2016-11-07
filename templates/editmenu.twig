@@ -1,0 +1,42 @@
+{% extends "layout.twig" %}
+
+{% block contenido %}
+
+<form class="formEditCompra" method="post" action="editMenu" enctype="multipart/form-data">
+  <fieldset class="fieldAltaProd" >
+  <legend>Editar Menu</legend>
+
+	<label>Fecha: </label>
+  <br>
+  	<input type="date" name="fecha" placeholder=  value="{{ menu.fecha|date("d/m/Y") }}" required></label>
+    <br>
+  	<label>Producto:</label><br>
+    <select name="producto" id="producto">
+    <option value="">Seleccione</option>
+     {% autoescape 'html' %}
+     {% for producto in productos %}
+        <option {% if menu.producto.id == producto.id %}selected="selected" {% endif %} value="{{ producto.id }}">{{ producto.nombre }} {{ producto.marca }}
+        </option>
+     {% endfor %}
+     {% endautoescape %}
+    </select>
+    <br>
+    <label for="habilitado">Habilitado </label> <br>
+        <select name="habilitado" id="habilitado" required>
+         <option value="">Seleccione</option>
+         <option {% if menu.habilitado == 0 %}selected="selected" {% endif %} value="0">Si</option>
+         <option {% if menu.habilitado == 1 %}selected="selected" {% endif %}value="1">No</option>
+        </select>
+
+    
+    <input type="hidden" name="menuid" value="{{ menu.id }}"/>
+
+    
+<br>
+
+     <input type="submit" value="Confirmar"/>
+  </fieldset>
+
+</form>
+
+{% endblock %}

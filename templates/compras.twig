@@ -17,6 +17,7 @@
 		<th>ACCIONES</th>
 
 	</tr>
+		{% autoescape 'html' %}
 		{% for compra in compras %}
 		  <tr id="{{ compra.id }}">
 				<td>{{ compra.proveedor }}</td>
@@ -32,6 +33,7 @@
 				</td>
 			</tr>
 		{% endfor %}
+		{% endautoescape %}
 	</table>
 
 {% include 'paginacion/paginacionCompras.twig' with {'pagesCount' : pagesCount} %}
