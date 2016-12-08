@@ -21,8 +21,9 @@
     <input type="file" name="myFileInfo" id="myFileInfo" value="{{ baseUrl() }}/{{ compra.factura }}">
     <input type="hidden" name="compraid" value="{{ compra.id }}"/>
 
-    
+
 <br>
+<input type="hidden" name="token" value={{token}}>
 
      <input type="submit" value="Confirmar"/>
   </fieldset>

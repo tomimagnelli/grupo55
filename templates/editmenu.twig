@@ -27,11 +27,12 @@
          <option {% if menu.habilitado == 0 %}selected="selected" {% endif %} value="0">Si</option>
          <option {% if menu.habilitado == 1 %}selected="selected" {% endif %}value="1">No</option>
         </select>
+        <input type="hidden" name="token" value={{token}}>
 
-    
+
     <input type="hidden" name="menuid" value="{{ menu.id }}"/>
 
-    
+
 <br>
 
      <input type="submit" value="Confirmar"/>

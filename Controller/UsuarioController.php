@@ -14,13 +14,14 @@ class UsuarioController {
     echo $app->view->render( "users.twig", array('usuarios' => (UsuarioResource::getInstance()->get()), 'ubicaciones' => (UbicacionResource::getInstance()->get())));
   }
 
-  public function cargaUbicaciones($app){
+  public function cargaUbicaciones($app, $token){
       $app->applyHook('must.be.administrador');
-      echo $app->view->render( "altausuario.twig", array('ubicaciones' => (UbicacionResource::getInstance()->get())));
+      echo $app->view->render( "altausuario.twig", array('ubicaciones' => (UbicacionResource::getInstance()->get()), 'token'=>$token));
 
     }
 
-  public function newUsuario($app,$user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id = null,$habilitado) {
+  public function newUsuario($app,$user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id = null,$habilitado,$token) {
+    CSRF::getInstance()->control($app,$token);
     $app->applyHook('must.be.administrador');
     $errors = [];
       if (!Validator::hasLength(45, $nombre)) {
@@ -76,7 +77,8 @@ class UsuarioController {
 
   }
 
-  public function editUsuario($app,$user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id = null,$habilitado,$id) {
+  public function editUsuario($app,$user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id = null,$habilitado,$id,$token) {
+    CSRF::getInstance()->control($app,$token);
     $app->applyHook('must.be.administrador');
 
     $errors = [];
@@ -135,7 +137,8 @@ class UsuarioController {
   }
 
 
-  public function deleteUsuario($app, $id) {
+  public function deleteUsuario($app, $id,$token) {
+    CSRF::getInstance()->control($app,$token);
     $app->applyHook('must.be.administrador');
     if (UsuarioResource::getInstance()->delete($id)) {
       $app->flash('success', 'El usuario ha sido eliminado exitosamente.');
@@ -145,11 +148,11 @@ class UsuarioController {
     $app->redirect('/users/page?id=1');
   }
 
-  public function showUsuario($app, $id){
+  public function showUsuario($app, $id, $token){
     $app->applyHook('must.be.administrador');
     $user = UsuarioResource::getInstance()->get($id);
     $ubicacion = UsuarioResource::getInstance()->ubicacion($id);
-    echo $app->view->render( "edituser.twig", array('usuario' => ($user), 'ubicacionUser' => ($ubicacion), 'ubicaciones' => (UbicacionResource::getInstance()->get())));
+    echo $app->view->render( "edituser.twig", array('usuario' => ($user), 'ubicacionUser' => ($ubicacion), 'ubicaciones' => (UbicacionResource::getInstance()->get()),'token'=>$token));
   }
 
 

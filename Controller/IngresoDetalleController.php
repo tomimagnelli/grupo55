@@ -15,18 +15,18 @@ use Model\Resource\TipoIngresoResource;
 class IngresoDetalleController {
 
 
-   public function showAltaVenta($app){
-    echo $app->view->render( "altaventa.twig", array('productos' => (ProductoResource::getInstance()->get()), 'tiposingreso' => (TipoIngresoResource::getInstance()->get())));
+   public function showAltaVenta($app,$token){
+    echo $app->view->render( "altaventa.twig", array('productos' => (ProductoResource::getInstance()->get()), 'tiposingreso' => (TipoIngresoResource::getInstance()->get()),'token' =>$token));
   }
 
-  public function showEditVenta($app,$id){
+  public function showEditVenta($app,$id,$token){
    $ingreso_detalle = IngresoDetalleResource::getInstance()->get($id);
-   echo $app->view->render( "editingreso.twig", array('ingreso_detalle' => ($ingreso_detalle),'productos' => (ProductoResource::getInstance()->get()), 'tiposingreso' => (TipoIngresoResource::getInstance()->get())));
+   echo $app->view->render( "editingreso.twig", array('ingreso_detalle' => ($ingreso_detalle),'productos' => (ProductoResource::getInstance()->get()), 'tiposingreso' => (TipoIngresoResource::getInstance()->get()),'token' =>$token));
  }
 
 
- 
-    public function showBusquedaIngresos($app, $desde, $hasta){ 
+
+    public function showBusquedaIngresos($app, $desde, $hasta){
     $ingresosentre = IngresoDetalleResource::getInstance()-> buscar($desde, $hasta);
     $sumaingresos = IngresoDetalleResource::getInstance()-> sumaingresos($ingresosentre);
     $pedidos = IngresoDetalleResource::getInstance()-> buscarpedidos($desde, $hasta);
@@ -42,7 +42,9 @@ class IngresoDetalleController {
     }
 
 
-    public function newIngresoDetalle($app,$ingreso_tipo_id,$producto_id,$cantidad,$precio_unitario, $descripcion) {
+    public function newIngresoDetalle($app,$ingreso_tipo_id,$producto_id,$cantidad,$precio_unitario, $descripcion,$token) {
+      CSRF::getInstance()->control($app,$token);
+
         $app->applyHook('must.be.administrador.or.gestion');
 
 
@@ -56,7 +58,8 @@ class IngresoDetalleController {
 
       }
 
-    public function deleteIngreso($app, $id) {
+    public function deleteIngreso($app, $id,$token) {
+      CSRF::getInstance()->control($app,$token);
     $app->applyHook('must.be.administrador');
     if (IngresoDetalleResource::getInstance()->delete($id)) {
       $app->flash('success', 'Venta eliminada exitosamente.');
@@ -66,7 +69,9 @@ class IngresoDetalleController {
     $app->redirect('/ingresos/page?id=1');
   }
 
-  public function edit($app,$producto,$cantidad,$precio_unitario,$ingreso_tipo_id,$descripcion,$id) {
+  public function edit($app,$producto,$cantidad,$precio_unitario,$ingreso_tipo_id,$descripcion,$id,$token) {
+    CSRF::getInstance()->control($app,$token);
+
     $app->applyHook('must.be.administrador');
 
 
@@ -92,7 +97,7 @@ class IngresoDetalleController {
          $app->applyHook('must.be.administrador');
           if (IngresoDetalleResource::getInstance()->buscarIngresos($id)) {
                 $app->flash('success', 'Busqueda finalizada');
-          } 
+          }
           else {
                $app->flash('error', 'No se encontraron resultados');
           }

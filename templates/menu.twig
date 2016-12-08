@@ -12,7 +12,7 @@
 
 <br>
 
-<a id="notificar" href="{{ baseUrl() }}/bot">Notificar </a>
+<a id="notificar" href="{{ baseUrl() }}/bot?token={{token}}">Notificar </a>
 
 
 <table>
@@ -30,7 +30,7 @@
 				<td>
 					<a href="editMenu?id={{ menu.id }}"> <img title="Editar" alt="Editar" src="{{ baseUrl() }}/uploads/editar.png"></a>
 
-					<a href="delete?id={{ menu.id }}"> <img title="Eliminar" alt="Eliminar" src="{{ baseUrl() }}/uploads/eliminar.png"></a>
+					<a href="delete?id={{ menu.id }}&token={{token}}"> <img title="Eliminar" alt="Eliminar" src="{{ baseUrl() }}/uploads/eliminar.png"></a>
 				</td>
         {% if menu.habilitado == 0 %}
 				<td>Si</td>

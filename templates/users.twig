@@ -7,7 +7,7 @@
  <form action="{{ baseUrl() }}/users/altausuario" target="rightframe" method="get">
 
  <button type="submit">AGREGAR UN USUARIO</button><br>
-  
+
 </form>
 
 <table>
@@ -34,7 +34,7 @@
 				<td>
 					<a href="edituser?id={{ usuario.id }}"> <img title="Editar" alt="Editar" src="{{ baseUrl() }}/uploads/editar.png"></a>
 
-					<a href="delete?id={{ usuario.id }}"> <img title="Eliminar" alt="Eliminar" src="{{ baseUrl() }}/uploads/eliminar.png"></a>
+					<a href="delete?id={{ usuario.id }}&token={{token}}"> <img title="Eliminar" alt="Eliminar" src="{{ baseUrl() }}/uploads/eliminar.png"></a>
 				</td>
 				{% if usuario.habilitado == 0 %}
 				<td>Si</td>

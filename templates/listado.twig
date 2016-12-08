@@ -26,7 +26,7 @@
 				<td>
 					<a href="editProducto?id={{ producto.id }}"><img title="Editar" alt="Editar" src="{{ baseUrl() }}/uploads/editar.png"></a>
 
-					<a href="delete?id={{ producto.id }}"><img title="Eliminar" alt="Eliminar" src="{{ baseUrl() }}/uploads/eliminar.png"></a>
+					<a href="delete?id={{ producto.id }}&token={{token}}"><img title="Eliminar" alt="Eliminar" src="{{ baseUrl() }}/uploads/eliminar.png"></a>
 				</td>
 			</tr>
 		{% endfor %}

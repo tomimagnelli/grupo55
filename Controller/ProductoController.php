@@ -16,11 +16,12 @@ class ProductoController {
     echo $app->view->render( "stockminimo.twig", array('productos' => (ProductoResource::getInstance()->get()), 'categorias' => (CategoriaResource::getInstance()->get())));
   }
 
-  public function showAltaProducto($app){
-    echo $app->view->render( "altaproducto.twig", array('categorias' => (CategoriaResource::getInstance()->get())));
+  public function showAltaProducto($app,$token){
+    echo $app->view->render( "altaproducto.twig", array('categorias' => (CategoriaResource::getInstance()->get()),'token'=>$token));
   }
 
-  public function newProducto($app,$nombre,$marca,$stock,$stock_minimo,$proveedor,$precio_venta_unitario,$categoria_id = null,$descripcion) {
+  public function newProducto($app,$nombre,$marca,$stock,$stock_minimo,$proveedor,$precio_venta_unitario,$categoria_id = null,$descripcion,$token) {
+    CSRF::getInstance()->control($app,$token);
     $app->applyHook('must.be.administrador.or.gestion');
 
     $errors = [];
@@ -61,7 +62,8 @@ class ProductoController {
 
   }
 
-  public function editProducto($app,$nombre,$marca,$stock,$stock_minimo,$proveedor,$precio_venta_unitario,$categoria_id = null,$descripcion,$id) {
+  public function editProducto($app,$nombre,$marca,$stock,$stock_minimo,$proveedor,$precio_venta_unitario,$categoria_id = null,$descripcion,$id,$token) {
+    CSRF::getInstance()->control($app,$token);
     $app->applyHook('must.be.administrador.or.gestion');
 
     $errors = [];
@@ -102,7 +104,8 @@ class ProductoController {
 
   }
 
-  public function deleteProducto($app, $id) {
+  public function deleteProducto($app, $id,$token) {
+    CSRF::getInstance()->control($app,$token);
     $app->applyHook('must.be.administrador.or.gestion');
     if (ProductoResource::getInstance()->delete($id)) {
       $app->flash('success', 'El producto ha sido eliminado exitosamente.');
@@ -112,11 +115,11 @@ class ProductoController {
     $app->redirect('/listado/page?ids=1');
   }
 
-  public function showProducto($app, $id){
+  public function showProducto($app, $id,$token){
     $app->applyHook('must.be.administrador.or.gestion');
     $producto = ProductoResource::getInstance()->get($id);
     $categoria = ProductoResource::getInstance()->categoria($id);
-    echo $app->view->render( "editproducto.twig", array('producto' => ($producto), 'categoriaProd' => ($categoria), 'categorias' => (CategoriaResource::getInstance()->get())));
+    echo $app->view->render( "editproducto.twig", array('producto' => ($producto), 'categoriaProd' => ($categoria), 'categorias' => (CategoriaResource::getInstance()->get()),'token'=>$token));
   }
 
 }

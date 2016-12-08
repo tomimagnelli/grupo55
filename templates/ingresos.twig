@@ -5,7 +5,7 @@
 <form action="{{ baseUrl() }}/ingresos/altaventa" target="rightframe" method="get">
 
  <button type="submit">NUEVA VENTA</button><br>
-  
+
 </form>
 
 <table>
@@ -30,7 +30,7 @@
 				<td>
 				<a href="editingreso?id={{ ingreso_detalle.id }}"><img title="Editar" alt="Editar" src="{{ baseUrl() }}/uploads/editar.png"></a>
 
-				<a href="deleteVenta?id={{ ingreso_detalle.id }}"><img title="Eliminar" alt="Eliminar" src="{{ baseUrl() }}/uploads/eliminar.png"></a>
+				<a href="deleteVenta?id={{ ingreso_detalle.id }}&token={{token}}"><img title="Eliminar" alt="Eliminar" src="{{ baseUrl() }}/uploads/eliminar.png"></a>
 				</td>
 
 		{% endfor %}

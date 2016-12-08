@@ -12,12 +12,14 @@ use Model\Resource\CompraResource;
 
 class EgresoDetalleController {
 
-   public function showEditEgreso($app,$id){
+   public function showEditEgreso($app,$id,$token){
     $egreso_detalle = EgresoDetalleResource::getInstance()->get($id);
-    echo $app->view->render( "editegreso.twig", array('egreso_detalle' => ($egreso_detalle),'productos' => (ProductoResource::getInstance()->get()), 'tiposegreso' => (TipoEgresoResource::getInstance()->get())));
+    echo $app->view->render( "editegreso.twig", array('egreso_detalle' => ($egreso_detalle),'productos' => (ProductoResource::getInstance()->get()), 'tiposegreso' => (TipoEgresoResource::getInstance()->get()),'token' =>$token));
   }
 
-   public function newEgresoDetalle($app,$compra, $producto,$cantidad,$precio_unitario, $egreso_tipo_id) {
+   public function newEgresoDetalle($app,$compra, $producto,$cantidad,$precio_unitario, $egreso_tipo_id,$token) {
+     CSRF::getInstance()->control($app,$token);
+
         $app->applyHook('must.be.administrador.or.gestion');
 
 
@@ -31,14 +33,16 @@ class EgresoDetalleController {
 
       }
 
-    public function showBusquedaEgresos($app, $desde, $hasta){ 
+    public function showBusquedaEgresos($app, $desde, $hasta){
     $comprasentre = EgresoDetalleResource::getInstance()-> buscar($desde, $hasta);
     $sumaegresos = EgresoDetalleResource::getInstance()-> sumaEgresos($comprasentre);
 
     echo $app->view->render( "busquedaEgresos.twig", array('compras' => (CompraResource::getInstance()->get()),'egresos' => (EgresoDetalleResource::getInstance()->get()),'comprasentre' => ($comprasentre),'productos' => (ProductoResource::getInstance()->get()),'egresosdetalle' => (EgresoDetalleResource::getInstance()->get()),'sumaegresos' => ($sumaegresos), 'desde' => ($desde), 'hasta' => ($hasta), 'tiposegreso' => (TipoEgresoResource::getInstance()->get())));
   }
-  
-    public function edit($app,$producto,$cantidad,$precio_unitario,$egreso_tipo_id,$id) {
+
+    public function edit($app,$producto,$cantidad,$precio_unitario,$egreso_tipo_id,$id,$token) {
+      CSRF::getInstance()->control($app,$token);
+
        $app->applyHook('must.be.administrador');
 
 
@@ -59,7 +63,9 @@ class EgresoDetalleController {
 
    }
 
-     public function deleteEgreso($app, $id) {
+     public function deleteEgreso($app, $id,$token) {
+       CSRF::getInstance()->control($app,$token);
+
     $app->applyHook('must.be.administrador');
     if (EgresoDetalleResource::getInstance()->delete($id)) {
       $app->flash('success', 'Egreso eliminado exitosamente.');
