@@ -20,6 +20,16 @@ class UsuarioController {
 
     }
 
+  public function login($username, $pass)
+    {
+       if(UsuarioResource::getInstance()->login($username,$pass)){
+        $_SESSION['csrf_token'] = rand(0,999999);
+        return UsuarioResource::getInstance()->login($username,$pass);
+       }
+       else{
+        return false;
+       }
+    }
   public function newUsuario($app,$user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id = null,$habilitado) {
     $app->applyHook('must.be.administrador');
     $errors = [];

@@ -2,7 +2,7 @@
 
 {% block contenido %}
 
-<input type="text" id="botoninfo "name="botoninfo" value='{{ desde|date("d/m/Y") }} a {{ hasta|date("d/m/Y") }}'></input>
+<h4>{{ desde|date("d/m/Y") }} a {{ hasta|date("d/m/Y") }}</h4>
 <table>
 	<tr>
 		<th id="compra">Compra</th>
@@ -33,10 +33,10 @@
 
 
 	<table>
-
+	<tr>
 	<th id="tot">Total recaudado:</th>
-	<th id="suma total"> $ {{ sumaegresos }} </th>
-
+	<th id="suma-total"> $ {{ sumaegresos }} </th>
+	</tr>
 	</table>
 	
 

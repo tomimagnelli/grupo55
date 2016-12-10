@@ -39,8 +39,9 @@ $app->get('/', '\Controller\HomeController:showHome')->setParams(array($app, 'me
 $app->post('/', function() use ($app, $userResource) {
 	  $name = $app->request->post('usuario');
     $pass = $app->request->post('contraseña');
-
-    $user = $userResource->login($name, $pass);
+    $userController = new UsuarioController();
+    $user = $userController->login($name,$pass);
+  
     $habilitado = $userResource->estaHabilitado($name, $pass);
     if ($user) {
       if ($habilitado) {

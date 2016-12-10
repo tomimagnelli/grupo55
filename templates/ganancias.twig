@@ -2,23 +2,26 @@
 
 {% block contenido %}
 
-<input type="text" id="botoninfo "name="botoninfo" value='{{ desde|date("d/m/Y") }} a {{ hasta|date("d/m/Y") }}'></input>
+<input type="text" id="botoninfo" name="botoninfo" value='{{ desde|date("d/m/Y") }} a {{ hasta|date("d/m/Y") }}'>
 
 	<table>
-
+	<tr>
 	<th id="toti">Total recaudado en ganancias:</th>
-	<th id="sum totali"> $ {{ sumaingresosdetalle }} </th>
-
-	
+	<th id="sum-totali"> $ {{ sumaingresosdetalle }} </th>
+	</tr>
+	</table>
 	<table> 
+	<tr>
 	<th id="tot">Total de egresos en compras:</th>
-	<th id="suma total"> $ {{ sumaegresosdetalle }} </th>
-
+	<th id="suma-total"> $ {{ sumaegresosdetalle }} </th>
+	</tr>
 	</table>
 
 	<table>
+	<tr>
 	<th id="resumen">Balance</th>
 	<th id="resumentotal"> $ {{ total }}</th>
+	</tr>
 	</table>
 
 	<table>
