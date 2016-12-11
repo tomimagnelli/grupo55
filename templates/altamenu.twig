@@ -2,10 +2,10 @@
 
 {% block contenido %}
 
-<form class="formAltaProd" for="formAltaProd" method="post" action="altamenu" enctype="multipart/form-data">
+<form class="formAltaProd" method="post" action="altamenu" enctype="multipart/form-data">
   <fieldset class="fieldAltaProd"  >
   <label for="fecha">Fecha:</label>
-    <input type="date" name="fecha"  id="fecha" required>
+    <input type="date" name="fecha"  id="fecha" required />
     <label for="producto">Seleccione el producto: </label>
     <select id="producto" name="producto" required>
      <option value="" selected="selected">Seleccione</option>
@@ -22,6 +22,7 @@
      <option value="1">No</option>
     </select>
 
+    <input type="hidden" name="token" value={{token}} />
 
      <input type="submit" value="Confirmar"/>
   </fieldset>

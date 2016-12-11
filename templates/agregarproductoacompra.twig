@@ -13,10 +13,10 @@
     </select>
 
     <label>Cantidad:</label>
-    <input type="number" name="cantidad" placeholder="Ingrese cantidad" required>
-    <input type="hidden" name="compra" value="{{ compra.id }}">
+    <input type="number" name="cantidad" placeholder="Ingrese cantidad" required />
+    <input type="hidden" name="compra" value="{{ compra.id }}" />
     <label>Precio unitario:</label>
-    <input type="number" name="precio_unitario" placeholder="Ingrese cantidad" required>
+    <input type="number" name="precio_unitario" placeholder="Ingrese cantidad" required />
     <label>Tipo egreso: </label>
     <select name="egreso_tipo_id">
     <option value="" selected="selected">Seleccione</option>
@@ -25,10 +25,12 @@
        {% endfor %}
 
     </select>
+    <input type="hidden" name="token" value={{token}} />
+
   	<input type="submit" value="Agregar">
 
   </fieldset>
-  
+
 </form>
 
 

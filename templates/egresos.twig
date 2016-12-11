@@ -20,7 +20,7 @@
 				<td>{{ egreso_detalle.preciounitario }}</td>
 				<td>
 					<a href="editegreso?id={{ egreso_detalle.id }}"><img title="Editar" alt="Editar" src="{{ baseUrl() }}/uploads/editar.png"></a>
-					<a href="delete?id={{ egreso_detalle.id }}"><img title="Eliminar" alt="Eliminar" src="{{ baseUrl() }}/uploads/eliminar.png"></a>
+					<a href="delete?id={{ egreso_detalle.id }}&token={{token}}"><img title="Eliminar" alt="Eliminar" src="{{ baseUrl() }}/uploads/eliminar.png"></a>
 				</td>
 
 		{% endfor %}

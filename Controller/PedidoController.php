@@ -16,19 +16,21 @@ class PedidoController {
 
 
 
-  public function showAltaPedido($app){
+  public function showAltaPedido($app,$token){
       $app->applyHook('must.be.online');
-      echo $app->view->render( "altaPedido.twig");
+      echo $app->view->render( "altaPedido.twig", array('token' => $token));
 
     }
 
-    public function pedidosEntreFechas($app, $desde, $hasta,$userid){ 
+    public function pedidosEntreFechas($app, $desde, $hasta,$userid){
     $pedidosentre = PedidoResource::getInstance()-> buscar($desde, $hasta, $userid);
 
     echo $app->view->render( "pedidosEntreFechas.twig", array('pedidos' => ($pedidosentre),'productos' => (ProductoResource::getInstance()->get()),'desde' => ($desde), 'hasta' => ($hasta), 'estados' => (EstadoResource::getInstance()->get())));
   }
 
-  public function deletePedido($app, $id) {
+  public function deletePedido($app, $id,$token) {
+    CSRF::getInstance()->control($app,$token);
+
     $app->applyHook('must.be.administrador.or.gestion');
     if (PedidoResource::getInstance()->delete($id)) {
       $app->flash('success', 'El pedido ha sido eliminado exitosamente.');
@@ -38,7 +40,9 @@ class PedidoController {
     $app->redirect('/pedidos/page?id=1');
   }
 
-  public function newPedido($app,$observacion,$userId) {
+  public function newPedido($app,$observacion,$userId,$token) {
+    CSRF::getInstance()->control($app,$token);
+
        $app->applyHook('must.be.online');
 
          if (PedidoResource::getInstance()->insert($observacion,$userId)){
@@ -50,7 +54,9 @@ class PedidoController {
 
      }
 
-     public function enviarPedido($app, $id, $userId) {
+     public function enviarPedido($app, $id, $userId,$token) {
+       CSRF::getInstance()->control($app,$token);
+
        $app->applyHook('must.be.online');
        if (PedidoResource::getInstance()->enviar($id)) {
          $app->flash('success', 'El pedido ha sido enviado exitosamente.');
@@ -60,7 +66,10 @@ class PedidoController {
        $app->redirect('/pedidosUsuario/page?id=1&userId=' .$userId);
      }
 
-     public function aceptarPedido($app, $id) {
+     public function aceptarPedido($app, $id,$token,$token) {
+       CSRF::getInstance()->control($app,$token);
+
+       CSRF::getInstance()->control($app,$token);
     $app->applyHook('must.be.administrador.or.gestion');
     if(PedidoDetalleResource::getInstance()->aceptarStock($id)){
        PedidoDetalleResource::getInstance()->descontarStock($id);
@@ -77,13 +86,15 @@ class PedidoController {
     }
       }
 
-   public function cancelarPedido($app, $id) {
+   public function cancelarPedido($app, $id,$token) {
+     CSRF::getInstance()->control($app,$token);
+
 
 
           $app->applyHook('must.be.administrador.or.gestion');
           if (PedidoResource::getInstance()->cancelar($id)) {
                $app->flash('success', 'Pedido cancelado');
-          } 
+          }
           else {
              $app->flash('error', 'No se pudo cancelar');
           }
@@ -91,12 +102,14 @@ class PedidoController {
 
    }
 
-   public function cancelarPedidoUsuario($app, $id, $userId) {
+   public function cancelarPedidoUsuario($app, $id, $userId,$token) {
+     CSRF::getInstance()->control($app,$token);
+
 
           $pedido = PedidoResource::getInstance()->get($id);
         $fechapedido = $pedido->getFecha()->format('Y-m-d H:i:s');
         $fechaactual = (new \DateTime())->format('Y-m-d H:i:s');
-  
+
          $minutos = (strtotime($fechaactual)-strtotime($fechapedido))/60;
          $minutos = abs($minutos); $minutos = floor($minutos);
 
@@ -107,10 +120,10 @@ class PedidoController {
 
         else {
 
-          
+
           if (PedidoResource::getInstance()->cancelar($id)) {
                $app->flash('success', 'Pedido cancelado');
-          } 
+          }
           else {
              $app->flash('error', 'No se pudo cancelar');
           }
@@ -120,7 +133,7 @@ class PedidoController {
 
    }
 
-    
+
 
 
 }

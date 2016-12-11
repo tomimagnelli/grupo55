@@ -2,7 +2,7 @@
 
 {% block contenido %}
 
-<form class="formAltaProd" for="formAltaProd" method="post" action="agregarProductoPedido" enctype="multipart/form-data">
+<form class="formAltaProd" method="post" action="agregarProductoPedido" enctype="multipart/form-data">
   <fieldset class="fieldAltaProd"  >
   <label for="producto">Seleccione el producto: </label>
   <select id="producto" name="producto" required>
@@ -14,10 +14,12 @@
    {% endif %}
    {% endfor %}
   </select>
-  <input type="hidden" name="userId"  id="userId" value="{{session.id}}">
+  <input type="hidden" name="userId"  id="userId" value="{{session.id}}" />
   <input type="hidden" name="pedido" value="{{ pedido.id }}">
 
-  <input type="number" placeholder="Ingrese cantidad" name="cant">
+  <input type="number" placeholder="Ingrese cantidad" name="cant" />
+  <input type="hidden" name="token" value={{token}} />
+
 
      <input type="submit" value="Confirmar"/>
   </fieldset>

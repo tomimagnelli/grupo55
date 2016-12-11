@@ -6,7 +6,7 @@
  <form action="{{ baseUrl() }}/compras/altacompra" target="rightframe" method="get">
 
  <button type="submit">NUEVA COMPRA</button><br>
-  
+
 </form>
 
 <table>
@@ -27,7 +27,7 @@
 					<a href="egresos/page?user={{ compra.id }}&ids=1"> Ver productos agregados</a>
 					<a href="agregarproductoacompra?id={{ compra.id }}"> Agregar un producto </a>
 					<a href="editCompra?id={{ compra.id }}"> <img title="Editar compra" alt="Editar" src="{{ baseUrl() }}/uploads/editar.png"></a>
-					<a href="deleteCompra?id={{ compra.id }}"> <img title="Eliminar" alt="Eliminar" src="{{ baseUrl() }}/uploads/eliminar.png"></a>
+					<a href="deleteCompra?id={{ compra.id }}&token={{token}}"> <img title="Eliminar" alt="Eliminar" src="{{ baseUrl() }}/uploads/eliminar.png"></a>
 
 
 				</td>

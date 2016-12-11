@@ -16,13 +16,15 @@ class PedidoDetalleController {
 
 
 
-    public function showAgregarProdutcoPedido($app,$id){
+    public function showAgregarProdutcoPedido($app,$id,$token){
         $app->applyHook('must.be.online');
-        echo $app->view->render( "agregarProductoPedido.twig", array('menus' => (MenuDelDiaResource::getInstance() -> menusHoy()), 'pedido' => (PedidoResource::getInstance() -> get($id))));
+        echo $app->view->render( "agregarProductoPedido.twig", array('menus' => (MenuDelDiaResource::getInstance() -> menusHoy()), 'pedido' => (PedidoResource::getInstance() -> get($id)),'token' => $token));
 
       }
 
-      public function newProducto($app,$producto, $cant, $userId, $pedido) {
+      public function newProducto($app,$producto, $cant, $userId, $pedido,$token) {
+        CSRF::getInstance()->control($app,$token);
+
            $app->applyHook('must.be.online');
 
 

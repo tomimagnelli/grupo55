@@ -10,21 +10,23 @@ use Model\Resource\ProductoResource;
 class MenuController {
 
 
-  public function showAltaMenu($app){
+  public function showAltaMenu($app,$token){
       $app->applyHook('must.be.administrador');
-   
-      echo $app->view->render( "altamenu.twig", array('productos' => (ProductoResource::getInstance()->get()), 'hoy' =>(MenuDelDiaResource::getInstance()->hoy())));
+
+      echo $app->view->render( "altamenu.twig", array('productos' => (ProductoResource::getInstance()->get()), 'hoy' =>(MenuDelDiaResource::getInstance()->hoy()),'token'=>$token));
 
     }
 
-     public function showEditMenu($app, $id){
+     public function showEditMenu($app, $id,$token){
       $app->applyHook('must.be.administrador');
       $menu = MenuDelDiaResource::getInstance()->get($id);
-      echo $app->view->render( "editmenu.twig", array('menu' => ($menu),'productos' => (ProductoResource::getInstance()->get())));
+      echo $app->view->render( "editmenu.twig", array('menu' => ($menu),'productos' => (ProductoResource::getInstance()->get()),'token'=>$token));
 
     }
 
-    public function newMenu($app,$fecha, $producto,$habilitado) {
+    public function newMenu($app,$fecha, $producto,$habilitado,$token) {
+      CSRF::getInstance()->control($app,$token);
+
          $app->applyHook('must.be.administrador.or.gestion');
 
           if(ProductoResource::getInstance()->hayStock($producto)){
@@ -41,9 +43,11 @@ class MenuController {
          }
        }
 
-       public function editMenu($app,$fecha,$producto,$habilitado, $menuid){
+       public function editMenu($app,$fecha,$producto,$habilitado, $menuid,$token){
+         CSRF::getInstance()->control($app,$token);
 
-  
+
+
         if (MenuDelDiaResource::getInstance()->edit($fecha,$producto,$habilitado, $menuid)){
 
            $app->flash('success', 'El menu ha sido modificado exitosamente');
@@ -56,7 +60,9 @@ class MenuController {
       }
 
 
-     public function deleteMenu($app, $id) {
+     public function deleteMenu($app, $id,$token) {
+       CSRF::getInstance()->control($app,$token);
+
           $app->applyHook('must.be.administrador.or.gestion');
           if (MenuDelDiaResource::getInstance()->delete($id)) {
             $app->flash('success', 'El menu ha sido eliminado exitosamente.');

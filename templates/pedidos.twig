@@ -25,8 +25,8 @@
 			<td>
 					<a href="pedidosUsuarioProd/page?pid={{ pedido.id }}&id=1"> Ver productos agregados</a>
 					{% if pedido.estado.nombre == "Pendiente" %}
-					<a href="aceptar?id={{ pedido.id }}"> <img title="Aceptar pedido" alt="Aceptar" src="{{ baseUrl() }}/uploads/aceptar.jpg"></a>
-					<a href="cancelar?id={{ pedido.id }}"> <img title="Cancelar pedido" alt=Cancelar src="{{ baseUrl() }}/uploads/cancelar.jpg"></a>
+					<a href="aceptar?id={{ pedido.id }}&token={{token}}"> <img title="Aceptar pedido" alt="Aceptar" src="{{ baseUrl() }}/uploads/aceptar.jpg"></a>
+					<a href="cancelar?id={{ pedido.id }}&token={{token}}"> <img title="Cancelar pedido" alt=Cancelar src="{{ baseUrl() }}/uploads/cancelar.jpg"></a>
 					{% endif %}
 
 			</td>

@@ -6,7 +6,7 @@ use Model\Resource\ConfiguracionResource;
 
 class ConfigController {
 
-   public function showConfig($app){
+   public function showConfig($app,$token){
       $app->applyHook('must.be.administrador');
       $configResource = ConfiguracionResource::getInstance();
       echo $app->view->render( "config.twig",
@@ -16,10 +16,13 @@ class ConfigController {
       'tituloMenu' => ($configResource->get('tituloMenu')),
       'infoMenu' => ($configResource->get('infoMenu')),
       'imgMenu' => ($configResource->get('imgMenu')),
-      'paginacion' => ($configResource->get('paginacion'))));
+      'paginacion' => ($configResource->get('paginacion')),
+      'token'      => $token));
   }
 
- public function setPaginacion($app,$value) {
+ public function setPaginacion($app,$value,$token) {
+   CSRF::getInstance()->control($app,$token);
+
     $app->applyHook('must.be.administrador');
     ConfiguracionResource::getInstance()->edit('paginacion',$value);
     echo $app->redirect('/config');
@@ -44,7 +47,9 @@ public function setTituloDescripcion($app,$value) {
     }
   }
 
- public function setDescripcion($app,$titulo,$descripcion) {
+ public function setDescripcion($app,$titulo,$descripcion,$token) {
+   CSRF::getInstance()->control($app,$token);
+
     $app->applyHook('must.be.administrador');
   	$this->setTituloDescripcion($app,$titulo);
   	$this->setInfoDescripcion($app,$descripcion);
@@ -65,7 +70,9 @@ public function setImgMenu($app) {
     ConfiguracionResource::getInstance()->edit('imgMenu',$target_file);
 	}
   }
-  public function setMenu($app,$titulo) {
+  public function setMenu($app,$titulo,$token) {
+    CSRF::getInstance()->control($app,$token);
+
     $app->applyHook('must.be.administrador');
   	$this->setTituloMenu($app,$titulo);
   	$this->setImgMenu($app);

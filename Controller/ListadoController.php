@@ -52,7 +52,7 @@ class ListadoController {
         ));
     }
 
-    public function indexActionListado($app,$page = 1) {
+    public function indexActionListado($app,$page = 1,$token) {
         $app->applyHook('must.be.administrador.or.gestion');
         $productos = ProductoResource::getInstance()->get();
         $prodgrafico=ProductoResource::getInstance()->grafico();
@@ -64,11 +64,13 @@ class ListadoController {
             "productos"     => $paginator,
             "prodgrafico"  => $prodgrafico,
             "totalItems" => $totalItems,
-            "pagesCount" => $pagesCount
+            "pagesCount" => $pagesCount,
+            "token"      => $token
+
         ));
     }
 
-    public function indexActionIngresos($app,$page = 1) {
+    public function indexActionIngresos($app,$page = 1,$token) {
         $app->applyHook('must.be.administrador.or.gestion');
         $ingresos = IngresoDetalleResource::getInstance()->get();
         $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
@@ -78,11 +80,13 @@ class ListadoController {
         echo $app->view->render('ingresos.twig', array(
             "ingresos"     => $paginator,
             "totalItems" => $totalItems,
-            "pagesCount" => $pagesCount
+            "pagesCount" => $pagesCount,
+            "token"      => $token
+
         ));
     }
 
-    public function indexActionCompras($app,$page = 1) {
+    public function indexActionCompras($app,$page = 1,$token) {
         $app->applyHook('must.be.administrador.or.gestion');
         $compras = CompraResource::getInstance()->get();
         $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
@@ -92,12 +96,14 @@ class ListadoController {
         echo $app->view->render('compras.twig', array(
             "compras"     => $paginator,
             "totalItems" => $totalItems,
-            "pagesCount" => $pagesCount
+            "pagesCount" => $pagesCount,
+            "token"      => $token
+
         ));
     }
 
 
-    public function indexActionEgresos($app, $idCompra, $page = 1){
+    public function indexActionEgresos($app, $idCompra, $page = 1,$token){
       $app->applyHook('must.be.administrador.or.gestion');
       $egresos = EgresoDetalleResource::getInstance()->get();
       $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
@@ -108,11 +114,13 @@ class ListadoController {
           "egresos"     => $paginator,
           "totalItems" => $totalItems,
           "pagesCount" => $pagesCount,
-          "idCompra"   => $idCompra
+          "idCompra"   => $idCompra,
+          "token"      => $token
+
       ));
     }
 
-    public function indexActionUsuarios($app, $page = 1){
+    public function indexActionUsuarios($app, $page = 1, $token){
       $app->applyHook('must.be.administrador.or.gestion');
       $usuarios = UsuarioResource::getInstance()->get();
       $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
@@ -122,11 +130,12 @@ class ListadoController {
       echo $app->view->render('users.twig', array(
           "usuarios"     => $paginator,
           "totalItems" => $totalItems,
-          "pagesCount" => $pagesCount
+          "pagesCount" => $pagesCount,
+          "token"      => $token
       ));
     }
 
-    public function indexActionMenu($app, $page = 1){
+    public function indexActionMenu($app, $page = 1,$token){
       $app->applyHook('must.be.administrador.or.gestion');
       $menus = MenuDelDiaResource::getInstance()->get();
       $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
@@ -136,11 +145,13 @@ class ListadoController {
       echo $app->view->render('menu.twig', array(
           "menus"     => $paginator,
           "totalItems" => $totalItems,
-          "pagesCount" => $pagesCount
+          "pagesCount" => $pagesCount,
+          "token"      => $token
+
       ));
     }
 
-    public function indexActionPedidosUsuario($app, $page = 1, $userId){
+    public function indexActionPedidosUsuario($app, $page = 1, $userId,$token){
       $app->applyHook('must.be.administrador.or.online');
       $pedidos = PedidoResource::getInstance()->get();
       $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
@@ -150,7 +161,9 @@ class ListadoController {
       echo $app->view->render('pedidosUsuario.twig', array(
           "pedidos"     => $paginator,
           "totalItems" => $totalItems,
-          "pagesCount" => $pagesCount
+          "pagesCount" => $pagesCount,
+          "token"      => $token
+
       ));
     }
 
@@ -169,7 +182,7 @@ class ListadoController {
       ));
     }
 
-    public function indexActionPedidos($app, $page = 1){
+    public function indexActionPedidos($app, $page = 1,$token){
       $app->applyHook('must.be.administrador.or.online');
       $pedidos = PedidoResource::getInstance()->get();
       $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
@@ -179,7 +192,9 @@ class ListadoController {
       echo $app->view->render('pedidos.twig', array(
           "pedidos"     => $paginator,
           "totalItems" => $totalItems,
-          "pagesCount" => $pagesCount
+          "pagesCount" => $pagesCount,
+          "token"      => $token
+
       ));
     }
 

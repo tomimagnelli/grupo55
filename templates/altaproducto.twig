@@ -10,13 +10,13 @@
     <input type="text" name="marca" id="marca" placeholder="Marca..." required>
     <label for="stock">Cantidad de stock:</label>
     <input type="number" name="stock" id="stock" placeholder="Cantidad stock..." required>
-    
+
     <label for="stock_minimo">Cantidad m&iacute;nima de stock:</label>
     <input type="number" name="stock_minimo" id="stock_minimo"  placeholder="Cant. minima de stock..." required>
-    
+
     <label for="proovedor">Proovedor:</label>
     <input type="text" name="proovedor" id="proovedor" placeholder="Proovedor..." required>
-  
+
     <label for="precio_venta_unitario">Precio de venta unitario:</label>
     <input type="number" name="precio_venta_unitario" id="precio_venta_unitario" placeholder="Precio..." step="1" required="">
     <label for="categoria_id">Categor&iacute;a: </label>
@@ -30,10 +30,11 @@
     </select>
     <label for="descripcion">Descripcion:</label>
     <input type="text" id="descripcion" name="descripcion" placeholder="Descripcion del producto..." required>
+    <input type="hidden" name="token" value={{token}} />
      <input type="submit" value="Agregar"/>
 
   </fieldset>
-  
+
 </form>
 
 

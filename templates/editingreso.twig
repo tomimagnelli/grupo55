@@ -16,7 +16,7 @@
 
 
     <label for="precio_unitario">Precio unitario</label>
-    <input type="number" name="precio_unitario" id="precio_unitario" value="{{ ingreso_detalle.precio_unitario}}" required/>
+    <input type="number" name="precio_unitario" id="precio_unitario" value="{{ ingreso_detalle.precio_unitario}}" required />
 
     <label for="cantidad">Cantidad: </label>
     <input type="number" name="cantidad" id="cantidad" value="{{ ingreso_detalle.cantidad}}" required/>
@@ -35,9 +35,10 @@
 
 
     <input type="hidden" name="ingresoid" value="{{ ingreso_detalle.id }}"/>
+    <input type="hidden" name="token" value={{token}}>
     <input type="submit" value="Modificar"/>
     </fieldset>
   </form>
-  
+
 
 {% endblock %}

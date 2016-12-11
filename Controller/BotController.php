@@ -33,7 +33,8 @@ class BotController {
     return (SubscriptoResource::getInstance()->unsub($chat_id));
   }
 
-  public function notificar() {
+  public function notificar($app,$token) {
+    CSRF::getInstance()->control($app,$token);
     $subscriptos = SubscriptoResource::getInstance()->get();
     try {
     if ($this->hoy() == '') {

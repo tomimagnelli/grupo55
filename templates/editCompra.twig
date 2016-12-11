@@ -8,21 +8,22 @@
 
 	<label>Proveedor:
   <br>
-  	<input type="text" name="editproveedor" placeholder="Nombre del proveedor"  value="{{ compra.proveedor }}" required></label>
+  	<input type="text" name="editproveedor" placeholder="Nombre del proveedor"  value="{{ compra.proveedor }}" required /></label>
     <br>
   	<label>Cuit proveedor:</label>
     <br>
-  	<input type="text" name="editproveedor_cuit" placeholder="Cuit" value="{{ compra.proveedor_cuit }}" required>
+  	<input type="text" name="editproveedor_cuit" placeholder="Cuit" value="{{ compra.proveedor_cuit }}" required />
 <br>
     <label>Factura escaneada:</label>
     <br>
     <img src="{{ baseUrl() }}/{{ compra.factura }}" alt="factura" />
 
-    <input type="file" name="myFileInfo" id="myFileInfo" value="{{ baseUrl() }}/{{ compra.factura }}">
+    <input type="file" name="myFileInfo" id="myFileInfo" value="{{ baseUrl() }}/{{ compra.factura }}" />
     <input type="hidden" name="compraid" value="{{ compra.id }}"/>
 
-    
+
 <br>
+<input type="hidden" name="token" value={{token}} />
 
      <input type="submit" value="Confirmar"/>
   </fieldset>

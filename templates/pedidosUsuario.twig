@@ -41,11 +41,11 @@
 					<a href="pedidosUsuarioProd/page?pid={{ pedido.id }}&id=1"> Ver productos agregados</a>
           {% if pedido.estado is null %}
 					<a href="agregarProductoPedido?id={{ pedido.id }}"> Agregar un producto </a>
-          <a href="enviarPedido?id={{ pedido.id }}&userId={{session.id}}"> Enviar Pedido </a>
+          <a href="enviarPedido?id={{ pedido.id }}&userId={{session.id}}&token={{token}}"> Enviar Pedido </a>
           {% endif %}
 
           {% if pedido.estado.id == 1 %}
-          	<a href="cancelarPedidoUsuario?id={{ pedido.id }}&userId={{session.id}}"> <img title="Cancelar pedido" alt=Cancelar src="{{ baseUrl() }}/uploads/cancelar.jpg"></a>
+          	<a href="cancelarPedidoUsuario?id={{ pedido.id }}&userId={{session.id}}&token={{token}}"> <img title="Cancelar pedido" alt=Cancelar src="{{ baseUrl() }}/uploads/cancelar.jpg"></a>
 
           {% endif %}
 

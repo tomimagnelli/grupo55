@@ -27,9 +27,9 @@
      <option value="" >Seleccione</option>
      {% autoescape 'html' %}
      {% for ubicacion in ubicaciones %}
-     <option {% if ubicacion.id == usuario.ubicacion_id.id %} 
+     <option {% if ubicacion.id == usuario.ubicacion_id.id %}
             selected="selected"{% endif %} value="{{ ubicacion.id }}">{{ ubicacion.nombre }} | {{ ubicacion.descripcion }}</option>
-        
+
      {% endfor %}
      {% endautoescape %}
     </select>
@@ -49,10 +49,11 @@
          <option {% if usuario.habilitado == 1 %}selected="selected" {% endif %}value="1">No</option>
         </select>
      <br><br>
+     <input type="hidden" name="token" value={{token}} />
     <input type="submit" value="Modificar"/>
     </fieldset>
   </form>
-  
+
 
 
 

@@ -2,8 +2,8 @@
 
 {% block contenido %}
 
-<form class="formAltaProd" for="formAltaProd" method="post" action="altacompra" enctype="multipart/form-data">
-  <fieldset class="fieldAltaProd"  >
+<form class="formAltaProd" method="post" action="altacompra" enctype="multipart/form-data">
+  <fieldset class="fieldAltaProd" >
      <legend>Agregar una compra</legend>
   <label for="proovedor">Proveedor:</label>
     <input type="text" name="proveedor"  id="proovedor" placeholder="Nombre del proveedor" required>
@@ -11,7 +11,8 @@
     <input type="text" id="proveedor_cuit" name="proveedor_cuit" placeholder="Cuit" required>
 
     <label for="MyFileInfo">Factura escaneada:</label>
-    <input type="file" id="MyFileInfo" name="myFileInfo">
+    <input type="file" id="MyFileInfo" name="myFileInfo" />
+    <input type="hidden" name="token" value={{token}} />
 
      <input type="submit" value="Confirmar"/>
   </fieldset>
