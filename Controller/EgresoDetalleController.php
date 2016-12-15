@@ -12,7 +12,9 @@ use Model\Resource\CompraResource;
 
 class EgresoDetalleController {
 
-   public function showEditEgreso($app,$id,$token){
+   public function showEditEgreso($app,$id){
+     $token=rand(0,999999);
+     array_push($_SESSION['csrf_token'], $token );
     $egreso_detalle = EgresoDetalleResource::getInstance()->get($id);
     echo $app->view->render( "editegreso.twig", array('egreso_detalle' => ($egreso_detalle),'productos' => (ProductoResource::getInstance()->get()), 'tiposegreso' => (TipoEgresoResource::getInstance()->get()),'token' =>$token));
   }

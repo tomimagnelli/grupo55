@@ -52,7 +52,9 @@ class ListadoController {
         ));
     }
 
-    public function indexActionListado($app,$page = 1,$token) {
+    public function indexActionListado($app,$page = 1) {
+      $token=rand(0,999999);
+      array_push($_SESSION['csrf_token'], $token );
         $app->applyHook('must.be.administrador.or.gestion');
         $productos = ProductoResource::getInstance()->get();
         $prodgrafico=ProductoResource::getInstance()->grafico();
@@ -70,7 +72,9 @@ class ListadoController {
         ));
     }
 
-    public function indexActionIngresos($app,$page = 1,$token) {
+    public function indexActionIngresos($app,$page = 1) {
+      $token=rand(0,999999);
+      array_push($_SESSION['csrf_token'], $token );
         $app->applyHook('must.be.administrador.or.gestion');
         $ingresos = IngresoDetalleResource::getInstance()->get();
         $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
@@ -86,7 +90,10 @@ class ListadoController {
         ));
     }
 
-    public function indexActionCompras($app,$page = 1,$token) {
+    public function indexActionCompras($app,$page = 1) {
+      $token=rand(0,999999);
+      array_push($_SESSION['csrf_token'], $token );
+
         $app->applyHook('must.be.administrador.or.gestion');
         $compras = CompraResource::getInstance()->get();
         $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
@@ -103,7 +110,9 @@ class ListadoController {
     }
 
 
-    public function indexActionEgresos($app, $idCompra, $page = 1,$token){
+    public function indexActionEgresos($app, $idCompra, $page = 1){
+      $token=rand(0,999999);
+      array_push($_SESSION['csrf_token'], $token );
       $app->applyHook('must.be.administrador.or.gestion');
       $egresos = EgresoDetalleResource::getInstance()->get();
       $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
@@ -120,7 +129,9 @@ class ListadoController {
       ));
     }
 
-    public function indexActionUsuarios($app, $page = 1, $token){
+    public function indexActionUsuarios($app, $page = 1){
+      $token=rand(0,999999);
+      array_push($_SESSION['csrf_token'], $token );
       $app->applyHook('must.be.administrador.or.gestion');
       $usuarios = UsuarioResource::getInstance()->get();
       $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
@@ -135,7 +146,9 @@ class ListadoController {
       ));
     }
 
-    public function indexActionMenu($app, $page = 1,$token){
+    public function indexActionMenu($app, $page = 1){
+      $token=rand(0,999999);
+      array_push($_SESSION['csrf_token'], $token );
       $app->applyHook('must.be.administrador.or.gestion');
       $menus = MenuDelDiaResource::getInstance()->get();
       $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
@@ -151,7 +164,9 @@ class ListadoController {
       ));
     }
 
-    public function indexActionPedidosUsuario($app, $page = 1, $userId,$token){
+    public function indexActionPedidosUsuario($app, $page = 1, $userId){
+      $token=rand(0,999999);
+      array_push($_SESSION['csrf_token'], $token );
       $app->applyHook('must.be.administrador.or.online');
       $pedidos = PedidoResource::getInstance()->get();
       $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();
@@ -182,7 +197,9 @@ class ListadoController {
       ));
     }
 
-    public function indexActionPedidos($app, $page = 1,$token){
+    public function indexActionPedidos($app, $page = 1){
+      $token=rand(0,999999);
+      array_push($_SESSION['csrf_token'], $token );
       $app->applyHook('must.be.administrador.or.online');
       $pedidos = PedidoResource::getInstance()->get();
       $pageSize = ConfiguracionResource::getInstance()->get('paginacion')->getValor();

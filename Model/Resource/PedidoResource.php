@@ -126,21 +126,37 @@ public function cancelar($id)
        return $this->get();
 }
 
-  public function buscar ($desde, $hasta, $userid){
+public function buscar ($desde, $hasta, $userid){
+
+          $fechahasta = new \DateTime($hasta);
+          $year=$fechahasta->format("Y");
+          $month=$fechahasta->format("m");
+          $day=$fechahasta->format("d");
+
+          $fechahasta = $year."-".$month."-".$day." 23:59:59";
+
+          $fechadesde = new \DateTime($desde);
+          $year=$fechadesde->format("Y");
+          $month=$fechadesde->format("m");
+          $day=$fechadesde->format("d");
+
+
+          $fechadesde=  $year."-".$month."-".$day." 00:00:00";
+
 
 
           $query_string = " SELECT p FROM Model\Entity\Pedido p
-                            WHERE (p.fecha_alta >= :fechadesde) and (p.fecha_alta <= :fechahasta)
-                            and (p.usuario = :userId)";
+                            WHERE (p.usuario = :userId) and (p.fecha_alta BETWEEN :fechadesde and :fechahasta) ";
 
           $query = $this->getEntityManager()->createQuery($query_string);
-
-          $query->setParameter('fechadesde',$desde);
-          $query->setParameter('fechahasta',$hasta);
           $query->setParameter('userId',$userid);
+          $query->setParameter('fechadesde',$fechadesde);
+          $query->setParameter('fechahasta',$fechahasta);
 
 
           return $query->getResult();
+
+
 
       }
 

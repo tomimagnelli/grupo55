@@ -14,7 +14,9 @@ class UsuarioController {
     echo $app->view->render( "users.twig", array('usuarios' => (UsuarioResource::getInstance()->get()), 'ubicaciones' => (UbicacionResource::getInstance()->get())));
   }
 
-  public function cargaUbicaciones($app, $token){
+  public function cargaUbicaciones($app){
+    $token=rand(0,999999);
+    array_push($_SESSION['csrf_token'], $token );
       $app->applyHook('must.be.administrador');
       echo $app->view->render( "altausuario.twig", array('ubicaciones' => (UbicacionResource::getInstance()->get()), 'token'=>$token));
 
@@ -23,14 +25,13 @@ class UsuarioController {
   public function login($username, $pass)
     {
        if(UsuarioResource::getInstance()->login($username,$pass)){
-        $_SESSION['csrf_token'] = rand(0,999999);
         return UsuarioResource::getInstance()->login($username,$pass);
        }
        else{
         return false;
        }
     }
- 
+
   public function newUsuario($app,$user,$pass,$nombre,$apellido,$documento,$telefono,$rol_id,$email,$ubicacion_id = null,$habilitado,$token) {
     CSRF::getInstance()->control($app,$token);
 
@@ -160,7 +161,9 @@ class UsuarioController {
     $app->redirect('/users/page?id=1');
   }
 
-  public function showUsuario($app, $id, $token){
+  public function showUsuario($app, $id){
+    $token=rand(0,999999);
+    array_push($_SESSION['csrf_token'], $token );
     $app->applyHook('must.be.administrador');
     $user = UsuarioResource::getInstance()->get($id);
     $ubicacion = UsuarioResource::getInstance()->ubicacion($id);

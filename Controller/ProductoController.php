@@ -16,8 +16,13 @@ class ProductoController {
     echo $app->view->render( "stockminimo.twig", array('productos' => (ProductoResource::getInstance()->get()), 'categorias' => (CategoriaResource::getInstance()->get())));
   }
 
-  public function showAltaProducto($app,$token){
+  public function showAltaProducto($app){
+    $token=rand(0,999999);
+    array_push($_SESSION['csrf_token'], $token );
+
     echo $app->view->render( "altaproducto.twig", array('categorias' => (CategoriaResource::getInstance()->get()),'token'=>$token));
+
+
   }
 
   public function newProducto($app,$nombre,$marca,$stock,$stock_minimo,$proveedor,$precio_venta_unitario,$categoria_id = null,$descripcion,$token) {
@@ -115,7 +120,10 @@ class ProductoController {
     $app->redirect('/listado/page?ids=1');
   }
 
-  public function showProducto($app, $id,$token){
+  public function showProducto($app, $id){
+    $token=rand(0,999999);
+    array_push($_SESSION['csrf_token'], $token );
+    
     $app->applyHook('must.be.administrador.or.gestion');
     $producto = ProductoResource::getInstance()->get($id);
     $categoria = ProductoResource::getInstance()->categoria($id);

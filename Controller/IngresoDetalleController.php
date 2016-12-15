@@ -15,11 +15,15 @@ use Model\Resource\TipoIngresoResource;
 class IngresoDetalleController {
 
 
-   public function showAltaVenta($app,$token){
+   public function showAltaVenta($app){
+     $token=rand(0,999999);
+     array_push($_SESSION['csrf_token'], $token );
     echo $app->view->render( "altaventa.twig", array('productos' => (ProductoResource::getInstance()->get()), 'tiposingreso' => (TipoIngresoResource::getInstance()->get()),'token' =>$token));
   }
 
-  public function showEditVenta($app,$id,$token){
+  public function showEditVenta($app,$id){
+    $token=rand(0,999999);
+    array_push($_SESSION['csrf_token'], $token );
    $ingreso_detalle = IngresoDetalleResource::getInstance()->get($id);
    echo $app->view->render( "editingreso.twig", array('ingreso_detalle' => ($ingreso_detalle),'productos' => (ProductoResource::getInstance()->get()), 'tiposingreso' => (TipoIngresoResource::getInstance()->get()),'token' =>$token));
  }

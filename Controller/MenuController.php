@@ -10,14 +10,18 @@ use Model\Resource\ProductoResource;
 class MenuController {
 
 
-  public function showAltaMenu($app,$token){
+  public function showAltaMenu($app){
+    $token=rand(0,999999);
+    array_push($_SESSION['csrf_token'], $token );
       $app->applyHook('must.be.administrador');
 
       echo $app->view->render( "altamenu.twig", array('productos' => (ProductoResource::getInstance()->get()), 'hoy' =>(MenuDelDiaResource::getInstance()->hoy()),'token'=>$token));
 
     }
 
-     public function showEditMenu($app, $id,$token){
+     public function showEditMenu($app, $id){
+       $token=rand(0,999999);
+       array_push($_SESSION['csrf_token'], $token );
       $app->applyHook('must.be.administrador');
       $menu = MenuDelDiaResource::getInstance()->get($id);
       echo $app->view->render( "editmenu.twig", array('menu' => ($menu),'productos' => (ProductoResource::getInstance()->get()),'token'=>$token));

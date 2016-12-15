@@ -12,9 +12,13 @@ class CSRF {
      }
 public function control($app,$token)
   {
-
-    if ($_SESSION['csrf_token']!=$token) {
-        $app->flash('error', "No esta seguro ".$token."-".$_SESSION['csrf_token']);
+    $encontrado=false;
+    foreach ($_SESSION['csrf_token'] as $t) {
+      if($t == $token){
+        $encontrado=true;
+      }
+    }
+    if ($encontrado == false) {
         $app->redirect('/logout');
   }
 

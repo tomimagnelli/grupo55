@@ -41,11 +41,11 @@ $app->post('/', function() use ($app, $userResource) {
     $pass = $app->request->post('contraseña');
     $userController = new UsuarioController();
     $user = $userController->login($name,$pass);
-  
     $habilitado = $userResource->estaHabilitado($name, $pass);
     if ($user) {
       if ($habilitado) {
-      $_SESSION['csrf_token'] = rand(0,999999);
+        $_SESSION['csrf_token'] = array();
+
     	$_SESSION['id']=$user->getId();
     	$_SESSION['user']=$user->getUsuario();
     	$_SESSION['rol']=$user->getRol_Id();
@@ -101,16 +101,12 @@ $app->group('/backend', function() use($app) {
 });
 
 $app->group('/listado', function() use($app) {
-  if(isset($_SESSION['csrf_token'])){
-    $csrf_token= $_SESSION['csrf_token'];
-  }else{
-    $csrf_token=null;
-  }
-     $app->get('/page', '\Controller\ListadoController:indexActionListado')->setParams(array($app, $app->request->get('ids'),$csrf_token));
+
+     $app->get('/page', '\Controller\ListadoController:indexActionListado')->setParams(array($app, $app->request->get('ids')));
 
      $app->get('/delete', '\Controller\ProductoController:deleteProducto')->setParams(array($app, $app->request->get('id'),$app->request->get('token')));
 
-     $app->get('/editProducto', '\Controller\ProductoController:showProducto')->setParams(array($app, $app->request->get('id'),$csrf_token));
+     $app->get('/editProducto', '\Controller\ProductoController:showProducto')->setParams(array($app, $app->request->get('id')));
 
      $app->post('/editProducto', '\Controller\ProductoController:editProducto')->setParams(
             array($app, $app->request->post('nombre'),
@@ -128,12 +124,8 @@ $app->group('/listado', function() use($app) {
 
 
     $app->group('/altaproducto', function() use($app) {
-      if(isset($_SESSION['csrf_token'])){
-        $csrf_token= $_SESSION['csrf_token'];
-      }else{
-        $csrf_token=null;
-      }
-        $app->get('/', '\Controller\ProductoController:showAltaProducto')->setParams(array($app,$csrf_token));
+
+        $app->get('/', '\Controller\ProductoController:showAltaProducto')->setParams(array($app));
         $app->post('/', '\Controller\ProductoController:newProducto')->setParams(
               array($app,$app->request->post('nombre'),
               $app->request->post('marca'),
@@ -164,23 +156,13 @@ $app->group('/stockminimo', function() use($app) {
 
 
 $app->group('/users', function() use ($app, $userResource) {
-  if(isset($_SESSION['csrf_token'])){
-    $csrf_token= $_SESSION['csrf_token'];
-  }else{
-    $csrf_token=null;
-  }
 
     // Listar
-    $app->get('/page', '\Controller\ListadoController:indexActionUsuarios')->setParams(array($app, $app->request->get('id'),$csrf_token));
+    $app->get('/page', '\Controller\ListadoController:indexActionUsuarios')->setParams(array($app, $app->request->get('id')));
 
     $app->group('/altausuario', function() use($app, $userResource) {
-      if(isset($_SESSION['csrf_token'])){
-        $csrf_token= $_SESSION['csrf_token'];
-      }else{
-        $csrf_token=null;
-      }
 
-       $app->get('/', '\Controller\UsuarioController:cargaUbicaciones')->setParams(array($app,$csrf_token));
+       $app->get('/', '\Controller\UsuarioController:cargaUbicaciones')->setParams(array($app));
 
 
         $app->post('/', '\Controller\UsuarioController:newUsuario')->setParams(
@@ -201,13 +183,9 @@ $app->group('/users', function() use ($app, $userResource) {
 
 
     $app->group('/edituser', function() use($app, $userResource) {
-      if(isset($_SESSION['csrf_token'])){
-        $csrf_token= $_SESSION['csrf_token'];
-      }else{
-        $csrf_token=null;
-      }
 
-        $app->get('/', '\Controller\UsuarioController:showUsuario')->setParams(array($app, $app->request->get('id'),$csrf_token));
+
+        $app->get('/', '\Controller\UsuarioController:showUsuario')->setParams(array($app, $app->request->get('id')));
 
         $app->post('/', '\Controller\UsuarioController:editUsuario')->setParams(
                array($app, $app->request->post('user'),
@@ -244,20 +222,12 @@ $app->group('/ventasprod', function() use($app) {
 
 
 $app->group('/compras', function() use ($app) {
-  if(isset($_SESSION['csrf_token'])){
-    $csrf_token= $_SESSION['csrf_token'];
-  }else{
-    $csrf_token=null;
-  }
-  $app->get('/page', '\Controller\ListadoController:indexActionCompras')->setParams(array($app, $app->request->get('ids'),$csrf_token));
+
+  $app->get('/page', '\Controller\ListadoController:indexActionCompras')->setParams(array($app, $app->request->get('ids')));
 
   $app->group('/altacompra', function() use($app) {
-    if(isset($_SESSION['csrf_token'])){
-      $csrf_token= $_SESSION['csrf_token'];
-    }else{
-      $csrf_token=null;
-    }
-        $app->get('/', '\Controller\CompraController:showAltaCompra')->setParams(array($app,$csrf_token));
+
+        $app->get('/', '\Controller\CompraController:showAltaCompra')->setParams(array($app));
         $app->post('/', 'Controller\CompraController:newCompra')->setParams(
               array($app, $app->request->post('proveedor'),
               $app->request->post('proveedor_cuit'),
@@ -269,19 +239,11 @@ $app->group('/compras', function() use ($app) {
 
 
         $app->group('/egresos', function() use ($app) {
-          if(isset($_SESSION['csrf_token'])){
-            $csrf_token= $_SESSION['csrf_token'];
-          }else{
-            $csrf_token=null;
-          }
-              $app->get('/page', '\Controller\ListadoController:indexActionEgresos')->setParams(array($app, $app->request->get('user'),$app->request->get('ids'),$csrf_token));
+
+              $app->get('/page', '\Controller\ListadoController:indexActionEgresos')->setParams(array($app, $app->request->get('user'),$app->request->get('ids')));
               $app->group('/editegreso', function() use($app) {
-                if(isset($_SESSION['csrf_token'])){
-                  $csrf_token= $_SESSION['csrf_token'];
-                }else{
-                  $csrf_token=null;
-                }
-                      $app->get('/', '\Controller\EgresoDetalleController:showEditEgreso')->setParams(array($app, $app->request->get('id'),$csrf_token));
+
+                      $app->get('/', '\Controller\EgresoDetalleController:showEditEgreso')->setParams(array($app, $app->request->get('id')));
                       $app->post('/', '\Controller\EgresoDetalleController:edit')->setParams(
                      array($app,$app->request->post('producto_id'),
                      $app->request->post('cantidad'),
@@ -342,21 +304,13 @@ $app->group('/compras', function() use ($app) {
 });
 
 $app->group('/ingresos', function() use ($app) {
-  if(isset($_SESSION['csrf_token'])){
-    $csrf_token= $_SESSION['csrf_token'];
-  }else{
-    $csrf_token=null;
-  }
-  $app->get('/page', '\Controller\ListadoController:indexActionIngresos')->setParams(array($app, $app->request->get('id'),$csrf_token));
+
+  $app->get('/page', '\Controller\ListadoController:indexActionIngresos')->setParams(array($app, $app->request->get('id')));
 
 
   $app->group('/altaventa', function() use($app) {
-    if(isset($_SESSION['csrf_token'])){
-      $csrf_token= $_SESSION['csrf_token'];
-    }else{
-      $csrf_token=null;
-    }
-      $app->get('/', '\Controller\IngresoDetalleController:showAltaVenta')->setParams(array($app,$csrf_token));
+
+      $app->get('/', '\Controller\IngresoDetalleController:showAltaVenta')->setParams(array($app));
       $app->post('/', '\Controller\IngresoDetalleController:newIngresoDetalle')->setParams(
             array($app,$app->request->post('ingreso_tipo_id'),
             $app->request->post('producto_id'),
@@ -370,12 +324,8 @@ $app->group('/ingresos', function() use ($app) {
     });
 
   $app->group('/editingreso', function() use($app) {
-    if(isset($_SESSION['csrf_token'])){
-      $csrf_token= $_SESSION['csrf_token'];
-    }else{
-      $csrf_token=null;
-    }
-      $app->get('/', '\Controller\IngresoDetalleController:showEditVenta')->setParams(array($app, $app->request->get('id'),$csrf_token));
+
+      $app->get('/', '\Controller\IngresoDetalleController:showEditVenta')->setParams(array($app, $app->request->get('id')));
       $app->post('/', '\Controller\IngresoDetalleController:edit')->setParams(
           array($app,$app->request->post('producto_id'),
           $app->request->post('cantidad'),
@@ -400,12 +350,8 @@ $app->get('/deleteVenta', '\Controller\IngresoDetalleController:deleteIngreso')-
 
 
 $app->group('/config', function() use($app) {
-  if(isset($_SESSION['csrf_token'])){
-    $csrf_token= $_SESSION['csrf_token'];
-  }else{
-    $csrf_token=null;
-  }
-  $app->get('/', '\Controller\ConfigController:showConfig')->setParams(array($app,$csrf_token));
+
+  $app->get('/', '\Controller\ConfigController:showConfig')->setParams(array($app));
 
   $app->post('/setPaginacion', '\Controller\ConfigController:setPaginacion')->setParams(
            array($app, $app->request->post('paginacionInt'),
@@ -426,17 +372,13 @@ $app->group('/config', function() use($app) {
 });
 
 $app->group('/menu', function() use ($app) {
-  if(isset($_SESSION['csrf_token'])){
-    $csrf_token= $_SESSION['csrf_token'];
-  }else{
-    $csrf_token=null;
-  }
 
-  $app->get('/page', '\Controller\ListadoController:indexActionMenu')->setParams(array($app, $app->request->get('id'),$csrf_token));
+
+  $app->get('/page', '\Controller\ListadoController:indexActionMenu')->setParams(array($app, $app->request->get('id')));
 
   $app->get('/delete', '\Controller\MenuController:deleteMenu')->setParams(array($app, $app->request->get('id'),$app->request->get('token')));
 
-  $app->get('/altamenu', '\Controller\MenuController:showAltaMenu')->setParams(array($app,$csrf_token));
+  $app->get('/altamenu', '\Controller\MenuController:showAltaMenu')->setParams(array($app));
   $app->post('/altamenu', '\Controller\MenuController:newMenu')->setParams(
        array($app,$app->request->post('fecha'),
        $app->request->post('producto'),
@@ -446,12 +388,8 @@ $app->group('/menu', function() use ($app) {
      );
 
   $app->group('/editMenu', function() use($app) {
-    if(isset($_SESSION['csrf_token'])){
-      $csrf_token= $_SESSION['csrf_token'];
-    }else{
-      $csrf_token=null;
-    }
-          $app->get('/', '\Controller\MenuController:showEditMenu')->setParams(array($app, $app->request->get('id'),$csrf_token));
+
+          $app->get('/', '\Controller\MenuController:showEditMenu')->setParams(array($app, $app->request->get('id')));
           $app->post('/', '\Controller\MenuController:editMenu')->setParams(
                    array($app, $app->request->post('fecha'),
                    $app->request->post('producto'),
@@ -469,12 +407,8 @@ $app->group('/menu', function() use ($app) {
 
 
 $app->group('/pedidos', function() use($app) {
-  if(isset($_SESSION['csrf_token'])){
-    $csrf_token= $_SESSION['csrf_token'];
-  }else{
-    $csrf_token=null;
-  }
-    $app->get('/page', '\Controller\ListadoController:indexActionPedidos')->setParams(array($app, $app->request->get('id'),$csrf_token));
+
+    $app->get('/page', '\Controller\ListadoController:indexActionPedidos')->setParams(array($app, $app->request->get('id')));
      $app->get('/aceptar', '\Controller\PedidoController:aceptarPedido')->setParams(array($app, $app->request->get('id'),$app->request->get('token')));
      $app->get('/cancelar', '\Controller\PedidoController:cancelarPedido')->setParams(array($app, $app->request->get('id'),$app->request->get('token')));
      $app->group('/pedidosUsuarioProd', function() use ($app) {
@@ -483,24 +417,16 @@ $app->group('/pedidos', function() use($app) {
 });
 
 $app->group('/pedidosUsuario', function() use($app) {
-  if(isset($_SESSION['csrf_token'])){
-    $csrf_token= $_SESSION['csrf_token'];
-  }else{
-    $csrf_token=null;
-  }
-     $app->get('/page', '\Controller\ListadoController:indexActionPedidosUsuario')->setParams(array($app, $app->request->get('id'),$app->request->get('userId'),$csrf_token));
+
+     $app->get('/page', '\Controller\ListadoController:indexActionPedidosUsuario')->setParams(array($app, $app->request->get('id'),$app->request->get('userId')));
 
      $app->group('/pedidosUsuarioProd', function() use ($app) {
-       if(isset($_SESSION['csrf_token'])){
-         $csrf_token= $_SESSION['csrf_token'];
-       }else{
-         $csrf_token=null;
-       }
+
 
            $app->get('/page', '\Controller\ListadoController:indexActionPedidosUsuarioProd')->setParams(array($app, $app->request->get('pid'),$app->request->get('id')));
      });
 
-     $app->get('/altaPedido', '\Controller\PedidoController:showAltaPedido')->setParams(array($app,$csrf_token));
+     $app->get('/altaPedido', '\Controller\PedidoController:showAltaPedido')->setParams(array($app));
 
      $app->post('/altaPedido', '\Controller\PedidoController:newPedido')->setParams(
           array($app,$app->request->post('observacion'),
@@ -509,7 +435,7 @@ $app->group('/pedidosUsuario', function() use($app) {
 
         );
 
-    $app->get('/agregarProductoPedido', '\Controller\PedidoDetalleController:showAgregarProdutcoPedido')->setParams(array($app,$app->request->get('id'),$csrf_token));
+    $app->get('/agregarProductoPedido', '\Controller\PedidoDetalleController:showAgregarProdutcoPedido')->setParams(array($app,$app->request->get('id')));
     $app->post('/agregarProductoPedido', '\Controller\PedidoDetalleController:newProducto')->setParams(
          array($app,$app->request->post('producto'),
          $app->request->post('cant'),
@@ -519,11 +445,7 @@ $app->group('/pedidosUsuario', function() use($app) {
 
        );
 
-         if(isset($_SESSION['csrf_token'])){
-           $csrf_token= $_SESSION['csrf_token'];
-         }else{
-           $csrf_token=null;
-         }
+
     $app->get('/enviarPedido', '\Controller\PedidoController:enviarPedido')->setParams(array($app, $app->request->get('id'),$app->request->get('userId'),$app->request->get('token')));
 
     $app->get('/cancelarPedidoUsuario', '\Controller\PedidoController:cancelarPedidoUsuario')->setParams(array($app, $app->request->get('id'),$app->request->get('userId'),$app->request->get('token')));
@@ -596,11 +518,7 @@ $app->group('/egresosentre', function() use($app) {
 });
 
 $app->get('/bot', function() use ($app, $botController) {
-  if(isset($_SESSION['csrf_token'])){
-    $csrf_token= $_SESSION['csrf_token'];
-  }else{
-    $csrf_token=null;
-  }
+
     if ($botController->notificar($app,$app->request->get('token'))) {
       $app->flash('success', 'Se han realizado las notificaciones correctamente');
     } else {

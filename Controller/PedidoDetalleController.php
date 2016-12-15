@@ -16,7 +16,9 @@ class PedidoDetalleController {
 
 
 
-    public function showAgregarProdutcoPedido($app,$id,$token){
+    public function showAgregarProdutcoPedido($app,$id){
+      $token=rand(0,999999);
+      array_push($_SESSION['csrf_token'], $token );
         $app->applyHook('must.be.online');
         echo $app->view->render( "agregarProductoPedido.twig", array('menus' => (MenuDelDiaResource::getInstance() -> menusHoy()), 'pedido' => (PedidoResource::getInstance() -> get($id)),'token' => $token));
 

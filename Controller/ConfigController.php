@@ -6,7 +6,9 @@ use Model\Resource\ConfiguracionResource;
 
 class ConfigController {
 
-   public function showConfig($app,$token){
+   public function showConfig($app){
+     $token=rand(0,999999);
+     array_push($_SESSION['csrf_token'], $token );
       $app->applyHook('must.be.administrador');
       $configResource = ConfiguracionResource::getInstance();
       echo $app->view->render( "config.twig",

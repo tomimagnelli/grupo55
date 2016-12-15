@@ -16,16 +16,22 @@ class CompraController {
   }
 
 
-  public function showAltaCompra($app,$token){
+  public function showAltaCompra($app){
+    $token=rand(0,999999);
+    array_push($_SESSION['csrf_token'], $token );
    echo $app->view->render( "altacompra.twig",array('tiposegreso' => (TipoEgresoResource::getInstance()->get()),'token'=>$token));
  }
 
 
-  public function showAltaCompra2($app,$id,$token){
+  public function showAltaCompra2($app,$id){
+    $token=rand(0,999999);
+    array_push($_SESSION['csrf_token'], $token );
    echo $app->view->render( "agregarproductoacompra.twig", array('productos' => (ProductoResource::getInstance()->get()),'tiposegreso' => (TipoEgresoResource::getInstance()->get()),'compra' => (CompraResource::getInstance()->get($id)),'token'=>$token));
  }
 
- public function ShowEditCompra($app,$id,$token) {
+ public function ShowEditCompra($app,$id) {
+   $token=rand(0,999999);
+   array_push($_SESSION['csrf_token'], $token );
    $app->applyHook('must.be.administrador');
    $compra = CompraResource::getInstance()->get($id);
    echo $app->view->render( "editCompra.twig", array('compra' => ($compra),'token'=>$token));

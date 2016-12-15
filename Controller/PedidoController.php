@@ -16,7 +16,9 @@ class PedidoController {
 
 
 
-  public function showAltaPedido($app,$token){
+  public function showAltaPedido($app){
+    $token=rand(0,999999);
+    array_push($_SESSION['csrf_token'], $token );
       $app->applyHook('must.be.online');
       echo $app->view->render( "altaPedido.twig", array('token' => $token));
 
@@ -66,8 +68,7 @@ class PedidoController {
        $app->redirect('/pedidosUsuario/page?id=1&userId=' .$userId);
      }
 
-     public function aceptarPedido($app, $id,$token,$token) {
-       CSRF::getInstance()->control($app,$token);
+     public function aceptarPedido($app, $id,$token) {
 
        CSRF::getInstance()->control($app,$token);
     $app->applyHook('must.be.administrador.or.gestion');
